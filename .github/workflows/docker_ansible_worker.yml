@@ -1,4 +1,4 @@
-name: "[DOCKER IMAGE] Ansible Worker"
+name: '[DOCKER IMAGE] Ansible Worker'
 
 on:
   workflow_dispatch:
@@ -10,14 +10,14 @@ on:
     branches:
       - main
     paths:
-      - "docker-images/ansible-worker/Dockerfile"
-      - "docker-images/ansible-worker/VERSION"
+      - 'docker-images/ansible-worker/Dockerfile'
+      - 'docker-images/ansible-worker/VERSION'
   pull_request:
     branches:
       - main
     paths:
-      - "docker-images/ansible-worker/Dockerfile"
-      - "docker-images/ansible-worker/VERSION"
+      - 'docker-images/ansible-worker/Dockerfile'
+      - 'docker-images/ansible-worker/VERSION'
 
 jobs:
   build:
@@ -69,10 +69,10 @@ jobs:
         id: trivy
         with:
           image-ref: ${{ env.IMAGE_NAME }}:build
-          format: "table"
-          exit-code: "1"
+          format: 'table'
+          exit-code: '1'
           ignore-unfixed: true
-          severity: "CRITICAL,HIGH"
+          severity: 'CRITICAL,HIGH'
 
       - name: 📄 Show Build Output
         uses: actions/github-script@0.9.0
