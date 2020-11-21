@@ -1,0 +1,38 @@
+version: '2.3'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:10
+    restart: always
+    networks:
+      - statping
+    volumes:
+      - ./statup/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: statup
+      POSTGRES_USER: statup
+      POSTGRES_PASSWORD:
+
+  statup:
+    container_name: statup
+    image: hunterlong/statping:latest
+    restart: always
+    networks:
+      - statping
+    depends_on:
+      - postgres
+    volumes:
+      - ./statup/app:/app
+    ports:
+      - 0.0.0.0:8080:8080
+    environment:
+      DB_CONN: postgres
+      DB_HOST: postgres
+      DB_DATABASE: statup
+      DB_USER: statup
+      DB_PASS:
+
+networks:
+  statping:
+    driver: bridge
