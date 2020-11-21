@@ -1,0 +1,78 @@
+version: '2'
+
+services:
+  # --------------------------------------------------------------------------
+  # WEKAN - https://github.com/wekan/wekan-mongodb
+  # --------------------------------------------------------------------------
+  wekandb:
+    # All Wekan data is stored in MongoDB. For backup and restore, see:
+    #   https://github.com/wekan/wekan/wiki/Export-Docker-Mongo-Data
+    image: mongo:3.2.20
+    container_name: wekan-db
+    restart: always
+    command: mongod --smallfiles --oplogSize 128
+    networks:
+      - wekan-tier
+    expose:
+      - 27017
+    volumes:
+      - /docker/data/wekan_bookstack/wekan-db:/data/db
+      - /docker/data/wekan_bookstack/wekan-db-dump:/dump
+
+  wekan:
+    image: quay.io/wekan/wekan
+    container_name: wekan-app
+    restart: always
+    networks:
+      - wekan-tier
+    # For running Wekan in different port like 3000, use: 3000:80
+    ports:
+      - 9001:8080
+    environment:
+      #---------------------------------------------------------------
+      - MONGO_URL=mongodb://wekandb:27017/wekan
+      #---------------------------------------------------------------
+      # == ROOT_URL SETTING ==
+      # Change ROOT_URL to your real Wekan URL, for example:
+      #   http://example.com
+      #   http://example.com/wekan
+      #   http://192.168.1.100
+      #---------------------------------------------------------------
+      - ROOT_URL=http://127.0.0.1:9001/
+      #---------------------------------------------------------------
+      # == PORT SETTING ==
+      # Not needed on Docker, but if you had installed from source,
+      #   you could also have setup Wekan Node.js port at localhost
+      #   with setting: PORT=3001
+      #   and have Nginx proxy to port 3001, see Wekan wiki.
+      #---------------------------------------------------------------
+      # - PORT=3001
+      #---------------------------------------------------------------
+      # == EMAIL SETTINGS ==
+      # Email settings are required in both MAIL_URL and Admin Panel,
+      #   see https://github.com/wekan/wekan/wiki/Troubleshooting-Mail
+      #   For SSL in email, change smtp:// to smtps://
+      # NOTE: Special characters need to be url-encoded in MAIL_URL.
+      #---------------------------------------------------------------
+      #- MAIL_URL=smtp://user:pass@mailserver.example.com:25/
+      #- MAIL_FROM='Example Wekan Support <support@example.com>'
+      #---------------------------------------------------------------
+      # ==== WEKAN API AND EXPORT BOARD ====
+      # Wekan Export Board works when WITH_API=true.
+      # https://github.com/wekan/wekan/wiki/REST-API
+      # https://github.com/wekan/wekan-gogs
+      # If you disable Wekan API with false, Export Board does not work.
+      - WITH_API=true
+      #-----------------------------------------------------------------
+      # ==== BROWSER POLICY AND TRUSTED IFRAME URL ====
+      # Enable browser policy and allow one trusted URL that can have iframe that has Wekan embedded inside.
+      # Setting this to false is not recommended, it also disables all other browser policy protections
+      # and allows all iframing etc. See wekan/server/policy.js
+      - BROWSER_POLICY_ENABLED=true
+      # When browser policy is enabled, HTML code at this Trusted URL can have iframe that embeds Wekan inside.
+      #- TRUSTED_URL=
+    depends_on:
+      - wekandb
+
+networks:
+  wekan-tier:
