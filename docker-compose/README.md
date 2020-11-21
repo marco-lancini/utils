@@ -6,6 +6,7 @@ build a few docker-compose based apps/
 
 ## Apps
 
-| App                      | Description               |
-| ------------------------ | ------------------------- |
-| [wekan](wekan/README.md) | OSS alternative to Trello |
+| App                                           | Description                    |
+| --------------------------------------------- | ------------------------------ |
+| [nginx-proxy](nginx-proxy/docker-compose.yml) | Sample setup for `nginx-proxy` |
+| [wekan](wekan/README.md)                      | OSS alternative to Trello      |
