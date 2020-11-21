@@ -111,7 +111,7 @@ jobs:
         run: exit 1
 
       - name: 🚀 Push image to GitHub Container Registry
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           IMAGE_VERSION=${{ steps.obtain_version.outputs.tag }}
           REMOTE_IMAGE=${REGISTRY}/${{ github.repository_owner }}/$IMAGE_NAME
