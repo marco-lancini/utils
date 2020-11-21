@@ -1,7 +1,5 @@
 FROM alpine:3.7
 
-ARG NOMAD_VERSION=0.8.6
-
 # Create a consul user and group first so the IDs get set the same way, even as
 # the rest of this may change over time.
 RUN addgroup nomad && \
@@ -12,7 +10,7 @@ RUN set -eux && \
     apk add --no-cache ca-certificates curl openssl unzip  libc6-compat && \
     mkdir -p /tmp/build && \
     cd /tmp/build && \
-    curl -sSL https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_amd64.zip -o nomad.zip && \
+    curl -sSL https://releases.hashicorp.com/nomad/0.8.6/nomad_0.8.6_linux_amd64.zip -o nomad.zip && \
     unzip nomad.zip && \
     install nomad /usr/bin/nomad && \
     cd /tmp && \
