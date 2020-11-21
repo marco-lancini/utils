@@ -10,4 +10,4 @@ All these images are pushed to [Github Container Registry](https://github.com/ma
 
 | Image            | Description                                            | Pull                                          |
 | ---------------- | ------------------------------------------------------ | --------------------------------------------- |
-| `ansible-worker` | Alpine with Ansible, OpenSSH, and sshpass preinstalled | `ghcr.io/marco-lancini/ansible-worker:latest` |
+| [ansible-worker](ansible-worker/Dockerfile) | Alpine with Ansible, OpenSSH, and sshpass preinstalled | `ghcr.io/marco-lancini/ansible-worker:latest` |
