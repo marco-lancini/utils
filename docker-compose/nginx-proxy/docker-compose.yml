@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  # ---------- NGINX-PROXY (https://github.com/jwilder/nginx-proxy)
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - '80:80'
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  # ---------- DUMMY SERVICE exposing port 8000
+  web:
+    image: jwilder/whoami
+    ports:
+      - 8000:8000
+    environment:
+      - VIRTUAL_HOST=127.0.0.1
+      - VIRTUAL_PORT=8000
+# Access the dummy service
+# - Command line --> curl -H "Host: 127.0.0.1" localhost
+# - Browser      --> http://127.0.0.1
