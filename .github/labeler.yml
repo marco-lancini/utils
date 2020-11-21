@@ -1,0 +1,13 @@
+docker-compose:
+  - docker-compose/**/*
+
+docker-images:
+  - docker-images/**/*
+
+documentation:
+  - '*.md'
+  - '*.markdown'
+
+ci/cd:
+  - .github/workflows/*
+  - .pre-commit-config.yaml
