@@ -1,7 +1,6 @@
 FROM alpine:3.7
 
-# This is the release of Consul to pull in.
-ENV NOMAD_VERSION=0.8.6
+ARG NOMAD_VERSION=0.8.6
 
 # Create a consul user and group first so the IDs get set the same way, even as
 # the rest of this may change over time.
