@@ -4464,7 +4464,7 @@
   });
 
   hljs.registerLanguage(
-    'd'
+    'd',
     /**
      * Known issues:
      *
@@ -4479,9 +4479,7 @@
      *
      * - special token sequence rule is not strictly following D grammar (anything following #line
      *   up to the end of line is matched as special token sequence)
-     */,
-
-    function (hljs) {
+     */ function (hljs) {
       /**
        * Language keywords
        *
@@ -16321,8 +16319,7 @@
           'std_logic std_logic_vector unsigned signed boolean_vector integer_vector ' +
           'std_ulogic std_ulogic_vector unresolved_unsigned u_unsigned unresolved_signed u_signed' +
           'real_vector time_vector',
-        literal:
-          'false true note warning error failure ' + 'line text side width', // severity_level // textio
+        literal: 'false true note warning error failure ' + 'line text side width', // severity_level // textio
       },
       illegal: '{',
       contains: [
