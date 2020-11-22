@@ -1,0 +1,63 @@
+---
+tools_dir: /opt/red
+
+
+kali_make_dirs:
+  - "/opt/red/"
+
+kali_apt:
+  # ---------- DNSCAT2
+  - ruby-dev 
+  - gcc 
+  - make
+
+# kali_pip:
+#   - httpie
+  
+# kali_easy_install:
+#   - example
+
+kali_gem:
+  # ---------- DNSCAT2
+  - package: bundler
+    state: latest
+
+# kali_go:
+#   - github.com/bettercap/bettercap  
+
+# kali_go_build:
+#   - git_name: gobuster
+#     go_folder: /root/go/src/gobuster/
+
+kali_git_repositories:
+  - repo: https://github.com/iagox86/dnscat2.git
+    dest: dnscat2
+  - repo: https://github.com/EmpireProject/Empire
+    dest: "empire"
+  - repo: https://github.com/n1nj4sec/pupy.git
+    dest: "pupy"
+    force: "yes"
+
+kali_shortcuts:
+  - empire
+
+# kali_binary:
+#   - url: https://raw.githubusercontent.com/raesene/TestingScripts/master/snmpv3enum.rb
+#     dest: "{{ tools_dir }}/snmpv3enum/snmpv3enum.rb"
+
+# # kali_deb:
+# #   - /tmp/libssl1.0.0_1.0.1t-1+deb7u4_amd64.deb
+# #   - /tmp/libicu55_55.1-7ubuntu0.4_amd64.deb
+# #   - /tmp/powershell_6.0.2-1.ubuntu.16.04_amd64.deb
+
+# kali_tars:
+#   - src: https://labs.portcullis.co.uk/download/rdp-sec-check-0.9.tgz
+#     dest: "{{ tools_dir }}/rdp-sec-check/"
+   
+# kali_config:
+#   - src: "terminator"
+#     dest: "/root/.config/terminator/config"
+
+# kali_bash:
+#   - firefox.sh
+

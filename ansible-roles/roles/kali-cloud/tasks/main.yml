@@ -1,0 +1,174 @@
+---
+# ----------------------------------------------------------------------------------------
+# PREPARE
+# ----------------------------------------------------------------------------------------
+- name: Create directories
+  register: dir_done
+  file: path="{{ item }}" state=directory
+  with_items:
+    - "{{ kali_make_dirs|default([]) }}"
+
+
+# ----------------------------------------------------------------------------------------
+# INSTALL
+# ----------------------------------------------------------------------------------------
+- name: Install Tools via APT
+  when: dir_done is success
+  register: apt_done
+  sudo: true
+  apt: name={{ item }} state=present
+  with_items:
+   - "{{ kali_apt|default([]) }}"
+
+- name: Install Tools via pip
+  when: dir_done is success
+  register: pip_done
+  sudo: true
+  pip: name={{ item }}
+  with_items:
+    - "{{ kali_pip|default([]) }}"
+
+- name: Install Tools via easy_install
+  when: pip_done is success
+  register: easy_install_done
+  sudo: true
+  easy_install: name={{ item }}
+  with_items:
+    - "{{ kali_easy_install|default([]) }}"
+
+- name: Install Tools via gem
+  when: easy_install_done is success
+  register: gem_done
+  sudo: true
+  gem: 
+    name={{ item.package }}
+    state={{ item.state|default("latest") }}
+  with_items:
+    - "{{ kali_gem|default([]) }}"
+
+- name: Install Tools via go
+  when: gem_done is success
+  register: go_done
+  sudo: true
+  shell: go get {{ item }}
+  with_items:
+    - "{{ kali_go|default([]) }}"
+
+- name: Install GIT repositories
+  when: go_done is success
+  register: git_done
+  git:
+    repo={{ item.repo }}
+    dest={{tools_dir}}/{{ item.dest }}
+    accept_hostkey=yes
+    version={{ item.version|default(\"master\") }}
+    force={{ item.force|default("no") }}
+  with_items:
+    - "{{ kali_git_repositories|default([]) }}"
+
+- name: Configure Python3 repositories
+  when: git_done is success
+  command: chdir="{{ tools_dir }}/{{ item }}" pipenv --three install --skip-lock
+  with_items: 
+    - "{{ kali_install_python3|default([]) }}"
+
+- name: Configure Python2 repositories
+  when: git_done is success
+  command: chdir="{{ tools_dir }}/{{ item }}" pipenv --two install --skip-lock
+  with_items: 
+    - "{{ kali_install_python2|default([]) }}"
+
+- name: Manually build go packages
+  when: git_done is success
+  command: |
+    mv {{tools_dir}}/{{ item.git_name }} {{ item.go_folder }}
+    chdir={{ item.go_folder }} go get
+    chdir={{ item.go_folder }} go build
+    chdir={{ item.go_folder }} go install
+  with_items:
+    - "{{ kali_go_build|default([]) }}"
+
+- name: Install shortcuts
+  copy:
+    src: "{{ role_path }}/files/{{ item }}"
+    dest: /usr/local/bin/{{ item }}
+    mode: a+x
+  with_items:
+    - "{{ kali_shortcuts|default([]) }}"
+
+- name: Download binaries
+  when: git_done is success
+  register: bin_done
+  get_url:
+    url={{ item.url }}
+    dest={{ item.dest }}
+    mode=a+x
+  with_items:
+    - "{{ kali_binary|default([]) }}"
+
+- name: Install DEB binaries
+  when: bin_done is success
+  apt: deb="{{item}}"
+  sudo: true
+  with_items:
+    - "{{ kali_deb|default([]) }}"
+
+- name: Download and extract zipped installs
+  when: git_done is success
+  register: tars_done
+  unarchive:
+    src={{ item.src }}
+    dest={{ item.dest}}
+    remote_src=yes
+  with_items:
+    - "{{ kali_tars|default([]) }}"
+
+- name: Copy configuration files
+  copy:
+    src: "{{ role_path }}/files/{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - "{{ kali_config|default([]) }}"
+
+- name: Run bash scripts
+  when: git_done is success
+  script: ../files/{{ item }}
+  with_items:
+    - "{{ kali_bash|default([]) }}"
+
+
+# ----------------------------------------------------------------------------------------
+# CUSTOM
+# ----------------------------------------------------------------------------------------
+- name: Install Cloudsploit
+  when: git_done is success
+  command: chdir="{{ tools_dir }}/cloudsploit/" npm install
+
+- name: Install Google Cloud SDK
+  when: tars_done is success
+  register: google_sdk
+  command: "{{ tools_dir }}/google-cloud-sdk/install.sh"
+
+- name: Install kubectl
+  when: google_sdk is success
+  command: |
+    gcloud components install kubectl
+    set -x; cd "$(mktemp -d)" && \
+        curl -fsSLO "https://storage.googleapis.com/krew/v{{ version_krew }}/krew.{tar.gz,yaml}" && \
+        tar zxvf krew.tar.gz && \
+        ./krew-"$(uname | tr '[:upper:]' '[:lower:]')_amd64" install --manifest=krew.yaml --archive=krew.tar.gz
+
+- name: Install krew
+  when: tars_done is success
+  command: chdir="/tmp/krew/ " ./krew-"$(uname | tr '[:upper:]' '[:lower:]')_amd64" install
+
+
+# ----------------------------------------------------------------------------------------
+# CLEANUP
+# ----------------------------------------------------------------------------------------
+- name: Clean the system
+  script: ../files/cleanup.sh
+
+- debug: msg="{{ item }}"
+  with_items:
+    - "Install iTerm color scheme: ~/.oh-my-zsh/custom/palenight.itermcolors"

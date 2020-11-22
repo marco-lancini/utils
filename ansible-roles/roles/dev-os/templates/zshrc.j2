@@ -1,0 +1,142 @@
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH={{ home_dir }}/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="custom"
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git git-extras tmux last-working-dir dirhistory python pip z docker)
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='micro'
+else
+  export EDITOR='micro'
+fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+# ------------------------------------------------------------------------------
+#  CUSTOM
+# ------------------------------------------------------------------------------
+# Setting history length
+HISTSIZE=1000000
+HISTFILESIZE=5000
+HISTTIMEFORMAT="%d/%m/%y %T "
+
+# Individual history per terminal
+unsetopt inc_append_history
+unsetopt share_history
+
+# Aliases
+source ~/.bash_aliases
+function cd {
+    builtin cd "$@" && clear && ls -lh --color=auto
+}
+alias la='ls -A'
+alias ls='clear && ls -lhG --color=auto'
+alias ..="cd .."
+alias ee="exit"
+alias renew='/etc/init.d/networking restart'
+alias emacs="emacs -nw"
+alias bat='bat --theme TwoDark'
+alias lock="gnome-screensaver-command -l"
+alias glog="git log --graph --decorate --oneline"
+alias glog_full="git log --graph --decorate --abbrev-commit"
+alias ungit='find . -type d -name ".git" | while read dir ; do sh -c "cd $dir/../ && echo \"\nGIT STATUS IN ${dir//\.\
+git/}\" && git status -s && git cherry -v" ; done'
+
+# Python
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PYTHONSTARTUP=/root/.pythonstartup
+export PIPENV_VENV_IN_PROJECT=true
+
+# Go
+export GOPATH=~/go/
+
+# Plz
+source ~/.profile
+source <(plz --completion_script)
+
+# CSPs
+export AWS_SDK_LOAD_CONFIG=1
+autoload -U compinit && compinit
+source /usr/lib/google-cloud-sdk/completion.bash.inc
+source /usr/local/bin/aws_zsh_completer.sh
+
+# Kubernetes
+source <(kubectl completion zsh)
+source ~/.oh-my-zsh/custom/kube-ps1.sh
+[ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
+function kubectl() { echo "+ kubectl $@">&2; command kubectl $@; }
+alias k="kubectl"
+alias krew="kubectl-krew"
+alias debug-shell="kubectl run -it --rm --restart=Never kube-shell --image alpine -- sh"
+export KUBE_PS1_PREFIX="["
+export KUBE_PS1_SUFFIX="]"
+export KUBE_PS1_SEPARATOR="|"
+export KUBE_PS1_CTX_COLOR="magenta"
+export KUBE_PS1_NS_COLOR="cyan"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:~/go/bin:$PATH"
+export KUBECONFIG=~/.kube/config
+for file in ~/.kube/configs/*.yaml; do
+    export KUBECONFIG=$KUBECONFIG:$file
+done
+
+# Docker compose
+alias wekan_up="docker-compose -f /opt/admin_wekan/docker-compose.yml up -d"
+alias wekan_down="docker-compose -f /opt/admin_wekan/docker-compose.yml down"
+alias wiki_up="docker-compose -f /opt/admin_raneto/docker-compose.yaml up -d"
+alias wiki_down="docker-compose -f /opt/admin_raneto/docker-compose.yaml down"

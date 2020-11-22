@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cd /opt/patator/ && python patator.py "$@"

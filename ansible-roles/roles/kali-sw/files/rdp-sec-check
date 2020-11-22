@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cd /opt/rdp-sec-check/ && ./rdp-sec-check.pl "$@"

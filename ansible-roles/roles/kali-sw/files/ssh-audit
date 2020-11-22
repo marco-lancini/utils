@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cd /opt/ssh-audit/ && python ssh-audit.py "$@"

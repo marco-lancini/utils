@@ -1,0 +1,10 @@
+---
+- name: Start ntp
+  service: name=ntp state=started
+
+- name: restart sshd
+  service: name=ssh state=restarted
+
+- name: reload ufw
+  ufw: state=reloaded
+  ignore_errors: yes

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+## Note: This is far from perfect...
+
+CWD=\$(pwd)/
+BWD="?"
+
+## Using full path?
+[ -e "/\${1}" ] && BWD=""
+
+## Using relative path?
+[ -e "./\${1}" ] && BWD="\${CWD}"
+
+## Can't find input file!
+[[ "\${BWD}" == "?" ]] && echo ' '${RED}'[!]'${RESET}' Cant find \$1. Quitting...' && exit
+
+## The magic!
+cd /usr/share/windows-binaries/hyperion/
+$(which wine) ./Src/Crypter/bin/crypter.exe \${BWD}\${1} output.exe
+
+## Restore our path
+cd \${CWD}/
+sleep 1s
+
+## Move the output file
+mv -f /usr/share/windows-binaries/hyperion/output.exe \${2}
+
+## Generate file hashes
+for FILE in \${1} \${2}; do
+  echo "[i] \$(md5sum \${FILE})"
+done

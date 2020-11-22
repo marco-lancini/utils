@@ -1,0 +1,236 @@
+---
+# ------------------------------------------------------------------------------
+# OS SETUP
+# ------------------------------------------------------------------------------
+# ---------- TIMEZONE/LOCALES
+- name: Set timezone to London
+  timezone:
+    name: Europe/London
+
+- name: Install ntp tools
+  apt: name={{item}} state=present
+  with_items:
+    - ntp
+    - ntpdate
+  notify:
+    - Start ntp
+  register: ntpinstalled
+
+- name: Update time
+  when: ntpinstalled is success
+  shell: ntpdate -b -s -u pool.ntp.org
+  register: ntpupdated
+
+- name: Configure keyboard layout location (gb)
+  when: keyboard_apple is success
+  replace:
+    path: /etc/default/keyboard
+    regexp: 's/XKBLAYOUT=".*"/XKBLAYOUT="gb"/'
+
+
+# ---------- UPDATE OS
+- name: Update OS
+  register: osupdated
+  apt:
+    update_cache: yes
+    upgrade: full
+
+- name: Set hostname
+  hostname: name="{{ hostname|default("dev") }}"
+  tags:
+    - hostname
+
+
+# ---------- USERS
+- name: Add users
+  user:
+    name={{ item.name }}
+    comment="{{ item.comment }}"
+    shell={{ item.shell }}
+    state=present
+  with_items: "{{ dev_users|default([]) }}"
+
+- name: Add public SSH keys per user
+  authorized_key:
+    user={{ item.name }}
+    key="{{ item.ssh_key }}"
+  with_items: "{{ dev_user_keys|default([]) }}"
+
+
+
+# ------------------------------------------------------------------------------
+# PREPARE
+# ------------------------------------------------------------------------------
+- name: Create directories
+  when: os_done is success
+  register: dir_done
+  file: path="{{ item }}" state=directory
+  with_items:
+    - "{{ dev_make_dirs|default([]) }}"
+
+
+
+# ------------------------------------------------------------------------------
+# INSTALL
+# ------------------------------------------------------------------------------
+- name: Install Tools via APT
+  when: dir_done is success
+  register: apt_done
+  sudo: true
+  apt: name={{ item }} state=present
+  with_items:
+   - "{{ dev_apt|default([]) }}"
+
+- name: Install Tools via pip
+  when: dir_done is success
+  register: pip_done
+  sudo: true
+  pip: name={{ item }}
+  with_items:
+    - "{{ dev_pip|default([]) }}"
+
+- name: Install Tools via easy_install
+  when: pip_done is success
+  register: easy_install_done
+  sudo: true
+  easy_install: name={{ item }}
+  with_items:
+    - "{{ dev_easy_install|default([]) }}"
+
+- name: Install Tools via gem
+  when: easy_install_done is success
+  register: gem_done
+  sudo: true
+  gem: 
+    name={{ item.package }}
+    state={{ item.state|default("latest") }}
+  with_items:
+    - "{{ dev_gem|default([]) }}"
+
+- name: Install Tools via go
+  when: gem_done is success
+  register: go_done
+  sudo: true
+  shell: go get {{ item }}
+  with_items:
+    - "{{ dev_go|default([]) }}"
+
+- name: Install GIT repositories
+  when: go_done is success
+  register: git_done
+  git:
+    repo={{ item.repo }}
+    dest={{tools_dir}}/{{ item.dest }}
+    accept_hostkey=yes
+    version={{ item.version|default(\"master\") }}
+    force={{ item.force|default("no") }}
+  with_items:
+    - "{{ dev_git_repositories|default([]) }}"
+
+- name: Manually build go packages
+  when: git_done is success
+  command: |
+    mv {{tools_dir}}/{{ item.git_name }} {{ item.go_folder }}
+    chdir={{ item.go_folder }} go get
+    chdir={{ item.go_folder }} go build
+    chdir={{ item.go_folder }} go install
+  with_items:
+    - "{{ dev_go_build|default([]) }}"
+
+- name: Install shortcuts
+  copy:
+    src: "{{ role_path }}/files/{{ item }}"
+    dest: /usr/local/bin/{{ item }}
+    mode: a+x
+  with_items:
+    - "{{ dev_shortcuts|default([]) }}"
+
+- name: Download binaries
+  when: git_done is success
+  register: bin_done
+  get_url:
+    url={{ item.url }}
+    dest={{ item.dest }}
+    mode=a+x
+  with_items:
+    - "{{ dev_binary|default([]) }}"
+
+- name: Download and extract zipped installs
+  when: git_done is success
+  register: tars_done
+  unarchive:
+    src={{ item.src }}
+    dest={{ item.dest}}
+    remote_src=yes
+  with_items:
+    - "{{ dev_tars|default([]) }}"
+
+- name: Run bash scripts
+  when: git_done is success
+  script: ../files/{{ item }}
+  with_items:
+    - "{{ dev_bash|default([]) }}"
+
+
+# ----------------------------------------------------------------------------------------
+# CUSTOM
+# ----------------------------------------------------------------------------------------
+# ---------- SSH
+- name: Enable SSH
+  when: apt_done is success
+  command: update-rc.d ssh defaults
+
+# ---------- FIREWALL
+- name: Allow ssh (and any other default ports) through firewall
+  ufw: rule=allow proto=tcp port={{ item }}
+  notify:
+    - reload ufw
+  with_items: "{{ dev_ufw_tcp_allow|default([22]) }}"
+
+- name: Make sure firewall is up and running, and denying
+  ufw: state=enabled policy=deny
+  notify:
+    - reload ufw
+  tags:
+    - ssh
+
+  
+# ---------- ZSH
+- name: Execute the zsh-installer.sh
+  when: tars_done is success
+  register: zsh_done
+  script: /tmp/zsh-installer.sh
+
+- name: Set ZSH as default shell
+  when: zsh_done is success
+  command: chsh -s "$(which zsh)"
+
+
+# ---------- CONFIG
+- name: Copy configuration files
+  when: zsh_done is success
+  copy:
+    src: "{{ role_path }}/files/{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - "{{ dev_config|default([]) }}"
+
+- name: Apply / deploy common templates
+  template:
+    src={{ item.src }}
+    dest={{ item.dest }}
+    mode={{ item.mode }}
+  with_items:
+    - "{{ dev_templates|default([]) }}"
+  tags:
+    - templates
+
+# ------------------------------------------------------------------------------
+# CLEANUP
+# ------------------------------------------------------------------------------
+- name: Clean the system
+  script: ../files/cleanup.sh
+
+- debug: msg="{{ item }}"
+  with_items:
+    - "Install iTerm2 color scheme (Bluloco Dark) from /tmp/iTerm2-Color-Schemes/"

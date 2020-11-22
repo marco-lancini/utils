@@ -1,0 +1,83 @@
+---
+# ----------------------------------------------------------------------------------------
+# PREPARE
+# ----------------------------------------------------------------------------------------
+- name: Create directories
+  register: dir_done
+  file: path="{{ item }}" state=directory
+  with_items:
+    - "{{ kali_make_dirs|default([]) }}"
+
+
+# ----------------------------------------------------------------------------------------
+# INSTALL
+# ----------------------------------------------------------------------------------------
+- name: Install Flawfinder
+  apt: pkg=flawfinder state=installed
+
+- name: Install Meld
+  apt: pkg=meld state=installed
+
+- name: Install Frida
+  easy_install:
+    name: frida
+
+# ---------- HOPPER
+- name: Download Hopper
+  get_url:
+    url: https://d2ap6ypl1xbe4k.cloudfront.net/Hopper-v4-4.3.9-Linux.deb
+    dest: /tmp/hopper.deb
+    checksum: sha1:7c800b8b8918b8141f10093552de0e518f525977
+  register: hopper_download
+
+- name: Install Hopper
+  when: hopper_download|success
+  apt: deb="/tmp/hopper.deb"
+  sudo: true
+
+
+# ---------- IPAPATCH
+- name: Clone IPAPatch
+  git:
+    repo: https://github.com/Naituw/IPAPatch.git
+    dest: "{{ github_folder }}IPAPatch/"
+  register: ipapatch_clone
+
+
+# ---------- NEEDLE
+- name: Install Needle Debian Dependencies
+  apt: name={{item}} state=installed
+  sudo: true
+  with_items:
+       - python2.7 
+       - python2.7-dev 
+       - sshpass 
+       - sqlite3 
+       - lib32ncurses5-dev
+  register: needle_dependencies_debian
+
+- name: Install Needle Python Dependencies
+  pip: name={{item}}
+  sudo: true
+  with_items:
+       - readline 
+       - paramiko 
+       - sshtunnel 
+       - frida 
+       - mitmproxy 
+       - biplist
+  register: needle_dependencies_python
+
+- name: Clone Needle
+  when: needle_dependencies_debian|success and needle_dependencies_python|success
+  git:
+    repo: https://github.com/mwrlabs/needle.git
+    dest: "{{ github_folder }}needle/"
+  register: needle_clone
+
+- name: Install Needle
+  when: needle_clone|success
+  copy:
+    src: "{{ role_path }}/files/needle"
+    dest: /usr/local/bin/needle
+    mode: a+x
