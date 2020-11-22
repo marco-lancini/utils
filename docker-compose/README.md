@@ -8,7 +8,7 @@ build a few docker-compose based apps/
 
 | App                                                  | Description                                                              |
 | ---------------------------------------------------- | ------------------------------------------------------------------------ |
-| `docker_vault`                                       | [Docker + Consul + Vault](https://github.com/marco-lancini/docker_vault) |
+| docker_vault                                         | [Docker + Consul + Vault](https://github.com/marco-lancini/docker_vault) |
 | [draw-pad-whiteboard](draw-pad-whiteboard/README.md) | Draw.io + Pad + Whiteboard                                               |
 | [nginx-proxy](nginx-proxy/docker-compose.yml)        | Sample setup for `nginx-proxy`                                           |
 | [raneto](raneto/docker-compose.yaml)                 | OSS Wiki                                                                 |
