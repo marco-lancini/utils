@@ -12,6 +12,6 @@ repos:
         args: ['--branch', 'master']
       - id: trailing-whitespace
   - repo: https://github.com/prettier/prettier
-    rev: 2.0.5
+    rev: 2.2.0
     hooks:
       - id: prettier
