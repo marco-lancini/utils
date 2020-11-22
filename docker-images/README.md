@@ -8,8 +8,8 @@ All these images are pushed to [Github Container Registry](https://github.com/ma
 
 ## Images
 
-| Image                                       | Description                                            | Pull                                          |
-| ------------------------------------------- | ------------------------------------------------------ | --------------------------------------------- |
-| [ansible-worker](ansible-worker/Dockerfile) | Alpine with Ansible, OpenSSH, and sshpass preinstalled | `ghcr.io/marco-lancini/ansible-worker:latest` |
-| [latex](latex/Dockerfile)                   | Alpine with texlive preinstalled                       | `ghcr.io/marco-lancini/latex:latest`          |
-| [nomad](nomad/Dockerfile)                   | Image for HashiCorp Nomad                              | `ghcr.io/marco-lancini/nomad:latest`          |
+| Image                                       | Description                                            | Pull                                          | Status                                                                                                                               |
+| ------------------------------------------- | ------------------------------------------------------ | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| [ansible-worker](ansible-worker/Dockerfile) | Alpine with Ansible, OpenSSH, and sshpass preinstalled | `ghcr.io/marco-lancini/ansible-worker:latest` | ![[DOCKER IMAGE] Ansible Worker](https://github.com/marco-lancini/utils/workflows/%5BDOCKER%20IMAGE%5D%20Ansible%20Worker/badge.svg) |
+| [latex](latex/Dockerfile)                   | Alpine with texlive preinstalled                       | `ghcr.io/marco-lancini/latex:latest`          | ![[DOCKER IMAGE] Latex](https://github.com/marco-lancini/utils/workflows/%5BDOCKER%20IMAGE%5D%20Latex/badge.svg)                     |
+| [nomad](nomad/Dockerfile)                   | Image for HashiCorp Nomad                              | `ghcr.io/marco-lancini/nomad:latest`          | ![[DOCKER IMAGE] Nomad](https://github.com/marco-lancini/utils/workflows/%5BDOCKER%20IMAGE%5D%20Nomad/badge.svg)                     |
