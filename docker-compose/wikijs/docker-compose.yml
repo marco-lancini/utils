@@ -1,0 +1,40 @@
+version: "3"
+services:
+  wikidb:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_DB: wiki
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_USER: wikijs
+    logging:
+      driver: "none"
+    volumes:
+      - /docker/data/postgres_data:/var/lib/postgresql/data
+    expose:
+      - 5432
+    networks:
+      - wikinet
+
+  wikijs:
+    image: requarks/wiki:2
+    depends_on:
+      - wikidb
+    links:
+      - wikidb
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: wikijs
+      DB_PASS: changeme
+      DB_NAME: wiki
+      DB_TYPE: sqlite
+    networks:
+      - wikinet
+    ports:
+      - "3000:3000"
+    volumes:
+      - /docker/data/:/etc/wiki/db/
+
+networks:
+  wikinet:
