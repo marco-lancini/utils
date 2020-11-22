@@ -1,0 +1,67 @@
+---
+tools_dir: /opt
+home_dir: /root
+
+kali_users:
+  - name: marco
+    comment: 'Marco L.'
+    shell: /bin/bash
+
+# kali_user_keys:
+#   - name: marco
+#     ssh_key: "ssh-rsa ..."
+
+#kali_make_dirs:
+
+kali_apt:
+  - mlocate
+  - zsh
+  - ufw
+
+#kali_pip:
+
+#kali_easy_install:
+
+#kali_gem:
+
+#kali_go:
+
+#kali_go_build:
+
+#kali_git_repositories:
+
+#kali_shortcuts:
+
+kali_binary:
+  - url: https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    dest: /tmp/zsh-installer.sh
+
+kali_tars:
+  - src: https://github.com/mbadolato/iTerm2-Color-Schemes/archive/master.zip
+    dest: '/tmp/iTerm2-Color-Schemes/'
+
+kali_config:
+  - src: custom.zsh-theme
+    dest: /root/.oh-my-zsh/themes/custom.zsh-theme
+
+kali_templates:
+  - src: hosts.j2
+    dest: /etc/hosts
+    mode: '0644'
+  - src: issue.ssh.j2
+    dest: /etc/issue.ssh
+    mode: '0644'
+  - src: ssh_config.j2
+    dest: /etc/
+    ode: '0644'
+  - src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    mode: '0644'
+  - src: zshrc.j2
+    dest: /root/.zshrc
+    mode: '0644'
+
+kali_bash:
+  - gnome3.sh
+  - thunar.sh
+  - bash.sh

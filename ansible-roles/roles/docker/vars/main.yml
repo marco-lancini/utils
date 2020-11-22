@@ -1,0 +1,5 @@
+distro: ubuntu
+version: bionic
+
+docker_users:
+  - root

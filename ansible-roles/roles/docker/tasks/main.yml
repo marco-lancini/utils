@@ -1,0 +1,34 @@
+- name: Install packages for apt over HTTPS
+  apt: name={{item}}
+    state=installed
+    update_cache=yes
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg2
+    - software-properties-common
+
+- name: Add Docker apt key
+  apt_key:
+    url: https://download.docker.com/linux/{{ ubuntu }}/gpg
+    state: present
+
+- name: Add Docker apt repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/{{ ubuntu }} {{ version }} stable
+    state: present
+
+- name: Update packages
+  apt: update_cache=yes
+
+- name: Install Docker via apt
+  apt: name=docker-ce
+    install-recommends=no
+    state=present
+
+- name: Add docker_users to docker group
+  user: name={{ item }}
+    groups=docker
+    append=yes
+  with_items: docker_users

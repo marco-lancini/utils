@@ -1,3 +1,6 @@
+ansible-roles:
+  - ansible-roles/**/*
+
 docker-compose:
   - docker-compose/**/*
 

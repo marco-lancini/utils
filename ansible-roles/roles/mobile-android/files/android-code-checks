@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cd /opt/mobile-code-checks/ && python android-checks.py "$@"

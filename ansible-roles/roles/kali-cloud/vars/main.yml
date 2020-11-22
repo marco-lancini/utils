@@ -1,0 +1,142 @@
+---
+tools_dir: /opt/cloud
+
+version_gcloud: '231.0.0'
+version_krew: '0.2.1'
+
+kali_make_dirs:
+  - '/opt/cloud'
+
+kali_apt:
+  # ---------- Prerequisites for Cloudsploit
+  - nodejs
+  - npm
+  # ---------- Prerequisites for CloudMapper
+  - autoconf
+  - automake
+  - libtool
+  - jq
+  - python3-dev
+  - python3-tk
+  # ---------- Prerequisites for PMapper
+  - graphviz
+  - python-pydot
+  - python-pydot-ng
+
+kali_pip:
+  - pipenv
+  - awscli
+  - aws-shell
+  - awsscout2
+  - ansi2html
+  # - python-tk
+
+#kali_easy_install:
+#   - example
+
+kali_gem:
+  - package: aws_public_ips
+    state: latest
+  - package: dockscan
+    state: latest
+
+kali_go:
+  - github.com/michenriksen/gitrob
+  - github.com/zricethezav/gitleaks
+  - github.com/Shopify/kubeaudit
+  - github.com/sysdiglabs/kubectl-dig/cmd/kubectl-dig
+
+kali_go_build:
+  - git_name: kubeaudit
+    go_folder: /root/go/src/github.com/Shopify/kubeaudit/
+
+kali_git_repositories:
+  - repo: https://github.com/cloudsploit/scans.git
+    dest: cloudsploit
+  - repo: https://github.com/duo-labs/cloudmapper.git
+    dest: cloudmapper
+  - repo: https://github.com/RhinoSecurityLabs/pacu.git
+    dest: pacu
+  - repo: https://github.com/carnal0wnage/weirdAAL.git
+    dest: weirdAAL
+  - repo: https://github.com/SecurityFTW/cs-suite.git
+    dest: cs-suite
+  - repo: https://github.com/disruptops/resource-counter.git
+    dest: resource-counter
+  - repo: https://github.com/nccgroup/aws-inventory.git
+    dest: aws-inventory
+  - repo: https://github.com/nccgroup/PMapper.git
+    dest: pmapper
+  - repo: https://github.com/sa7mon/S3Scanner.git
+    dest: S3Scanner
+  - repo: https://github.com/andresriancho/nimbostratus.git
+    dest: nimbostratus
+  - repo: https://github.com/dagrz/aws_pwn.git
+    dest: aws_pwn
+  - repo: https://github.com/awslabs/aws-security-benchmark.git
+    dest: aws-security-benchmark
+  - repo: https://github.com/toniblyx/prowler.git
+    dest: prowler
+  - repo: https://github.com/prevade/cloudjack.git
+    dest: cloudjack
+  - repo: https://github.com/nccgroup/G-Scout.git
+    dest: g-scout
+  - repo: https://github.com/nccgroup/ScoutSuite.git
+    dest: scoutsuite
+  - repo: https://github.com/spotify/gcp-audit.git
+    dest: gcp-audit
+  - repo: https://github.com/DenizParlak/hayat.git
+    dest: hayat
+  - repo: https://github.com/marcin-kolda/gcp-iam-collector.git
+    dest: gcp-iam-collector
+  - repo: https://github.com/RhinoSecurityLabs/GCPBucketBrute.git
+    dest: gcpbucketbrute
+  - repo: https://github.com/initstring/cloud_enum.git
+    dest: cloud_enum
+
+kali_install_python3:
+  - cloudmapper
+  - pacu
+  - weirdAAL
+  - scoutsuite
+  - gcpbucketbrute
+  - cloud_enum
+
+kali_install_python2:
+  - cs-suite
+  - resource-counter
+  - aws-inventory
+  - pmapper
+  - S3Scanner
+  - nimbostratus
+  - aws_pwn
+  - aws-security-benchmark
+  - prowler
+  - cloudjack
+  - g-scout
+  - gcp-audit
+  - gcp-iam-collector
+
+# kali_shortcuts:
+#   - prowler
+
+kali_binary:
+  - url: https://raw.githubusercontent.com/jonmosco/kube-ps1/master/kube-ps1.sh
+    dest: ~/.oh-my-zsh/custom/kube-ps1.sh
+  - url: https://raw.githubusercontent.com/JonathanSpeek/palenight-iterm2/master/palenight.itermcolors
+    dest: ~/.oh-my-zsh/custom/palenight.itermcolors
+
+# kali_deb:
+#     - /tmp/bat.deb
+
+kali_tars:
+  - src: https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-{{ version_gcloud }}-linux-x86_64.tar.gz
+    dest: '{{ tools_dir }}/'
+  - src: https://storage.googleapis.com/krew/v0.2.1/krew.tar.gz
+    dest: /tmp/krew/
+# kali_config:
+#   - src: "terminator"
+#     dest: "/root/.config/terminator/config"
+
+# kali_bash:
+#   - firefox.sh

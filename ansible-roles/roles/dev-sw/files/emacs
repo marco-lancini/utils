@@ -1,0 +1,15 @@
+;; displays the time in the status bar
+(display-time)
+;; Stop scrolling of screen at end of file
+(setq next-line-add-newlines nil)
+;; syntax highlighting by default
+(global-font-lock-mode 1)
+;; Scroll down with the cursor,move down the buffer one
+;; line at a time, instead of in larger amounts.
+(setq scroll-step 1)
+;; do not make backup files
+(setq make-backup-files nil)
+;; line numbers
+(global-linum-mode 1)
+;; word wrap
+(global-visual-line-mode t)

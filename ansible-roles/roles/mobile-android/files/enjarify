@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cd /opt/enjarify/ && bash enjarify.sh "$@"
