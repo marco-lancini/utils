@@ -1,0 +1,12 @@
+version: '2'
+services:
+  web:
+    container_name: wiki
+    restart: always
+    build:
+      context: ./wiki/
+      dockerfile: Dockerfile
+    volumes:
+      - ./wiki/content:/wiki/content
+    ports:
+      - 3000:3000

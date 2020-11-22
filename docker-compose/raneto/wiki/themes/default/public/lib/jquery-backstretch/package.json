@@ -1,0 +1,71 @@
+{
+  "_args": [
+    [
+      "jquery-backstretch@2.1.18",
+      "/app"
+    ]
+  ],
+  "_from": "jquery-backstretch@2.1.18",
+  "_id": "jquery-backstretch@2.1.18",
+  "_inBundle": false,
+  "_integrity": "sha512-qUUTfZD/pwpqlCVvgr8VLTNa0utQBUW+HTXLPZkyqcSiudgWf+ImXlRE7oKQ8o2MbcrZ28n6HCg38Sfhwn9CNw==",
+  "_location": "/jquery-backstretch",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "jquery-backstretch@2.1.18",
+    "name": "jquery-backstretch",
+    "escapedName": "jquery-backstretch",
+    "rawSpec": "2.1.18",
+    "saveSpec": null,
+    "fetchSpec": "2.1.18"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/jquery-backstretch/-/jquery-backstretch-2.1.18.tgz",
+  "_spec": "2.1.18",
+  "_where": "/app",
+  "author": {
+    "name": "Scott Robbin",
+    "email": "scott@robbin.co",
+    "url": "http://srobbin.com"
+  },
+  "bugs": {
+    "url": "https://github.com/jquery-backstretch/jquery-backstretch/issues"
+  },
+  "contributors": [
+    {
+      "name": "Daniel Cohen Gindi",
+      "email": "danielgindi@gmail.com"
+    }
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1"
+  },
+  "description": "A simple jQuery plugin that allows you to add a dynamically-resized, slideshow-capable background image to any page or element.",
+  "devDependencies": {
+    "grunt": "1.0.*",
+    "grunt-contrib-concat": "1.0.*",
+    "grunt-contrib-jshint": "1.0.*",
+    "grunt-contrib-qunit": "1.2.*",
+    "grunt-contrib-uglify": "2.0.*",
+    "grunt-contrib-watch": "1.0.*"
+  },
+  "homepage": "https://github.com/jquery-backstretch/jquery-backstretch#readme",
+  "keywords": [],
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "main": "jquery.backstretch.js",
+  "name": "jquery-backstretch",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jquery-backstretch/jquery-backstretch.git"
+  },
+  "title": "Backstretch",
+  "version": "2.1.18"
+}
