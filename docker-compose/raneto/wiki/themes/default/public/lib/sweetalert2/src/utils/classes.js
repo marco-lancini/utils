@@ -1,12 +1,12 @@
-export const swalPrefix = 'swal2-'
+export const swalPrefix = 'swal2-';
 
 export const prefix = (items) => {
-  const result = {}
+  const result = {};
   for (const i in items) {
-    result[items[i]] = swalPrefix + items[i]
+    result[items[i]] = swalPrefix + items[i];
   }
-  return result
-}
+  return result;
+};
 
 export const swalClasses = prefix([
   'container',
@@ -67,13 +67,7 @@ export const swalClasses = prefix([
   'grow-row',
   'grow-column',
   'grow-fullscreen',
-  'rtl'
-])
+  'rtl',
+]);
 
-export const iconTypes = prefix([
-  'success',
-  'warning',
-  'info',
-  'question',
-  'error'
-])
+export const iconTypes = prefix(['success', 'warning', 'info', 'question', 'error']);

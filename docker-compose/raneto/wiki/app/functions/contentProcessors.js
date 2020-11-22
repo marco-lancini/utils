@@ -1,10 +1,9 @@
-
 'use strict';
 
 const path = require('path');
-const fs   = require('fs-extra');
-const _    = require('underscore');
-const _s   = require('underscore.string');
+const fs = require('fs-extra');
+const _ = require('underscore');
+const _s = require('underscore.string');
 const yaml = require('js-yaml');
 
 // Regex for page meta (considers Byte Order Mark \uFEFF in case there's one)
@@ -19,7 +18,7 @@ const yaml = require('js-yaml');
 const _metaRegex = /^\uFEFF?\/\*([\s\S]*?)\*\//i;
 const _metaRegexYaml = /^\uFEFF?---([\s\S]*?)---/i;
 
-function cleanString (str, use_underscore) {
+function cleanString(str, use_underscore) {
   const u = use_underscore || false;
   str = str.replace(/\//g, ' ').trim();
   if (u) {
@@ -30,7 +29,7 @@ function cleanString (str, use_underscore) {
 }
 
 // Clean object strings.
-function cleanObjectStrings (obj) {
+function cleanObjectStrings(obj) {
   const cleanObj = {};
   for (const field in obj) {
     if (_.has(obj, field)) {
@@ -41,13 +40,13 @@ function cleanObjectStrings (obj) {
 }
 
 // Convert a slug to a title
-function slugToTitle (slug) {
+function slugToTitle(slug) {
   slug = slug.replace('.md', '').trim();
   return _s.titleize(_s.humanize(path.basename(slug)));
 }
 
 // Strip meta from Markdown content
-function stripMeta (markdownContent) {
+function stripMeta(markdownContent) {
   switch (true) {
     case _metaRegex.test(markdownContent):
       return markdownContent.replace(_metaRegex, '').trim();
@@ -59,7 +58,7 @@ function stripMeta (markdownContent) {
 }
 
 // Get meta information from Markdown content
-function processMeta (markdownContent) {
+function processMeta(markdownContent) {
   let meta = {};
   let metaArr;
   let metaString;
@@ -73,8 +72,8 @@ function processMeta (markdownContent) {
       metaString = metaArr ? metaArr[1].trim() : '';
 
       if (metaString) {
-        metas = metaString.match(/(.*): (.*)/ig);
-        metas.forEach(item => {
+        metas = metaString.match(/(.*): (.*)/gi);
+        metas.forEach((item) => {
           const parts = item.split(': ');
           if (parts[0] && parts[1]) {
             meta[cleanString(parts[0], true)] = parts[1].trim();
@@ -98,7 +97,7 @@ function processMeta (markdownContent) {
 }
 
 // Replace content variables in Markdown content
-function processVars (markdownContent, config) {
+function processVars(markdownContent, config) {
   if (config.variables && Array.isArray(config.variables)) {
     config.variables.forEach((v) => {
       markdownContent = markdownContent.replace(new RegExp('%' + v.name + '%', 'g'), v.content);
@@ -113,16 +112,16 @@ function processVars (markdownContent, config) {
   return markdownContent;
 }
 
-async function extractDocument (contentDir, filePath, debug) {
+async function extractDocument(contentDir, filePath, debug) {
   try {
     const file = await fs.readFile(filePath);
     const meta = processMeta(file.toString('utf-8'));
 
-    const id    = filePath.replace(contentDir, '').trim();
+    const id = filePath.replace(contentDir, '').trim();
     const title = meta.title ? meta.title : slugToTitle(id);
-    const body  = file.toString('utf-8');
+    const body = file.toString('utf-8');
 
-    return { id, title, body }
+    return {id, title, body};
   } catch (e) {
     if (debug) {
       console.log(e);
@@ -138,6 +137,6 @@ exports.default = {
   slugToTitle,
   stripMeta,
   processMeta,
-  processVars
+  processVars,
 };
 module.exports = exports.default;

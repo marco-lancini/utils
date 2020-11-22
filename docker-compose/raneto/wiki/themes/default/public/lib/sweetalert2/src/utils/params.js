@@ -1,4 +1,4 @@
-import { warn, warnAboutDepreation } from '../utils/utils.js'
+import {warn, warnAboutDepreation} from '../utils/utils.js';
 
 const defaultParams = {
   title: '',
@@ -66,8 +66,8 @@ const defaultParams = {
   onRender: null,
   onClose: null,
   onAfterClose: null,
-  scrollbarPadding: true
-}
+  scrollbarPadding: true,
+};
 
 const updatableParams = [
   'title',
@@ -94,16 +94,16 @@ const updatableParams = [
   'imageAlt',
   'imageClass',
   'progressSteps',
-  'currentProgressStep'
-]
+  'currentProgressStep',
+];
 
 export const deprecatedParams = {
   customContainerClass: 'customClass',
   confirmButtonClass: 'customClass',
   cancelButtonClass: 'customClass',
   imageClass: 'customClass',
-  inputClass: 'customClass'
-}
+  inputClass: 'customClass',
+};
 
 const toastIncompatibleParams = [
   'allowOutsideClick',
@@ -112,50 +112,50 @@ const toastIncompatibleParams = [
   'focusConfirm',
   'focusCancel',
   'heightAuto',
-  'keydownListenerCapture'
-]
+  'keydownListenerCapture',
+];
 
 /**
  * Is valid parameter
  * @param {String} paramName
  */
 export const isValidParameter = (paramName) => {
-  return Object.prototype.hasOwnProperty.call(defaultParams, paramName)
-}
+  return Object.prototype.hasOwnProperty.call(defaultParams, paramName);
+};
 
 /**
  * Is valid parameter for Swal.update() method
  * @param {String} paramName
  */
 export const isUpdatableParameter = (paramName) => {
-  return updatableParams.indexOf(paramName) !== -1
-}
+  return updatableParams.indexOf(paramName) !== -1;
+};
 
 /**
  * Is deprecated parameter
  * @param {String} paramName
  */
 export const isDeprecatedParameter = (paramName) => {
-  return deprecatedParams[paramName]
-}
+  return deprecatedParams[paramName];
+};
 
 const checkIfParamIsValid = (param) => {
   if (!isValidParameter(param)) {
-    warn(`Unknown parameter "${param}"`)
+    warn(`Unknown parameter "${param}"`);
   }
-}
+};
 
 const checkIfToastParamIsValid = (param) => {
   if (toastIncompatibleParams.includes(param)) {
-    warn(`The parameter "${param}" is incompatible with toasts`)
+    warn(`The parameter "${param}" is incompatible with toasts`);
   }
-}
+};
 
 const checkIfParamIsDeprecated = (param) => {
   if (isDeprecatedParameter(param)) {
-    warnAboutDepreation(param, isDeprecatedParameter(param))
+    warnAboutDepreation(param, isDeprecatedParameter(param));
   }
-}
+};
 
 /**
  * Show relevant warnings for given params
@@ -164,14 +164,14 @@ const checkIfParamIsDeprecated = (param) => {
  */
 export const showWarningsForParams = (params) => {
   for (const param in params) {
-    checkIfParamIsValid(param)
+    checkIfParamIsValid(param);
 
     if (params.toast) {
-      checkIfToastParamIsValid(param)
+      checkIfToastParamIsValid(param);
     }
 
-    checkIfParamIsDeprecated()
+    checkIfParamIsDeprecated();
   }
-}
+};
 
-export default defaultParams
+export default defaultParams;

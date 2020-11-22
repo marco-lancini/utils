@@ -7,7 +7,6 @@ body {
   color: #5a5a5a;
 }
 
-
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 
@@ -32,7 +31,6 @@ body {
 .navbar-wrapper .navbar .container {
   width: auto;
 }
-
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
@@ -69,7 +67,6 @@ body {
   background-color: #555;
 }
 
-
 /* MARKETING CONTENT
 -------------------------------------------------- */
 
@@ -91,7 +88,6 @@ body {
   background-color: #777;
 }
 
-
 /* Featurettes
 ------------------------- */
 
@@ -105,7 +101,6 @@ body {
   line-height: 1;
   letter-spacing: -1px;
 }
-
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */

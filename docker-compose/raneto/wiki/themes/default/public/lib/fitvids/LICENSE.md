@@ -1,6 +1,6 @@
 DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
 
-Copyright (C) 2015 Ross Zurowski <ross@rosszurowski.com> 
+Copyright (C) 2015 Ross Zurowski <ross@rosszurowski.com>
 
 Everyone is permitted to copy and distribute verbatim or modified
 copies of this license document, and changing it is allowed as long

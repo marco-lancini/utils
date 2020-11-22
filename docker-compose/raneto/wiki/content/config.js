@@ -1,11 +1,9 @@
-
 'use strict';
 
 // Modules
 var path = require('path');
 
 var config = {
-
   // Your site title (format: page_title - site_title)
   site_title: 'Wiki',
 
@@ -34,16 +32,16 @@ var config = {
   show_on_home_default: true,
 
   // Which Theme to Use?
-  theme_dir  : path.join(__dirname, '..', 'themes'),
-  theme_name : 'default',
+  theme_dir: path.join(__dirname, '..', 'themes'),
+  theme_name: 'default',
 
   // Specify the path of your content folder where all your '.md' files are located
   // Fix: Needs trailing slash for now!
   // Fix: Cannot be an absolute path
-  content_dir : path.join(__dirname, 'content'),
+  content_dir: path.join(__dirname, 'content'),
 
   // Where is the public directory or document root?
-  public_dir  : path.join(__dirname, '..', 'themes', 'default', 'public'),
+  public_dir: path.join(__dirname, '..', 'themes', 'default', 'public'),
 
   // The base URL of your images folder,
   // Relative to config.public_dir
@@ -54,10 +52,10 @@ var config = {
   analytics: '',
 
   // Set to true to enable the web editor
-  allow_editing : true,
+  allow_editing: true,
 
   // Set to true to enable HTTP Basic Authentication
-  authentication : true,
+  authentication: true,
 
   // If editing is enabled, set this to true to only authenticate for editing, not for viewing
   authentication_for_edit: true,
@@ -67,18 +65,18 @@ var config = {
 
   // Google OAuth
   googleoauth: false,
-  oauth2 : {
+  oauth2: {
     client_id: 'GOOGLE_CLIENT_ID',
     client_secret: 'GOOGLE_CLIENT_SECRET',
     callback: 'http://localhost:3000/auth/google/callback',
-    hostedDomain: 'google.com'
+    hostedDomain: 'google.com',
   },
   secret: 'someCoolSecretRightHere',
 
-  credentials    : [
+  credentials: [
     {
-      username : 'admin',
-      password : 'password'
+      username: 'admin',
+      password: 'password',
     },
   ],
 
@@ -94,7 +92,7 @@ var config = {
   rtl_layout: false,
 
   // Edit Home Page title, description, etc.
-  home_meta : {
+  home_meta: {
     // title       : 'Custom Home Title',
     // description : 'Custom Home Description'
   },
@@ -118,8 +116,7 @@ var config = {
     // append: 'Table of contents appendix',
     // maxdepth: 6,
     // firsth1: true,
-  }
-
+  },
 };
 config.public_dir = path.join(__dirname, '..', 'themes', config.theme_name, 'public');
 

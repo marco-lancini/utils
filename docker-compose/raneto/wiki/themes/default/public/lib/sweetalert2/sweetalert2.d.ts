@@ -327,7 +327,11 @@ declare module 'sweetalert2' {
      * An enum of possible reasons that can explain an alert dismissal.
      */
     enum DismissReason {
-      cancel, backdrop, close, esc, timer
+      cancel,
+      backdrop,
+      close,
+      esc,
+      timer,
     }
   }
 
@@ -440,8 +444,18 @@ declare module 'sweetalert2' {
      * @default null
      */
     input?:
-    'text' | 'email' | 'password' | 'number' | 'tel' | 'range' | 'textarea' | 'select' | 'radio' | 'checkbox' |
-    'file' | 'url';
+      | 'text'
+      | 'email'
+      | 'password'
+      | 'number'
+      | 'tel'
+      | 'range'
+      | 'textarea'
+      | 'select'
+      | 'radio'
+      | 'checkbox'
+      | 'file'
+      | 'url';
 
     /**
      * Modal window width, including paddings (box-sizing: border-box). Can be in px or %.
@@ -470,9 +484,21 @@ declare module 'sweetalert2' {
      * @default 'center'
      */
     position?:
-    'top' | 'top-start' | 'top-end' | 'top-left' | 'top-right' |
-    'center' | 'center-start' | 'center-end' | 'center-left' | 'center-right' |
-    'bottom' | 'bottom-start' | 'bottom-end' | 'bottom-left' | 'bottom-right';
+      | 'top'
+      | 'top-start'
+      | 'top-end'
+      | 'top-left'
+      | 'top-right'
+      | 'center'
+      | 'center-start'
+      | 'center-end'
+      | 'center-left'
+      | 'center-right'
+      | 'bottom'
+      | 'bottom-start'
+      | 'bottom-end'
+      | 'bottom-left'
+      | 'bottom-right';
 
     /**
      * Modal window grow direction
@@ -787,7 +813,7 @@ declare module 'sweetalert2' {
      * If input parameter is set to "select" or "radio", you can provide options.
      * Object keys will represent options values, object values will represent options text values.
      */
-    inputOptions?: SyncOrAsync<Map<string, string> | { [inputValue: string]: string }>;
+    inputOptions?: SyncOrAsync<Map<string, string> | {[inputValue: string]: string}>;
 
     /**
      * Automatically remove whitespaces from both ends of a result string.
@@ -811,7 +837,7 @@ declare module 'sweetalert2' {
      *
      * @default null
      */
-    inputAttributes?: { [attribute: string]: string };
+    inputAttributes?: {[attribute: string]: string};
 
     /**
      * Validator for input field, may be async (Promise-returning) or sync.
@@ -914,19 +940,19 @@ declare module 'sweetalert2' {
     scrollbarPadding?: boolean;
   }
 
-  export default Swal
+  export default Swal;
 }
 
 declare module 'sweetalert2/*/sweetalert2.js' {
-  export * from 'sweetalert2'
+  export * from 'sweetalert2';
   // "export *" does not matches the default export, so do it explicitly.
-  export { default } from 'sweetalert2' // eslint-disable-line
+  export {default} from 'sweetalert2'; // eslint-disable-line
 }
 
 declare module 'sweetalert2/*/sweetalert2.all.js' {
-  export * from 'sweetalert2'
+  export * from 'sweetalert2';
   // "export *" does not matches the default export, so do it explicitly.
-  export { default } from 'sweetalert2' // eslint-disable-line
+  export {default} from 'sweetalert2'; // eslint-disable-line
 }
 
 /**
@@ -934,11 +960,8 @@ declare module 'sweetalert2/*/sweetalert2.all.js' {
  * They will be merged with 'true' definitions.
  */
 
-interface JQuery {
-}
+interface JQuery {}
 
-interface Promise<T> {
-}
+interface Promise<T> {}
 
-interface Map<K, V> {
-}
+interface Map<K, V> {}

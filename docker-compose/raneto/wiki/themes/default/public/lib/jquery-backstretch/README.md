@@ -40,7 +40,7 @@ Include the jQuery library (version 1.7 or newer) and Backstretch plugin files i
   $(".foo").backstretch([
     "path/to/image.jpg",
     "path/to/image2.jpg",
-    "path/to/image3.jpg"    
+    "path/to/image3.jpg"
   ], {duration: 4000});
 
   // Or, to load from a url that can accept a resolution and provide the best image for that resolution
@@ -68,10 +68,10 @@ Include the jQuery library (version 1.7 or newer) and Backstretch plugin files i
     [
       // Will only be chosed for a @2x device
       { width: 1080, url: "path/to/image1_1080@2x.jpg", pixelRatio: 2 },
-      
+
       // Will only be chosed for a @1x device
       { width: 1080, url: "path/to/image1_1080.jpg", pixelRatio: 1 },
-      
+
       { width: 720, url: "path/to/image1_720@2x.jpg", pixelRatio: 2 },
       { width: 720, url: "path/to/image1_720.jpg", pixelRatio: 1 },
       { width: 320, url: "path/to/image1_320@2x.jpg",  pixelRatio: 2 },
@@ -84,11 +84,11 @@ Include the jQuery library (version 1.7 or newer) and Backstretch plugin files i
   $(".foo").backstretch([
     [
       // Will be chosen for a 2160 device or a 1080*2 device
-      { width: 2160, url: "path/to/image1_2160.jpg", pixelRatio: "auto" }, 
-      
+      { width: 2160, url: "path/to/image1_2160.jpg", pixelRatio: "auto" },
+
       // Will be chosen for a 1080 device or a 540*2 device
       { width: 1080, url: "path/to/image1_1080.jpg", pixelRatio: "auto" },
-      
+
       // Will be chosen for a 1440 device or a 720*2 device
       { width: 1440, url: "path/to/image1_1440.jpg", pixelRatio: "auto" },
       { width: 720, url: "path/to/image1_720.jpg", pixelRatio: "auto" },
@@ -101,9 +101,9 @@ Include the jQuery library (version 1.7 or newer) and Backstretch plugin files i
 
 ## Automatic resolution selection
 
-The automatic resolution selection algorithm has multiple options to choose from.  
-The default behaviour is that it matches the logical width of the element against the specified image sizes. Which means that an element with a 320px width on a @2x device is still considered as 320px.  
-If you want 320px on a @2x device to be considered as 640px, then you can specify `pixelRatio: "auto"` on the specific image resolution.  
+The automatic resolution selection algorithm has multiple options to choose from.
+The default behaviour is that it matches the logical width of the element against the specified image sizes. Which means that an element with a 320px width on a @2x device is still considered as 320px.
+If you want 320px on a @2x device to be considered as 640px, then you can specify `pixelRatio: "auto"` on the specific image resolution.
 However if you want to limit specific images to only be chosen if the device has a certain pixel ratio - you can specify that pixel ratio i.e `pixelRatio: 2.5`.
 
 ## Options
@@ -288,7 +288,7 @@ $(window).on("backstretch.after", function (e, instance, index) {
 
 ### Version 2.1.17
 
-* Bugfix: Calling `.backstretch(...)` on an already backstretched element did not properly destroy the older backstretch instance. Resulted in ghost backstretches... 
+* Bugfix: Calling `.backstretch(...)` on an already backstretched element did not properly destroy the older backstretch instance. Resulted in ghost backstretches...
 
 ### Version 2.1.16
 

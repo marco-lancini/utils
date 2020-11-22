@@ -2,7 +2,6 @@
 // Buttons
 // --------------------------------------------------
 
-
 // Base styles
 // --------------------------------------------------
 
@@ -40,7 +39,7 @@
   &.active {
     outline: 0;
     background-image: none;
-    .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+    .box-shadow(inset 0 3px 5px rgba(0,0,0,0.125));
   }
 
   &.disabled,
@@ -48,11 +47,10 @@
   fieldset[disabled] & {
     cursor: @cursor-disabled;
     pointer-events: none; // Future-proof disabling of clicks
-    .opacity(.65);
+    .opacity(0.65);
     .box-shadow(none);
   }
 }
-
 
 // Alternate buttons
 // --------------------------------------------------
@@ -79,7 +77,6 @@
 .btn-danger {
   .button-variant(@btn-danger-color; @btn-danger-bg; @btn-danger-border);
 }
-
 
 // Link buttons
 // -------------------------
@@ -120,7 +117,6 @@
   }
 }
 
-
 // Button Sizes
 // --------------------------------------------------
 
@@ -136,7 +132,6 @@
   .button-size(@padding-xs-vertical; @padding-xs-horizontal; @font-size-small; @line-height-small; @border-radius-small);
 }
 
-
 // Block button
 // --------------------------------------------------
 
@@ -151,9 +146,9 @@
 }
 
 // Specificity overrides
-input[type="submit"],
-input[type="reset"],
-input[type="button"] {
+input[type='submit'],
+input[type='reset'],
+input[type='button'] {
   &.btn-block {
     width: 100%;
   }

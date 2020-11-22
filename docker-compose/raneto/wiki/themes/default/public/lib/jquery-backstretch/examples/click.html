@@ -10,7 +10,7 @@
 	        background-color: #FFF;
 	        padding: 20px;
 	    }
-	    
+
       pre, code {
         font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
         font-size: 12px;
@@ -36,28 +36,28 @@
 &lt;script src=&quot;jquery.backstretch.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
     $.backstretch(&quot;pot-holder.jpg&quot;, {speed: 500});
-    
+
     $(&quot;#pot-holder&quot;).click(function (e) {
       e.preventDefault();
       $.backstretch(&quot;pot-holder.jpg&quot;);
     });
-    
+
     $(&quot;#coffee&quot;).click(function (e) {
       e.preventDefault();
       $.backstretch(&quot;coffee.jpg&quot;);
     });
-&lt;/script&gt;</pre>      
+&lt;/script&gt;</pre>
     </div>
 	<script src="../libs/jquery/jquery.js"></script>
   <script src="../src/jquery.backstretch.js"></script>
 	<script>
 	    $.backstretch("pot-holder.jpg", {fade: 500});
-	    
+
 	    $("#pot-holder").click(function (e) {
         e.preventDefault();
 	      $.backstretch("pot-holder.jpg");
 	    });
-	    
+
 	    $("#coffee").click(function (e) {
         e.preventDefault();
 	      $.backstretch("coffee.jpg");

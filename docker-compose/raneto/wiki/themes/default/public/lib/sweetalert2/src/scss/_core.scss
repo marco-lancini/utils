@@ -125,21 +125,23 @@
     }
   }
 
-  @include not('.swal2-top',
-  '.swal2-top-start',
-  '.swal2-top-end',
-  '.swal2-top-left',
-  '.swal2-top-right',
-  '.swal2-center-start',
-  '.swal2-center-end',
-  '.swal2-center-left',
-  '.swal2-center-right',
-  '.swal2-bottom',
-  '.swal2-bottom-start',
-  '.swal2-bottom-end',
-  '.swal2-bottom-left',
-  '.swal2-bottom-right',
-  '.swal2-grow-fullscreen') {
+  @include not(
+    '.swal2-top',
+    '.swal2-top-start',
+    '.swal2-top-end',
+    '.swal2-top-left',
+    '.swal2-top-right',
+    '.swal2-center-start',
+    '.swal2-center-end',
+    '.swal2-center-left',
+    '.swal2-center-right',
+    '.swal2-bottom',
+    '.swal2-bottom-start',
+    '.swal2-bottom-end',
+    '.swal2-bottom-left',
+    '.swal2-bottom-right',
+    '.swal2-grow-fullscreen'
+  ) {
     & > .swal2-modal {
       margin: auto;
     }
@@ -215,7 +217,7 @@
   &:not(.swal2-loading) {
     .swal2-styled {
       &[disabled] {
-        opacity: .4;
+        opacity: 0.4;
       }
 
       &:hover {
@@ -234,10 +236,10 @@
         box-sizing: border-box;
         width: 2.5em;
         height: 2.5em;
-        margin: .46875em;
+        margin: 0.46875em;
         padding: 0;
         animation: swal2-rotate-loading 1.5s linear 0s infinite normal;
-        border: .25em solid transparent;
+        border: 0.25em solid transparent;
         border-radius: 100%;
         border-color: transparent;
         background-color: transparent !important;
@@ -272,8 +274,8 @@
 }
 
 .swal2-styled {
-  margin: .3125em;
-  padding: .625em 2em;
+  margin: 0.3125em;
+  padding: 0.625em 2em;
   box-shadow: none;
   font-weight: 500;
 
@@ -451,7 +453,7 @@
 .swal2-select {
   min-width: 50%;
   max-width: 100%;
-  padding: .375em .625em;
+  padding: 0.375em 0.625em;
   background: $swal2-input-background;
   color: $swal2-input-color;
   font-size: $swal2-input-font-size;
@@ -465,12 +467,12 @@
   color: $swal2-input-color;
 
   label {
-    margin: 0 .6em;
+    margin: 0 0.6em;
     font-size: $swal2-input-font-size;
   }
 
   input {
-    margin: 0 .4em;
+    margin: 0 0.4em;
   }
 }
 
@@ -491,7 +493,7 @@
     width: 1.5em;
     min-width: 1.5em;
     height: 1.5em;
-    margin: 0 .625em;
+    margin: 0 0.625em;
     zoom: $swal2-validation-message-icon-zoom;
     border-radius: 50%;
     background-color: $swal2-validation-message-icon-background;
@@ -510,7 +512,7 @@
   height: $swal2-icon-size;
   margin: $swal2-icon-margin;
   zoom: $swal2-icon-zoom;
-  border: .25em solid transparent;
+  border: 0.25em solid transparent;
   border-radius: 50%;
   font-family: $swal2-icon-font-family;
   line-height: $swal2-icon-size;
@@ -537,8 +539,8 @@
       position: absolute;
       top: 2.3125em;
       width: 2.9375em;
-      height: .3125em;
-      border-radius: .125em;
+      height: 0.3125em;
+      border-radius: 0.125em;
       background-color: $swal2-error;
 
       &[class$='left'] {
@@ -596,7 +598,7 @@
       border-radius: 50%;
 
       &[class$='left'] {
-        top: -.4375em;
+        top: -0.4375em;
         left: -2.0635em;
         transform: rotate(-45deg);
         transform-origin: 3.75em 3.75em;
@@ -604,7 +606,7 @@
       }
 
       &[class$='right'] {
-        top: -.6875em;
+        top: -0.6875em;
         left: 1.875em;
         transform: rotate(-45deg);
         transform-origin: 0 3.75em;
@@ -616,12 +618,12 @@
       // Ring
       position: absolute;
       z-index: 2;
-      top: -.25em;
-      left: -.25em;
+      top: -0.25em;
+      left: -0.25em;
       box-sizing: content-box;
       width: 100%;
       height: 100%;
-      border: .25em solid $swal2-success-border;
+      border: 0.25em solid $swal2-success-border;
       border-radius: 50%;
     }
 
@@ -629,9 +631,9 @@
       // Hide corners left from animation
       position: absolute;
       z-index: 1;
-      top: .5em;
+      top: 0.5em;
       left: 1.625em;
-      width: .4375em;
+      width: 0.4375em;
       height: 5.625em;
       transform: rotate(-45deg);
     }
@@ -640,20 +642,20 @@
       display: block;
       position: absolute;
       z-index: 2;
-      height: .3125em;
-      border-radius: .125em;
+      height: 0.3125em;
+      border-radius: 0.125em;
       background-color: $swal2-success;
 
       &[class$='tip'] {
         top: 2.875em;
-        left: .875em;
+        left: 0.875em;
         width: 1.5625em;
         transform: rotate(45deg);
       }
 
       &[class$='long'] {
         top: 2.375em;
-        right: .5em;
+        right: 0.5em;
         width: 2.9375em;
         transform: rotate(-45deg);
       }
@@ -700,7 +702,7 @@
   .swal2-progress-step-line {
     z-index: 10;
     width: $swal2-progress-steps-distance;
-    height: .4em;
+    height: 0.4em;
     margin: 0 -1px;
     background: $swal2-active-step-background;
   }

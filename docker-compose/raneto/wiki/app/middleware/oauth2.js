@@ -19,7 +19,7 @@ var express = require('express');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-function extractProfile (profile) {
+function extractProfile(profile) {
   var imageUrl = '';
   var domain = '';
   if (profile.photos && profile.photos.length) {
@@ -32,7 +32,7 @@ function extractProfile (profile) {
     id: profile.id,
     displayName: profile.displayName,
     image: imageUrl,
-    domain: domain
+    domain: domain,
   };
 }
 
@@ -40,7 +40,7 @@ function extractProfile (profile) {
 // Middleware that requires the user to be logged in. If the user is not logged
 // in, it will redirect the user to authorize the application and then return
 // them to the original URL they requested.
-function authRequired (req, res, next) {
+function authRequired(req, res, next) {
   if (!req.user) {
     req.session.oauth2return = req.originalUrl;
     return res.redirect('/login');
@@ -53,17 +53,15 @@ function authRequired (req, res, next) {
 
 // Middleware that exposes the user's profile as well as login/logout URLs to
 // any templates. These are available as `profile`, `login`, and `logout`.
-function addTemplateVariables (req, res, next) {
+function addTemplateVariables(req, res, next) {
   res.locals.profile = req.user;
-  res.locals.login = '/auth/login?return=' +
-    encodeURIComponent(req.originalUrl);
-  res.locals.logout = '/auth/logout?return=' +
-    encodeURIComponent(req.originalUrl);
+  res.locals.login = '/auth/login?return=' + encodeURIComponent(req.originalUrl);
+  res.locals.logout = '/auth/logout?return=' + encodeURIComponent(req.originalUrl);
   next();
 }
 // [END middleware]
 
-function router (config) {
+function router(config) {
   // Configure the Google strategy for use by Passport.js.
   //
   // OAuth 2-based strategies require a `verify` function which receives the
@@ -71,17 +69,21 @@ function router (config) {
   // along with the user's profile. The function must invoke `cb` with a user
   // object, which will be set at `req.user` in route handlers after
   // authentication.
-  passport.use(new GoogleStrategy({
-    clientID: config.oauth2.client_id,
-    clientSecret: config.oauth2.client_secret,
-    callbackURL: config.oauth2.callback,
-    accessType: 'offline'
-
-  }, function (accessToken, refreshToken, profile, cb) {
-    // Extract the minimal profile information we need from the profile object
-    // provided by Google
-    cb(null, extractProfile(profile));
-  }));
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: config.oauth2.client_id,
+        clientSecret: config.oauth2.client_secret,
+        callbackURL: config.oauth2.callback,
+        accessType: 'offline',
+      },
+      function (accessToken, refreshToken, profile, cb) {
+        // Extract the minimal profile information we need from the profile object
+        // provided by Google
+        cb(null, extractProfile(profile));
+      }
+    )
+  );
 
   passport.serializeUser(function (user, cb) {
     cb(null, user);
@@ -113,7 +115,7 @@ function router (config) {
     },
 
     // Start OAuth 2 flow using Passport.js
-    passport.authenticate('google', { scope: ['email', 'profile'], hostedDomain: config.oauth2.hostedDomain || '' })
+    passport.authenticate('google', {scope: ['email', 'profile'], hostedDomain: config.oauth2.hostedDomain || ''})
   );
   // [END authorize]
 
@@ -154,5 +156,5 @@ module.exports = {
   extractProfile: extractProfile,
   router: router,
   required: authRequired,
-  template: addTemplateVariables
+  template: addTemplateVariables,
 };

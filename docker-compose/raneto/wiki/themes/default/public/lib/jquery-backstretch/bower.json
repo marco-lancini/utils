@@ -16,12 +16,5 @@
     "type": "git",
     "url": "git://github.com/jquery-backstretch/jquery-backstretch.git"
   },
-  "ignore": [
-    "Gruntfile.js",
-    "examples",
-    "libs",
-    "test",
-    ".gitignore",
-    "src"
-  ]
+  "ignore": ["Gruntfile.js", "examples", "libs", "test", ".gitignore", "src"]
 }

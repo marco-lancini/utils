@@ -29,7 +29,6 @@ body,
   margin-bottom: 10px;
 }
 
-
 /* Non-responsive overrides
  *
  * Utilize the following CSS to disable the responsive-ness of the container,
@@ -47,9 +46,9 @@ body,
   padding-top: 15px;
   padding-bottom: 15px;
   background-color: #eee;
-  background-color: rgba(86,61,124,.15);
+  background-color: rgba(86, 61, 124, 0.15);
   border: 1px solid #ddd;
-  border: 1px solid rgba(86,61,124,.2);
+  border: 1px solid rgba(86, 61, 124, 0.2);
 }
 
 .container .navbar-header,
@@ -106,11 +105,11 @@ body,
   float: left;
   background-color: #fff;
   border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, .15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-width: 0 1px 1px;
   border-radius: 0 0 4px 4px;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-          box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 }
 .navbar-default .navbar-nav .open .dropdown-menu > li > a {
   color: #333;
@@ -140,7 +139,7 @@ body,
   margin-left: 0;
   border: 0;
   -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
 }
 
 /* Copy-pasted from forms.less since we mixin the .form-inline styles. */
@@ -193,8 +192,8 @@ body,
   padding-left: 0;
 }
 
-.navbar-form .radio input[type="radio"],
-.navbar-form .checkbox input[type="checkbox"] {
+.navbar-form .radio input[type='radio'],
+.navbar-form .checkbox input[type='checkbox'] {
   position: relative;
   margin-left: 0;
 }

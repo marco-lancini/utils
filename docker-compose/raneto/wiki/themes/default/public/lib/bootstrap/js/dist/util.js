@@ -1,13 +1,16 @@
 /*!
-  * Bootstrap util.js v4.3.1 (https://getbootstrap.com/)
-  * Copyright 2011-2019 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-  */
+ * Bootstrap util.js v4.3.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('jquery')) :
-  typeof define === 'function' && define.amd ? define(['jquery'], factory) :
-  (global = global || self, global.Util = factory(global.jQuery));
-}(this, function ($) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined'
+    ? (module.exports = factory(require('jquery')))
+    : typeof define === 'function' && define.amd
+    ? define(['jquery'], factory)
+    : ((global = global || self), (global.Util = factory(global.jQuery)));
+})(this, function ($) {
+  'use strict';
 
   $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
 
@@ -28,7 +31,10 @@
   var MILLISECONDS_MULTIPLIER = 1000; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
 
   function toType(obj) {
-    return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase();
+    return {}.toString
+      .call(obj)
+      .match(/\s([a-z]+)/i)[1]
+      .toLowerCase();
   }
 
   function getSpecialTransitionEndEvent() {
@@ -41,7 +47,7 @@
         }
 
         return undefined; // eslint-disable-line no-undefined
-      }
+      },
     };
   }
 
@@ -69,7 +75,6 @@
    * Public Util Api
    * --------------------------------------------------------------------------
    */
-
 
   var Util = {
     TRANSITION_END: 'bsTransitionEnd',
@@ -100,7 +105,6 @@
         return 0;
       } // Get transition-duration of the element
 
-
       var transitionDuration = $(element).css('transition-duration');
       var transitionDelay = $(element).css('transition-delay');
       var floatTransitionDuration = parseFloat(transitionDuration);
@@ -109,7 +113,6 @@
       if (!floatTransitionDuration && !floatTransitionDelay) {
         return 0;
       } // If multiple durations are defined, take the first
-
 
       transitionDuration = transitionDuration.split(',')[0];
       transitionDelay = transitionDelay.split(',')[0];
@@ -136,7 +139,12 @@
           var valueType = value && Util.isElement(value) ? 'element' : toType(value);
 
           if (!new RegExp(expectedTypes).test(valueType)) {
-            throw new Error(componentName.toUpperCase() + ": " + ("Option \"" + property + "\" provided type \"" + valueType + "\" ") + ("but expected type \"" + expectedTypes + "\"."));
+            throw new Error(
+              componentName.toUpperCase() +
+                ': ' +
+                ('Option "' + property + '" provided type "' + valueType + '" ') +
+                ('but expected type "' + expectedTypes + '".')
+            );
           }
         }
       }
@@ -145,7 +153,6 @@
       if (!document.documentElement.attachShadow) {
         return null;
       } // Can find the shadow root otherwise it'll return the document
-
 
       if (typeof element.getRootNode === 'function') {
         var root = element.getRootNode();
@@ -156,17 +163,15 @@
         return element;
       } // when we don't find a shadow root
 
-
       if (!element.parentNode) {
         return null;
       }
 
       return Util.findShadowRoot(element.parentNode);
-    }
+    },
   };
   setTransitionEndSupport();
 
   return Util;
-
-}));
+});
 //# sourceMappingURL=util.js.map

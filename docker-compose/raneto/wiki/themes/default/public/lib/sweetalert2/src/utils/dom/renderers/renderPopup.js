@@ -1,35 +1,35 @@
-import { swalClasses } from '../../classes.js'
-import * as dom from '../../dom/index.js'
+import {swalClasses} from '../../classes.js';
+import * as dom from '../../dom/index.js';
 
 export const renderPopup = (instance, params) => {
-  const popup = dom.getPopup()
+  const popup = dom.getPopup();
 
   // Width
-  dom.applyNumericalStyle(popup, 'width', params.width)
+  dom.applyNumericalStyle(popup, 'width', params.width);
 
   // Padding
-  dom.applyNumericalStyle(popup, 'padding', params.padding)
+  dom.applyNumericalStyle(popup, 'padding', params.padding);
 
   // Background
   if (params.background) {
-    popup.style.background = params.background
+    popup.style.background = params.background;
   }
 
   // Default Class
-  popup.className = swalClasses.popup
+  popup.className = swalClasses.popup;
   if (params.toast) {
-    dom.addClass([document.documentElement, document.body], swalClasses['toast-shown'])
-    dom.addClass(popup, swalClasses.toast)
+    dom.addClass([document.documentElement, document.body], swalClasses['toast-shown']);
+    dom.addClass(popup, swalClasses.toast);
   } else {
-    dom.addClass(popup, swalClasses.modal)
+    dom.addClass(popup, swalClasses.modal);
   }
 
   // Custom class
-  dom.applyCustomClass(popup, params.customClass, 'popup')
+  dom.applyCustomClass(popup, params.customClass, 'popup');
   if (typeof params.customClass === 'string') {
-    dom.addClass(popup, params.customClass)
+    dom.addClass(popup, params.customClass);
   }
 
   // CSS animation
-  dom.toggleClass(popup, swalClasses.noanimation, !params.animation)
-}
+  dom.toggleClass(popup, swalClasses.noanimation, !params.animation);
+};

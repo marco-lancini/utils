@@ -1,25 +1,25 @@
 export const parseHtmlToContainer = (param, target) => {
   // DOM element
   if (param instanceof HTMLElement) {
-    target.appendChild(param)
+    target.appendChild(param);
 
-  // JQuery element(s)
+    // JQuery element(s)
   } else if (typeof param === 'object') {
-    handleJqueryElem(target, param)
+    handleJqueryElem(target, param);
 
-  // Plain string
+    // Plain string
   } else if (param) {
-    target.innerHTML = param
+    target.innerHTML = param;
   }
-}
+};
 
 const handleJqueryElem = (target, elem) => {
-  target.innerHTML = ''
+  target.innerHTML = '';
   if (0 in elem) {
     for (let i = 0; i in elem; i++) {
-      target.appendChild(elem[i].cloneNode(true))
+      target.appendChild(elem[i].cloneNode(true));
     }
   } else {
-    target.appendChild(elem.cloneNode(true))
+    target.appendChild(elem.cloneNode(true));
   }
-}
+};

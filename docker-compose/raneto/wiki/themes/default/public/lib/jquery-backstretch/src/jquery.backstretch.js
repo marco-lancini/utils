@@ -6,7 +6,7 @@
  * Licensed under the MIT license.
  */
 
-;(function ($, window, undefined) {
+(function ($, window, undefined) {
   'use strict';
 
   /** @const */
@@ -21,7 +21,7 @@
     /*
      * Scroll the page one pixel to get the right window height on iOS
      * Pretty harmless for everyone else
-    */
+     */
     if ($(window).scrollTop() === 0) {
       window.scrollTo(0, 0);
     }
@@ -29,19 +29,17 @@
     var returnValues;
 
     this.each(function (eachIndex) {
-      var $this = $(this)
-        , obj = $this.data('backstretch');
+      var $this = $(this),
+        obj = $this.data('backstretch');
 
       // Do we already have an instance attached to this element?
       if (obj) {
-
         // Is this a method they're trying to execute?
-        if (typeof args[0] === 'string' &&
-          typeof obj[args[0]] === 'function') {
-
+        if (typeof args[0] === 'string' && typeof obj[args[0]] === 'function') {
           // Call the method
           var returnValue = obj[args[0]].apply(obj, Array.prototype.slice.call(args, 1));
-          if (returnValue === obj) { // If a method is chaining
+          if (returnValue === obj) {
+            // If a method is chaining
             returnValue = undefined;
           }
           if (returnValue !== undefined) {
@@ -65,9 +63,8 @@
       if (!images || (images && images.length === 0)) {
         var cssBackgroundImage = $this.css('background-image');
         if (cssBackgroundImage && cssBackgroundImage !== 'none') {
-          images = [{url: $this.css('backgroundImage').replace(/url\(|\)|"|'/g, "")}];
-        }
-        else {
+          images = [{url: $this.css('backgroundImage').replace(/url\(|\)|"|'/g, '')}];
+        } else {
           $.error('No images were supplied for Backstretch, or element must have a CSS-defined background image.');
         }
       }
@@ -76,15 +73,13 @@
       $this.data('backstretch', obj);
     });
 
-    return returnValues ? returnValues.length === 1 ? returnValues[0] : returnValues : this;
+    return returnValues ? (returnValues.length === 1 ? returnValues[0] : returnValues) : this;
   };
 
   // If no element is supplied, we'll attach to body
   $.backstretch = function (images, options) {
     // Return the instance
-    return $('body')
-      .backstretch(images, options)
-      .data('backstretch');
+    return $('body').backstretch(images, options).data('backstretch');
   };
 
   // Custom selector
@@ -96,18 +91,18 @@
    * ========================= */
 
   $.fn.backstretch.defaults = {
-    duration: 5000                // Amount of time in between slides (if slideshow)
-    , transition: 'fade'          // Type of transition between slides
-    , transitionDuration: 0       // Duration of transition between slides
-    , animateFirst: true          // Animate the transition of first image of slideshow in?
-    , alignX: 0.5                 // The x-alignment for the image, can be 'left'|'center'|'right' or any number between 0.0 and 1.0
-    , alignY: 0.5                 // The y-alignment for the image, can be 'top'|'center'|'bottom' or any number between 0.0 and 1.0
-    , paused: false               // Whether the images should slide after given duration
-    , start: 0                    // Index of the first image to show
-    , preload: 2                  // How many images preload at a time?
-    , preloadSize: 1              // How many images can we preload in parallel?
-    , resolutionRefreshRate: 2500 // How long to wait before switching resolution?
-    , resolutionChangeRatioThreshold: 0.1 // How much a change should it be before switching resolution?
+    duration: 5000, // Amount of time in between slides (if slideshow)
+    transition: 'fade', // Type of transition between slides
+    transitionDuration: 0, // Duration of transition between slides
+    animateFirst: true, // Animate the transition of first image of slideshow in?
+    alignX: 0.5, // The x-alignment for the image, can be 'left'|'center'|'right' or any number between 0.0 and 1.0
+    alignY: 0.5, // The y-alignment for the image, can be 'top'|'center'|'bottom' or any number between 0.0 and 1.0
+    paused: false, // Whether the images should slide after given duration
+    start: 0, // Index of the first image to show
+    preload: 2, // How many images preload at a time?
+    preloadSize: 1, // How many images can we preload in parallel?
+    resolutionRefreshRate: 2500, // How long to wait before switching resolution?
+    resolutionChangeRatioThreshold: 0.1, // How much a change should it be before switching resolution?
   };
 
   /* STYLES
@@ -118,34 +113,34 @@
    * ========================= */
   var styles = {
     wrap: {
-      left: 0
-      , top: 0
-      , overflow: 'hidden'
-      , margin: 0
-      , padding: 0
-      , height: '100%'
-      , width: '100%'
-      , zIndex: -999999
-    }
-    , itemWrapper: {
-      position: 'absolute'
-      , display: 'none'
-      , margin: 0
-      , padding: 0
-      , border: 'none'
-      , width: '100%'
-      , height: '100%'
-      , zIndex: -999999
-    }
-    , item: {
-      position: 'absolute'
-      , margin: 0
-      , padding: 0
-      , border: 'none'
-      , width: '100%'
-      , height: '100%'
-      , maxWidth: 'none'
-    }
+      left: 0,
+      top: 0,
+      overflow: 'hidden',
+      margin: 0,
+      padding: 0,
+      height: '100%',
+      width: '100%',
+      zIndex: -999999,
+    },
+    itemWrapper: {
+      position: 'absolute',
+      display: 'none',
+      margin: 0,
+      padding: 0,
+      border: 'none',
+      width: '100%',
+      height: '100%',
+      zIndex: -999999,
+    },
+    item: {
+      position: 'absolute',
+      margin: 0,
+      padding: 0,
+      border: 'none',
+      width: '100%',
+      height: '100%',
+      maxWidth: 'none',
+    },
   };
 
   /* Given an array of different options for an image,
@@ -160,7 +155,6 @@
    *
    */
   var optimalSizeImages = (function () {
-
     /* Sorts the array of image sizes based on width */
     var widthInsertSort = function (arr) {
       for (var i = 1; i < arr.length; i++) {
@@ -180,19 +174,16 @@
      * return the best image.
      */
     var selectBest = function (containerWidth, containerHeight, imageSizes) {
-
       var devicePixelRatio = window.devicePixelRatio || 1;
       var deviceOrientation = getDeviceOrientation();
       var windowOrientation = getWindowOrientation();
-      var wrapperOrientation = (containerHeight > containerWidth) ?
-        'portrait' :
-        (containerWidth > containerHeight ? 'landscape' : 'square');
+      var wrapperOrientation =
+        containerHeight > containerWidth ? 'portrait' : containerWidth > containerHeight ? 'landscape' : 'square';
 
       var lastAllowedImage = 0;
       var testWidth;
 
       for (var j = 0, image; j < imageSizes.length; j++) {
-
         image = imageSizes[j];
 
         // In case a new image was pushed in, process it:
@@ -249,16 +240,13 @@
     };
 
     var replaceTagsInUrl = function (url, templateReplacer) {
-
       if (typeof url === 'string') {
         url = url.replace(/{{(width|height)}}/g, templateReplacer);
-      }
-      else if (url instanceof Array) {
+      } else if (url instanceof Array) {
         for (var i = 0; i < url.length; i++) {
           if (url[i].src) {
             url[i].src = replaceTagsInUrl(url[i].src, templateReplacer);
-          }
-          else {
+          } else {
             url[i] = replaceTagsInUrl(url[i], templateReplacer);
           }
         }
@@ -288,8 +276,7 @@
           images[i] = widthInsertSort(images[i]);
           var chosen = selectBest(containerWidth, containerHeight, images[i]);
           chosenImages.push(chosen);
-        }
-        else {
+        } else {
           // In case a new image was pushed in, process it:
           if (typeof images[i] === 'string') {
             images[i] = {url: images[i]};
@@ -302,7 +289,6 @@
       }
       return chosenImages;
     };
-
   })();
 
   var isVideoSource = function (source) {
@@ -346,9 +332,9 @@
         callback = arguments[arguments.length - 1];
       }
 
-      startAt = (typeof startAt === 'function' || !startAt) ? 0 : startAt;
-      count = (typeof count === 'function' || !count || count < 0) ? sources.length : Math.min(count, sources.length);
-      batchSize = (typeof batchSize === 'function' || !batchSize) ? 1 : batchSize;
+      startAt = typeof startAt === 'function' || !startAt ? 0 : startAt;
+      count = typeof count === 'function' || !count || count < 0 ? sources.length : Math.min(count, sources.length);
+      batchSize = typeof batchSize === 'function' || !batchSize ? 1 : batchSize;
 
       if (startAt >= sources.length) {
         startAt = 0;
@@ -386,19 +372,14 @@
       var image;
 
       for (var i = 0; i < sources.length; i++) {
-
         if (isVideoSource(sources[i])) {
-
           // Do not preload videos. There are issues with that.
           // First - we need to keep an instance of the preloaded and use that exactly, not a copy.
           // Second - there are memory issues.
           // If there will be a requirement from users - I'll try to implement this.
 
           continue;
-
-        }
-        else {
-
+        } else {
           image = new Image();
           image.src = sources[i].url;
 
@@ -406,13 +387,10 @@
 
           if (image.complete) {
             loaded();
-          }
-          else {
+          } else {
             $(image).on('load error', loaded);
           }
-
         }
-
       }
     };
   })();
@@ -423,11 +401,9 @@
     for (var i = 0; i < images.length; i++) {
       if (typeof images[i] === 'string') {
         processed.push({url: images[i]});
-      }
-      else if ($.isArray(images[i])) {
+      } else if ($.isArray(images[i])) {
         processed.push(processImagesArray(images[i]));
-      }
-      else {
+      } else {
         processed.push(processOptions(images[i]));
       }
     }
@@ -436,7 +412,6 @@
 
   /* Process options */
   var processOptions = function (options, required) {
-
     // Convert old options
 
     // centeredX/centeredY are deprecated
@@ -454,7 +429,6 @@
 
     // Deprecated spec
     if (options.speed !== undefined) {
-
       if (window.console && window.console.log) {
         window.console.log('jquery.backstretch: `speed` is deprecated, please use `transitionDuration`');
       }
@@ -491,14 +465,11 @@
   var processAlignOptions = function (options, required) {
     if (options.alignX === 'left') {
       options.alignX = 0.0;
-    }
-    else if (options.alignX === 'center') {
+    } else if (options.alignX === 'center') {
       options.alignX = 0.5;
-    }
-    else if (options.alignX === 'right') {
+    } else if (options.alignX === 'right') {
       options.alignX = 1.0;
-    }
-    else {
+    } else {
       if (options.alignX !== undefined || required) {
         options.alignX = parseFloat(options.alignX);
         if (isNaN(options.alignX)) {
@@ -509,14 +480,11 @@
 
     if (options.alignY === 'top') {
       options.alignY = 0.0;
-    }
-    else if (options.alignY === 'center') {
+    } else if (options.alignY === 'center') {
       options.alignY = 0.5;
-    }
-    else if (options.alignY === 'bottom') {
+    } else if (options.alignY === 'bottom') {
       options.alignY = 1.0;
-    }
-    else {
+    } else {
       if (options.alignX !== undefined || required) {
         options.alignY = parseFloat(options.alignY);
         if (isNaN(options.alignY)) {
@@ -529,10 +497,10 @@
   };
 
   var SUPPORTED_SCALE_OPTIONS = {
-    'cover': 'cover',
-    'fit': 'fit',
+    cover: 'cover',
+    fit: 'fit',
     'fit-smaller': 'fit-smaller',
-    'fill': 'fill'
+    fill: 'fill',
   };
 
   function validScale(scale) {
@@ -586,12 +554,13 @@
      */
     var $window = $(window);
     this.$container = $(container);
-    this.$root = this.isBody ? supportsFixedPosition ? $window : $(document) : this.$container;
+    this.$root = this.isBody ? (supportsFixedPosition ? $window : $(document)) : this.$container;
 
     this.originalImages = this.images;
     this.images = optimalSizeImages(
       this.options.alwaysTestWindowResolution ? $window : this.$root,
-      this.originalImages);
+      this.originalImages
+    );
 
     /**
      * Pre-Loading.
@@ -600,24 +569,24 @@
     preload(this.images, this.options.start || 0, this.options.preload || 1);
 
     // Don't create a new wrap if one already exists (from a previous instance of Backstretch)
-    var $existing = this.$container.children(".backstretch").first();
-    this.$wrap = $existing.length ? $existing :
-      $('<div class="backstretch"></div>')
-        .css(this.options.bypassCss ? {} : styles.wrap)
-        .appendTo(this.$container);
+    var $existing = this.$container.children('.backstretch').first();
+    this.$wrap = $existing.length
+      ? $existing
+      : $('<div class="backstretch"></div>')
+          .css(this.options.bypassCss ? {} : styles.wrap)
+          .appendTo(this.$container);
 
     if (!this.options.bypassCss) {
-
       // Non-body elements need some style adjustments
       if (!this.isBody) {
         // If the container is statically positioned, we need to make it relative,
         // and if no zIndex is defined, we should set it to zero.
-        var position = this.$container.css('position')
-          , zIndex = this.$container.css('zIndex');
+        var position = this.$container.css('position'),
+          zIndex = this.$container.css('zIndex');
 
         this.$container.css({
-          position: position === 'static' ? 'relative' : position
-          , zIndex: zIndex === 'auto' ? 0 : zIndex
+          position: position === 'static' ? 'relative' : position,
+          zIndex: zIndex === 'auto' ? 0 : zIndex,
         });
 
         // Needs a higher z-index
@@ -626,9 +595,8 @@
 
       // Fixed or absolute positioning?
       this.$wrap.css({
-        position: this.isBody && supportsFixedPosition ? 'fixed' : 'absolute'
+        position: this.isBody && supportsFixedPosition ? 'fixed' : 'absolute',
       });
-
     }
 
     // Set the first image
@@ -636,18 +604,19 @@
     this.show(this.index);
 
     // Listen for resize
-    $window.on('resize.backstretch', $.proxy(this.resize, this))
-           .on('orientationchange.backstretch', $.proxy(function () {
-             // Need to do this in order to get the right window height
-             if (this.isBody && window.pageYOffset === 0) {
-               window.scrollTo(0, 1);
-               this.resize();
-             }
-           }, this));
+    $window.on('resize.backstretch', $.proxy(this.resize, this)).on(
+      'orientationchange.backstretch',
+      $.proxy(function () {
+        // Need to do this in order to get the right window height
+        if (this.isBody && window.pageYOffset === 0) {
+          window.scrollTo(0, 1);
+          this.resize();
+        }
+      }, this)
+    );
   };
 
   var performTransition = function (options) {
-
     var transition = options.transition || 'fade';
 
     // Look for multiple options
@@ -663,24 +632,22 @@
     var $old = options['old'] ? options['old'] : $([]);
 
     switch (transition.toString().toLowerCase()) {
-
       default:
       case 'fade':
         $new.fadeIn({
           duration: options.duration,
           complete: options.complete,
-          easing: options.easing || undefined
+          easing: options.easing || undefined,
         });
         break;
 
       case 'fadeinout':
       case 'fade_in_out':
-
         var fadeInNew = function () {
           $new.fadeIn({
             duration: options.duration / 2,
             complete: options.complete,
-            easing: options.easing || undefined
+            easing: options.easing || undefined,
           });
         };
 
@@ -688,10 +655,9 @@
           $old.fadeOut({
             duration: options.duration / 2,
             complete: fadeInNew,
-            easing: options.easing || undefined
+            easing: options.easing || undefined,
           });
-        }
-        else {
+        } else {
           fadeInNew();
         }
 
@@ -713,58 +679,57 @@
       case 'cover_up':
       case 'coverdown':
       case 'cover_down':
-
         var transitionParts = transition.match(/^(cover|push)_?(.*)$/);
 
-        var animProp = transitionParts[2] === 'left' ? 'right' :
-          transitionParts[2] === 'right' ? 'left' :
-            transitionParts[2] === 'down' ? 'top' :
-              transitionParts[2] === 'up' ? 'bottom' :
-                'right';
+        var animProp =
+          transitionParts[2] === 'left'
+            ? 'right'
+            : transitionParts[2] === 'right'
+            ? 'left'
+            : transitionParts[2] === 'down'
+            ? 'top'
+            : transitionParts[2] === 'up'
+            ? 'bottom'
+            : 'right';
 
         var newCssStart = {
-          'display': ''
-        }, newCssAnim = {};
+            display: '',
+          },
+          newCssAnim = {};
         newCssStart[animProp] = '-100%';
         newCssAnim[animProp] = 0;
 
-        $new
-          .css(newCssStart)
-          .animate(newCssAnim, {
-            duration: options.duration,
-            complete: function () {
-              $new.css(animProp, '');
-              options.complete.apply(this, arguments);
-            },
-            easing: options.easing || undefined
-          });
+        $new.css(newCssStart).animate(newCssAnim, {
+          duration: options.duration,
+          complete: function () {
+            $new.css(animProp, '');
+            options.complete.apply(this, arguments);
+          },
+          easing: options.easing || undefined,
+        });
 
         if (transitionParts[1] === 'push' && $old.length) {
           var oldCssAnim = {};
           oldCssAnim[animProp] = '100%';
 
-          $old
-            .animate(oldCssAnim, {
-              duration: options.duration,
-              complete: function () {
-                $old.css('display', 'none');
-              },
-              easing: options.easing || undefined
-            });
+          $old.animate(oldCssAnim, {
+            duration: options.duration,
+            complete: function () {
+              $old.css('display', 'none');
+            },
+            easing: options.easing || undefined,
+          });
         }
 
         break;
     }
-
   };
 
   /* PUBLIC METHODS
    * ========================= */
   Backstretch.prototype = {
-
     resize: function () {
       try {
-
         // Check for a better suited image after the resize
         var $resTest = this.options.alwaysTestWindowResolution ? $(window) : this.$root;
         var newContainerWidth = $resTest.width();
@@ -774,11 +739,14 @@
         var resolutionChangeRatioThreshold = this.options.resolutionChangeRatioThreshold || 0.0;
 
         // check for big changes in container size
-        if ((newContainerWidth !== this._lastResizeContainerWidth ||
-          newContainerHeight !== this._lastResizeContainerHeight) &&
-          ((Math.abs(changeRatioW - 1) >= resolutionChangeRatioThreshold || isNaN(changeRatioW)) ||
-            (Math.abs(changeRatioH - 1) >= resolutionChangeRatioThreshold || isNaN(changeRatioH)))) {
-
+        if (
+          (newContainerWidth !== this._lastResizeContainerWidth ||
+            newContainerHeight !== this._lastResizeContainerHeight) &&
+          (Math.abs(changeRatioW - 1) >= resolutionChangeRatioThreshold ||
+            isNaN(changeRatioW) ||
+            Math.abs(changeRatioH - 1) >= resolutionChangeRatioThreshold ||
+            isNaN(changeRatioH))
+        ) {
           this._lastResizeContainerWidth = newContainerWidth;
           this._lastResizeContainerHeight = newContainerHeight;
 
@@ -791,9 +759,7 @@
           }
 
           // In case there is no cycle and the new source is different than the current
-          if (this.images.length === 1 &&
-            this._currentImage.url !== this.images[0].url) {
-
+          if (this.images.length === 1 && this._currentImage.url !== this.images[0].url) {
             // Wait a little an update the image being showed
             var that = this;
             clearTimeout(that._selectAnotherResolutionTimeout);
@@ -803,21 +769,19 @@
           }
         }
 
-        var bgCSS = {left: 0, top: 0, right: 'auto', bottom: 'auto'}
-
-          , boxWidth = this.isBody ? this.$root.width() : this.$root.innerWidth()
-          , boxHeight = this.isBody
-          ? (window.innerHeight ? window.innerHeight : this.$root.height())
-          : this.$root.innerHeight()
-
-          , naturalWidth = this.$itemWrapper.data('width')
-          , naturalHeight = this.$itemWrapper.data('height')
-
-          , ratio = (naturalWidth / naturalHeight) || 1
-
-          , alignX = this._currentImage.alignX === undefined ? this.options.alignX : this._currentImage.alignX
-          , alignY = this._currentImage.alignY === undefined ? this.options.alignY : this._currentImage.alignY
-          , scale = validScale(this._currentImage.scale || this.options.scale);
+        var bgCSS = {left: 0, top: 0, right: 'auto', bottom: 'auto'},
+          boxWidth = this.isBody ? this.$root.width() : this.$root.innerWidth(),
+          boxHeight = this.isBody
+            ? window.innerHeight
+              ? window.innerHeight
+              : this.$root.height()
+            : this.$root.innerHeight(),
+          naturalWidth = this.$itemWrapper.data('width'),
+          naturalHeight = this.$itemWrapper.data('height'),
+          ratio = naturalWidth / naturalHeight || 1,
+          alignX = this._currentImage.alignX === undefined ? this.options.alignX : this._currentImage.alignX,
+          alignY = this._currentImage.alignY === undefined ? this.options.alignY : this._currentImage.alignY,
+          scale = validScale(this._currentImage.scale || this.options.scale);
 
         var width, height;
 
@@ -825,29 +789,24 @@
           width = naturalWidth;
           height = naturalHeight;
 
-          if (width > boxWidth ||
-            height > boxHeight ||
-            scale === 'fit-smaller') {
+          if (width > boxWidth || height > boxHeight || scale === 'fit-smaller') {
             var boxRatio = boxWidth / boxHeight;
             if (boxRatio > ratio) {
               width = Math.floor(boxHeight * ratio);
               height = boxHeight;
-            }
-            else if (boxRatio < ratio) {
+            } else if (boxRatio < ratio) {
               width = boxWidth;
               height = Math.floor(boxWidth / ratio);
-            }
-            else {
+            } else {
               width = boxWidth;
               height = boxHeight;
             }
           }
-        }
-        else if (scale === 'fill') {
+        } else if (scale === 'fill') {
           width = boxWidth;
           height = boxHeight;
-        }
-        else { // 'cover'
+        } else {
+          // 'cover'
           width = Math.max(boxHeight * ratio, boxWidth);
           height = Math.max(width / ratio, boxHeight);
         }
@@ -859,44 +818,40 @@
         bgCSS.height = height;
 
         if (!this.options.bypassCss) {
-
           this.$wrap
-              .css({width: boxWidth, height: boxHeight})
-              .find('>.backstretch-item').not('.deleteable')
-              .each(function () {
-                var $wrapper = $(this);
-                $wrapper.find('img,video,iframe')
-                        .css(bgCSS);
-              });
+            .css({width: boxWidth, height: boxHeight})
+            .find('>.backstretch-item')
+            .not('.deleteable')
+            .each(function () {
+              var $wrapper = $(this);
+              $wrapper.find('img,video,iframe').css(bgCSS);
+            });
         }
 
         var evt = $.Event('backstretch.resize', {
-          relatedTarget: this.$container[0]
+          relatedTarget: this.$container[0],
         });
         this.$container.trigger(evt, this);
-
-      }
-      catch (err) {
+      } catch (err) {
         // IE7 seems to trigger resize before the image is loaded.
         // This try/catch block is a hack to let it fail gracefully.
       }
 
       return this;
-    }
+    },
 
     // Show the slide at a certain position
-    , show: function (newIndex, overrideOptions) {
-
+    show: function (newIndex, overrideOptions) {
       // Validate index
       if (Math.abs(newIndex) > this.images.length - 1) {
         return;
       }
 
       // Vars
-      var that = this
-        , $oldItemWrapper = that.$wrap.find('>.backstretch-item').addClass('deleteable')
-        , oldVideoWrapper = that.videoWrapper
-        , evtOptions = {relatedTarget: that.$container[0]};
+      var that = this,
+        $oldItemWrapper = that.$wrap.find('>.backstretch-item').addClass('deleteable'),
+        oldVideoWrapper = that.videoWrapper,
+        evtOptions = {relatedTarget: that.$container[0]};
 
       // Trigger the "before" event
       that.$container.trigger($.Event('backstretch.before', evtOptions), [that, newIndex]);
@@ -916,45 +871,38 @@
       if (isVideo) {
         that.videoWrapper = new VideoWrapper(selectedImage);
         that.$item = that.videoWrapper.$video.css('pointer-events', 'none');
-      }
-      else {
+      } else {
         that.$item = $('<img />');
       }
 
-      that.$itemWrapper = $('<div class="backstretch-item">')
-        .append(that.$item);
+      that.$itemWrapper = $('<div class="backstretch-item">').append(that.$item);
 
       if (this.options.bypassCss) {
         that.$itemWrapper.css({
-          'display': 'none'
+          display: 'none',
         });
-      }
-      else {
+      } else {
         that.$itemWrapper.css(styles.itemWrapper);
         that.$item.css(styles.item);
       }
 
       that.$item.bind(isVideo ? 'canplay' : 'load', function (e) {
-        var $this = $(this)
-          , $wrapper = $this.parent()
-          , options = $wrapper.data('options');
+        var $this = $(this),
+          $wrapper = $this.parent(),
+          options = $wrapper.data('options');
 
         if (overrideOptions) {
           options = $.extend({}, options, overrideOptions);
         }
 
-        var imgWidth = this.naturalWidth || this.videoWidth || this.width
-          , imgHeight = this.naturalHeight || this.videoHeight || this.height;
+        var imgWidth = this.naturalWidth || this.videoWidth || this.width,
+          imgHeight = this.naturalHeight || this.videoHeight || this.height;
 
         // Save the natural dimensions
-        $wrapper
-          .data('width', imgWidth)
-          .data('height', imgHeight);
+        $wrapper.data('width', imgWidth).data('height', imgHeight);
 
         var getOption = function (opt) {
-          return options[opt] !== undefined ?
-            options[opt] :
-            that.options[opt];
+          return options[opt] !== undefined ? options[opt] : that.options[opt];
         };
 
         var transition = getOption('transition');
@@ -963,7 +911,6 @@
 
         // Show the image, then delete the old one
         var bringInNextImage = function () {
-
           if (oldVideoWrapper) {
             oldVideoWrapper.stop();
             oldVideoWrapper.destroy();
@@ -996,18 +943,15 @@
           // Avoid transition on first show or if there's no transitionDuration value
           $wrapper.show();
           bringInNextImage();
-        }
-        else {
-
+        } else {
           performTransition({
-            'new': $wrapper,
+            new: $wrapper,
             old: $oldItemWrapper,
             transition: transition,
             duration: transitionDuration,
             easing: transitionEasing,
-            complete: bringInNextImage
+            complete: bringInNextImage,
           });
-
         }
 
         that.firstShow = false;
@@ -1028,25 +972,25 @@
       that._currentImage = selectedImage;
 
       return that;
-    }
+    },
 
-    , current: function () {
+    current: function () {
       return this.index;
-    }
+    },
 
-    , next: function () {
+    next: function () {
       var args = Array.prototype.slice.call(arguments, 0);
       args.unshift(this.index < this.images.length - 1 ? this.index + 1 : 0);
       return this.show.apply(this, args);
-    }
+    },
 
-    , prev: function () {
+    prev: function () {
       var args = Array.prototype.slice.call(arguments, 0);
       args.unshift(this.index === 0 ? this.images.length - 1 : this.index - 1);
       return this.show.apply(this, args);
-    }
+    },
 
-    , pause: function () {
+    pause: function () {
       // Pause the slideshow
       this.paused = true;
 
@@ -1055,9 +999,9 @@
       }
 
       return this;
-    }
+    },
 
-    , resume: function () {
+    resume: function () {
       // Resume the slideshow
       this.paused = false;
 
@@ -1067,9 +1011,9 @@
 
       this.cycle();
       return this;
-    }
+    },
 
-    , cycle: function () {
+    cycle: function () {
       // Start/resume the slideshow
       if (this.images.length > 1) {
         // Clear the timeout, just in case
@@ -1089,24 +1033,23 @@
 
         // Special video handling
         if (isVideo) {
-
           // Leave video at last frame
           if (!this._currentImage.loop) {
             var lastFrameTimeout = 0;
 
             this.$item
-                .on('playing.cycle', function () {
-                  var player = $(this).data('player');
+              .on('playing.cycle', function () {
+                var player = $(this).data('player');
 
-                  clearTimeout(lastFrameTimeout);
-                  lastFrameTimeout = setTimeout(function () {
-                    player.pause();
-                    player.$video.trigger('ended');
-                  }, (player.getDuration() - player.getCurrentTime()) * 1000);
-                })
-                .on('ended.cycle', function () {
-                  clearTimeout(lastFrameTimeout);
-                });
+                clearTimeout(lastFrameTimeout);
+                lastFrameTimeout = setTimeout(function () {
+                  player.pause();
+                  player.$video.trigger('ended');
+                }, (player.getDuration() - player.getCurrentTime()) * 1000);
+              })
+              .on('ended.cycle', function () {
+                clearTimeout(lastFrameTimeout);
+              });
           }
 
           // On error go to next
@@ -1116,18 +1059,15 @@
         if (isVideo && !this._currentImage.duration) {
           // It's a video - playing until end
           this.$item.on('ended.cycle', $.proxy(callNext, this));
-
-        }
-        else {
+        } else {
           // Cycling according to specified duration
           this._cycleTimeout = setTimeout($.proxy(callNext, this), duration);
         }
-
       }
       return this;
-    }
+    },
 
-    , destroy: function (preserveBackground) {
+    destroy: function (preserveBackground) {
       // Stop the resize events
       $(window).off('resize.backstretch orientationchange.backstretch');
 
@@ -1144,7 +1084,7 @@
         this.$wrap.remove();
       }
       this.$container.removeData('backstretch');
-    }
+    },
   };
 
   /**
@@ -1166,7 +1106,9 @@
    * > player.ytReady is a flag telling whether the youtube source is ready for playback
    * */
 
-  var VideoWrapper = function () { this.init.apply(this, arguments); };
+  var VideoWrapper = function () {
+    this.init.apply(this, arguments);
+  };
 
   /**
    * @param {Object} options
@@ -1177,7 +1119,6 @@
    * loop, mute, poster
    */
   VideoWrapper.prototype.init = function (options) {
-
     var that = this;
 
     var $video;
@@ -1191,30 +1132,28 @@
 
     var videoType = 'video';
 
-    if (!(options.url instanceof Array) &&
-      YOUTUBE_REGEXP.test(options.url)) {
+    if (!(options.url instanceof Array) && YOUTUBE_REGEXP.test(options.url)) {
       videoType = 'youtube';
     }
 
     that.type = videoType;
 
     if (videoType === 'youtube') {
-
       // Try to load the API in the meantime
       VideoWrapper.loadYoutubeAPI();
 
       that.ytId = options.url.match(YOUTUBE_REGEXP)[2];
-      var src = 'https://www.youtube.com/embed/' + that.ytId +
+      var src =
+        'https://www.youtube.com/embed/' +
+        that.ytId +
         '?rel=0&autoplay=0&showinfo=0&controls=0&modestbranding=1' +
         '&cc_load_policy=0&disablekb=1&iv_load_policy=3&loop=0' +
-        '&enablejsapi=1&origin=' + encodeURIComponent(window.location.origin);
+        '&enablejsapi=1&origin=' +
+        encodeURIComponent(window.location.origin);
 
       that.__ytStartMuted = !!options.mute || options.mute === undefined;
 
-      $video = $('<iframe />')
-        .attr({'src_to_load': src})
-        .css({'border': 0, 'margin': 0, 'padding': 0})
-        .data('player', that);
+      $video = $('<iframe />').attr({src_to_load: src}).css({border: 0, margin: 0, padding: 0}).data('player', that);
 
       if (options.loop) {
         $video.on('ended.loop', function () {
@@ -1231,16 +1170,13 @@
       if (window['YT'] && window['YT'].loaded) {
         that._initYoutube();
         $video.trigger('initsuccess');
-      }
-      else {
+      } else {
         $(window).one('youtube_api_load', function () {
           that._initYoutube();
           $video.trigger('initsuccess');
         });
       }
-
-    }
-    else {
+    } else {
       // Traditional <video> tag with multiple sources
 
       $video = $('<video>')
@@ -1253,11 +1189,11 @@
         .prop('preload', 'auto')
         .prop('poster', options.poster || '');
 
-      var sources = (options.url instanceof Array) ? options.url : [options.url];
+      var sources = options.url instanceof Array ? options.url : [options.url];
 
       for (var i = 0; i < sources.length; i++) {
         var sourceItem = sources[i];
-        if (typeof (sourceItem) === 'string') {
+        if (typeof sourceItem === 'string') {
           sourceItem = {src: sourceItem};
         }
         $('<source>')
@@ -1270,14 +1206,12 @@
 
       if (!$video[0].canPlayType || !sources.length) {
         $video.trigger('initerror');
-      }
-      else {
+      } else {
         $video.trigger('initsuccess');
       }
 
       setVideoElement();
     }
-
   };
 
   VideoWrapper.prototype._initYoutube = function () {
@@ -1285,9 +1219,7 @@
 
     var YT = window['YT'];
 
-    that.$video
-        .attr('src', that.$video.attr('src_to_load'))
-        .removeAttr('src_to_load');
+    that.$video.attr('src', that.$video.attr('src_to_load')).removeAttr('src_to_load');
 
     // It won't init if it's not in the DOM, so we emulate that
     var hasParent = !!that.$video[0].parentNode;
@@ -1298,8 +1230,7 @@
 
     var player = new YT.Player(that.video, {
       events: {
-        'onReady': function () {
-
+        onReady: function () {
           if (that.__ytStartMuted) {
             player.mute();
           }
@@ -1316,7 +1247,7 @@
           that._updateYoutubeSize();
           that.$video.trigger('canplay');
         },
-        'onStateChange': function (event) {
+        onStateChange: function (event) {
           switch (event.data) {
             case YT.PlayerState.PLAYING:
               that.$video.trigger('playing');
@@ -1335,15 +1266,15 @@
               break;
           }
         },
-        'onPlaybackQualityChange': function () {
+        onPlaybackQualityChange: function () {
           that._updateYoutubeSize();
           that.$video.trigger('resize');
         },
-        'onError': function (err) {
+        onError: function (err) {
           that.hasError = true;
-          that.$video.trigger({'type': 'error', 'error': err});
-        }
-      }
+          that.$video.trigger({type: 'error', error: err});
+        },
+      },
     });
 
     that.ytPlayer = player;
@@ -1395,8 +1326,7 @@
         that.$video.trigger('play');
         that.ytPlayer.playVideo();
       }
-    }
-    else {
+    } else {
       that.video.play();
     }
 
@@ -1412,8 +1342,7 @@
       if (that.ytReady) {
         that.ytPlayer.pauseVideo();
       }
-    }
-    else {
+    } else {
       that.video.pause();
     }
 
@@ -1430,8 +1359,7 @@
         that.ytPlayer.pauseVideo();
         that.ytPlayer.seekTo(0);
       }
-    }
-    else {
+    } else {
       that.video.pause();
       that.video.currentTime = 0;
     }
@@ -1458,8 +1386,7 @@
       if (that.ytReady) {
         return that.ytPlayer.getCurrentTime();
       }
-    }
-    else {
+    } else {
       return that.video.currentTime;
     }
 
@@ -1473,8 +1400,7 @@
       if (that.ytReady) {
         that.ytPlayer.seekTo(seconds, true);
       }
-    }
-    else {
+    } else {
       that.video.currentTime = seconds;
     }
 
@@ -1488,8 +1414,7 @@
       if (that.ytReady) {
         return that.ytPlayer.getDuration();
       }
-    }
-    else {
+    } else {
       return that.video.duration;
     }
 
@@ -1504,11 +1429,11 @@
     if (window['YT'] && window['__yt_load_event_interval__']) {
       return;
     }
-    
+
     if (!window['YT'] && !$('script[src*=www\\.youtube\\.com\\/iframe_api]').length) {
       $('<script type="text/javascript" src="https://www.youtube.com/iframe_api">').appendTo('body');
     }
-    
+
     window['__yt_load_event_interval__'] = setInterval(function () {
       if (window['YT'] && window['YT'].loaded) {
         $(window).trigger('youtube_api_load');
@@ -1519,12 +1444,10 @@
   };
 
   var getDeviceOrientation = function () {
-
     if ('matchMedia' in window) {
-      if (window.matchMedia("(orientation: portrait)").matches) {
+      if (window.matchMedia('(orientation: portrait)').matches) {
         return 'portrait';
-      }
-      else if (window.matchMedia("(orientation: landscape)").matches) {
+      } else if (window.matchMedia('(orientation: landscape)').matches) {
         return 'landscape';
       }
     }
@@ -1564,42 +1487,38 @@
    * ========================= */
 
   var supportsFixedPosition = (function () {
-    var ua = navigator.userAgent
-      , platform = navigator.platform
+    var ua = navigator.userAgent,
+      platform = navigator.platform,
       // Rendering engine is Webkit, and capture major version
-      , wkmatch = ua.match(/AppleWebKit\/([0-9]+)/)
-      , wkversion = !!wkmatch && wkmatch[1]
-      , ffmatch = ua.match(/Fennec\/([0-9]+)/)
-      , ffversion = !!ffmatch && ffmatch[1]
-      , operammobilematch = ua.match(/Opera Mobi\/([0-9]+)/)
-      , omversion = !!operammobilematch && operammobilematch[1]
-      , iematch = ua.match(/MSIE ([0-9]+)/)
-      , ieversion = !!iematch && iematch[1];
+      wkmatch = ua.match(/AppleWebKit\/([0-9]+)/),
+      wkversion = !!wkmatch && wkmatch[1],
+      ffmatch = ua.match(/Fennec\/([0-9]+)/),
+      ffversion = !!ffmatch && ffmatch[1],
+      operammobilematch = ua.match(/Opera Mobi\/([0-9]+)/),
+      omversion = !!operammobilematch && operammobilematch[1],
+      iematch = ua.match(/MSIE ([0-9]+)/),
+      ieversion = !!iematch && iematch[1];
 
     return !(
       // iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
-      ((platform.indexOf("iPhone") > -1 || platform.indexOf("iPad") > -1 || platform.indexOf(
-        "iPod") > -1) && wkversion && wkversion < 534) ||
-
-      // Opera Mini
-      (window.operamini && ({}).toString.call(window.operamini) === "[object OperaMini]") ||
-      (operammobilematch && omversion < 7458) ||
-
-      //Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
-      (ua.indexOf("Android") > -1 && wkversion && wkversion < 533) ||
-
-      // Firefox Mobile before 6.0 -
-      (ffversion && ffversion < 6) ||
-
-      // WebOS less than 3
-      ("palmGetResource" in window && wkversion && wkversion < 534) ||
-
-      // MeeGo
-      (ua.indexOf("MeeGo") > -1 && ua.indexOf("NokiaBrowser/8.5.0") > -1) ||
-
-      // IE6
-      (ieversion && ieversion <= 6)
+      (
+        ((platform.indexOf('iPhone') > -1 || platform.indexOf('iPad') > -1 || platform.indexOf('iPod') > -1) &&
+          wkversion &&
+          wkversion < 534) ||
+        // Opera Mini
+        (window.operamini && {}.toString.call(window.operamini) === '[object OperaMini]') ||
+        (operammobilematch && omversion < 7458) ||
+        //Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
+        (ua.indexOf('Android') > -1 && wkversion && wkversion < 533) ||
+        // Firefox Mobile before 6.0 -
+        (ffversion && ffversion < 6) ||
+        // WebOS less than 3
+        ('palmGetResource' in window && wkversion && wkversion < 534) ||
+        // MeeGo
+        (ua.indexOf('MeeGo') > -1 && ua.indexOf('NokiaBrowser/8.5.0') > -1) ||
+        // IE6
+        (ieversion && ieversion <= 6)
+      )
     );
-  }());
-
-}(jQuery, window));
+  })();
+})(jQuery, window);

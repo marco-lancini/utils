@@ -1,27 +1,27 @@
-import { swalClasses } from '../../classes.js'
-import * as dom from '../../dom/index.js'
+import {swalClasses} from '../../classes.js';
+import * as dom from '../../dom/index.js';
 
 export const renderImage = (instance, params) => {
-  const image = dom.getImage()
+  const image = dom.getImage();
 
   if (!params.imageUrl) {
-    return dom.hide(image)
+    return dom.hide(image);
   }
 
-  dom.show(image)
+  dom.show(image);
 
   // Src, alt
-  image.setAttribute('src', params.imageUrl)
-  image.setAttribute('alt', params.imageAlt)
+  image.setAttribute('src', params.imageUrl);
+  image.setAttribute('alt', params.imageAlt);
 
   // Width, height
-  dom.applyNumericalStyle(image, 'width', params.imageWidth)
-  dom.applyNumericalStyle(image, 'height', params.imageHeight)
+  dom.applyNumericalStyle(image, 'width', params.imageWidth);
+  dom.applyNumericalStyle(image, 'height', params.imageHeight);
 
   // Class
-  image.className = swalClasses.image
-  dom.applyCustomClass(image, params.customClass, 'image')
+  image.className = swalClasses.image;
+  dom.applyCustomClass(image, params.customClass, 'image');
   if (params.imageClass) {
-    dom.addClass(image, params.imageClass)
+    dom.addClass(image, params.imageClass);
   }
-}
+};

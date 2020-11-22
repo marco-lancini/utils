@@ -1,14 +1,14 @@
-import * as dom from '../../dom/index.js'
+import * as dom from '../../dom/index.js';
 
 export const renderFooter = (instance, params) => {
-  const footer = dom.getFooter()
+  const footer = dom.getFooter();
 
-  dom.toggle(footer, params.footer)
+  dom.toggle(footer, params.footer);
 
   if (params.footer) {
-    dom.parseHtmlToContainer(params.footer, footer)
+    dom.parseHtmlToContainer(params.footer, footer);
   }
 
   // Custom class
-  dom.applyCustomClass(footer, params.customClass, 'footer')
-}
+  dom.applyCustomClass(footer, params.customClass, 'footer');
+};

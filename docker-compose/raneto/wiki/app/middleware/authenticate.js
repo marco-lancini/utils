@@ -1,7 +1,6 @@
 'use strict';
 
-function middleware_authenticate (config) {
-
+function middleware_authenticate(config) {
   if (config.authentication === true) {
     // Authentication Middleware
     return function (req, res, next) {
@@ -14,16 +13,12 @@ function middleware_authenticate (config) {
       }
       return next();
     };
-
   } else {
-
     // No Authentication Required
     return function (req, res, next) {
       return next();
     };
-
   }
-
 }
 
 // Exports

@@ -2,19 +2,17 @@
 // RTL Forms
 // --------------------------------------------------
 
-
 .radio,
 .checkbox {
-
   label {
     padding-right: 20px;
     padding-left: initial;
   }
 }
-.radio input[type="radio"],
-.radio-inline input[type="radio"],
-.checkbox input[type="checkbox"],
-.checkbox-inline input[type="checkbox"] {
+.radio input[type='radio'],
+.radio-inline input[type='radio'],
+.checkbox input[type='checkbox'],
+.checkbox-inline input[type='checkbox'] {
   margin-right: -20px;
   margin-left: auto;
 }
@@ -32,7 +30,6 @@
 }
 
 .has-feedback {
-
   // Ensure icons don't overlap text
   .form-control {
     padding-left: (@input-height-base * 1.25);
@@ -57,24 +54,20 @@
 // Heads up! This is mixin-ed into `.navbar-form` in navbars.less.
 
 .form-inline {
-
   // Kick in the inline
   @media (min-width: @screen-sm-min) {
+    label {
+      padding-right: 0;
+      padding-left: initial;
+    }
 
-      label {
-        padding-right: 0;
-        padding-left: initial;
-      }
-
-    .radio input[type="radio"],
-    .checkbox input[type="checkbox"] {
+    .radio input[type='radio'],
+    .checkbox input[type='checkbox'] {
       margin-right: 0;
       margin-left: auto;
     }
-
   }
 }
-
 
 // Horizontal forms
 //
@@ -82,7 +75,6 @@
 // labels on the left and inputs on the right.
 
 .form-horizontal {
-
   // Reset spacing and right align labels, but scope to media queries so that
   // labels on narrow viewports stack the same as a default form example.
   @media (min-width: @screen-sm-min) {

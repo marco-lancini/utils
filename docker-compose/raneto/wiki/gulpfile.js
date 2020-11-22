@@ -1,11 +1,9 @@
-
 'use strict';
 
 // Modules
 var gulp = require('gulp');
 
 gulp.task('copy_libs', function () {
-
   var source = [
     'node_modules/jquery/**/*',
     'node_modules/bootstrap/**/*',
@@ -15,15 +13,12 @@ gulp.task('copy_libs', function () {
     'node_modules/highlightjs/**/*',
     'node_modules/masonry-layout/**/*',
     'node_modules/sweetalert2/**/*',
-    'node_modules/jquery-backstretch/**/*'
+    'node_modules/jquery-backstretch/**/*',
   ];
 
   var dest = 'themes/default/public/lib';
 
-  return gulp
-    .src(source, { base: 'node_modules' })
-    .pipe(gulp.dest(dest));
-
+  return gulp.src(source, {base: 'node_modules'}).pipe(gulp.dest(dest));
 });
 
 // Default

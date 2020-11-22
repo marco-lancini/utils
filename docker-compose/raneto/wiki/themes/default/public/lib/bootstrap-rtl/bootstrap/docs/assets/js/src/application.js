@@ -11,147 +11,143 @@
 
 /* global ZeroClipboard, addAnchors */
 
-!function ($) {
+!(function ($) {
   'use strict';
 
   $(function () {
-
     // Scrollspy
-    var $window = $(window)
-    var $body   = $(document.body)
+    var $window = $(window);
+    var $body = $(document.body);
 
     $body.scrollspy({
-      target: '.bs-docs-sidebar'
-    })
+      target: '.bs-docs-sidebar',
+    });
     $window.on('load', function () {
-      $body.scrollspy('refresh')
-    })
+      $body.scrollspy('refresh');
+    });
 
     // Kill links
     $('.bs-docs-container [href=#]').click(function (e) {
-      e.preventDefault()
-    })
+      e.preventDefault();
+    });
 
     // Sidenav affixing
     setTimeout(function () {
-      var $sideBar = $('.bs-docs-sidebar')
+      var $sideBar = $('.bs-docs-sidebar');
 
       $sideBar.affix({
         offset: {
           top: function () {
-            var offsetTop      = $sideBar.offset().top
-            var sideBarMargin  = parseInt($sideBar.children(0).css('margin-top'), 10)
-            var navOuterHeight = $('.bs-docs-nav').height()
+            var offsetTop = $sideBar.offset().top;
+            var sideBarMargin = parseInt($sideBar.children(0).css('margin-top'), 10);
+            var navOuterHeight = $('.bs-docs-nav').height();
 
-            return (this.top = offsetTop - navOuterHeight - sideBarMargin)
+            return (this.top = offsetTop - navOuterHeight - sideBarMargin);
           },
           bottom: function () {
-            return (this.bottom = $('.bs-docs-footer').outerHeight(true))
-          }
-        }
-      })
-    }, 100)
+            return (this.bottom = $('.bs-docs-footer').outerHeight(true));
+          },
+        },
+      });
+    }, 100);
 
     setTimeout(function () {
-      $('.bs-top').affix()
-    }, 100)
+      $('.bs-top').affix();
+    }, 100);
 
     // theme toggler
-    ;(function () {
-      var stylesheetLink = $('#bs-theme-stylesheet')
-      var themeBtn = $('.bs-docs-theme-toggle')
+    (function () {
+      var stylesheetLink = $('#bs-theme-stylesheet');
+      var themeBtn = $('.bs-docs-theme-toggle');
 
       var activateTheme = function () {
-        stylesheetLink.attr('href', stylesheetLink.attr('data-href'))
-        themeBtn.text('Disable theme preview')
-        localStorage.setItem('previewTheme', true)
-      }
+        stylesheetLink.attr('href', stylesheetLink.attr('data-href'));
+        themeBtn.text('Disable theme preview');
+        localStorage.setItem('previewTheme', true);
+      };
 
       if (localStorage.getItem('previewTheme')) {
-        activateTheme()
+        activateTheme();
       }
 
       themeBtn.click(function () {
-        var href = stylesheetLink.attr('href')
+        var href = stylesheetLink.attr('href');
         if (!href || href.indexOf('data') === 0) {
-          activateTheme()
+          activateTheme();
         } else {
-          stylesheetLink.attr('href', '')
-          themeBtn.text('Preview theme')
-          localStorage.removeItem('previewTheme')
+          stylesheetLink.attr('href', '');
+          themeBtn.text('Preview theme');
+          localStorage.removeItem('previewTheme');
         }
-      })
+      });
     })();
 
     // Tooltip and popover demos
     $('.tooltip-demo').tooltip({
       selector: '[data-toggle="tooltip"]',
-      container: 'body'
-    })
+      container: 'body',
+    });
     $('.popover-demo').popover({
       selector: '[data-toggle="popover"]',
-      container: 'body'
-    })
+      container: 'body',
+    });
 
     // Demos within modals
-    $('.tooltip-test').tooltip()
-    $('.popover-test').popover()
+    $('.tooltip-test').tooltip();
+    $('.popover-test').popover();
 
     // Popover demos
-    $('.bs-docs-popover').popover()
+    $('.bs-docs-popover').popover();
 
     // Button state demo
     $('#loading-example-btn').on('click', function () {
-      var btn = $(this)
-      btn.button('loading')
+      var btn = $(this);
+      btn.button('loading');
       setTimeout(function () {
-        btn.button('reset')
-      }, 3000)
-    })
+        btn.button('reset');
+      }, 3000);
+    });
 
     // Modal relatedTarget demo
     $('#exampleModal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget) // Button that triggered the modal
-      var recipient = button.data('whatever') // Extract info from data-* attributes
+      var button = $(event.relatedTarget); // Button that triggered the modal
+      var recipient = button.data('whatever'); // Extract info from data-* attributes
       // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
       // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-      var modal = $(this)
-      modal.find('.modal-title').text('New message to ' + recipient)
-      modal.find('.modal-body input').val(recipient)
-    })
+      var modal = $(this);
+      modal.find('.modal-title').text('New message to ' + recipient);
+      modal.find('.modal-body input').val(recipient);
+    });
 
     // Activate animated progress bar
     $('.bs-docs-activate-animated-progressbar').on('click', function () {
-      $(this).siblings('.progress').find('.progress-bar-striped').toggleClass('active')
-    })
+      $(this).siblings('.progress').find('.progress-bar-striped').toggleClass('active');
+    });
 
     // Config ZeroClipboard
     ZeroClipboard.config({
       moviePath: '/assets/flash/ZeroClipboard.swf',
-      hoverClass: 'btn-clipboard-hover'
-    })
+      hoverClass: 'btn-clipboard-hover',
+    });
 
     // Insert copy to clipboard button before .highlight
     $('.highlight').each(function () {
-      var btnHtml = '<div class="zero-clipboard"><span class="btn-clipboard">Copy</span></div>'
-      $(this).before(btnHtml)
-    })
-    var zeroClipboard = new ZeroClipboard($('.btn-clipboard'))
-    var htmlBridge = $('#global-zeroclipboard-html-bridge')
+      var btnHtml = '<div class="zero-clipboard"><span class="btn-clipboard">Copy</span></div>';
+      $(this).before(btnHtml);
+    });
+    var zeroClipboard = new ZeroClipboard($('.btn-clipboard'));
+    var htmlBridge = $('#global-zeroclipboard-html-bridge');
 
     // Handlers for ZeroClipboard
     zeroClipboard.on('load', function () {
-      htmlBridge
-        .data('placement', 'top')
-        .attr('title', 'Copy to clipboard')
-        .tooltip()
-    })
+      htmlBridge.data('placement', 'top').attr('title', 'Copy to clipboard').tooltip();
+    });
 
     // Copy to clipboard
     zeroClipboard.on('dataRequested', function (client) {
-      var highlight = $(this).parent().nextAll('.highlight').first()
-      client.setText(highlight.text())
-    })
+      var highlight = $(this).parent().nextAll('.highlight').first();
+      client.setText(highlight.text());
+    });
 
     // Notify copy success and reset tooltip title
     zeroClipboard.on('complete', function () {
@@ -160,22 +156,18 @@
         .tooltip('fixTitle')
         .tooltip('show')
         .attr('title', 'Copy to clipboard')
-        .tooltip('fixTitle')
-    })
+        .tooltip('fixTitle');
+    });
 
     // Notify copy failure
     zeroClipboard.on('noflash wrongflash', function () {
-      htmlBridge
-        .attr('title', 'Flash required')
-        .tooltip('fixTitle')
-        .tooltip('show')
-    })
-
-  })
-
-}(jQuery)
-
-;(function () {
+      htmlBridge.attr('title', 'Flash required').tooltip('fixTitle').tooltip('show');
+    });
+  });
+})(jQuery);
+(function () {
   'use strict';
-  addAnchors('.bs-docs-container h1, .bs-docs-container h2, .bs-docs-container h3, .bs-docs-container h4, .bs-docs-container h5');
+  addAnchors(
+    '.bs-docs-container h1, .bs-docs-container h2, .bs-docs-container h3, .bs-docs-container h4, .bs-docs-container h5'
+  );
 })();

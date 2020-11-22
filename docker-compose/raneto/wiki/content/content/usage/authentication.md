@@ -14,5 +14,3 @@ Change `authentication` to `true`.
 Change `credentials` to your desired username and password.
 
 Restart the server, if running, and you're ready to roll, privately.
-
-

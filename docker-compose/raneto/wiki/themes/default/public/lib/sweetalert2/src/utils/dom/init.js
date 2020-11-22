@@ -1,9 +1,9 @@
-import { swalClasses, iconTypes } from '../classes.js'
-import { getContainer, getPopup, getContent } from './getters.js'
-import { addClass, removeClass, getChildByClass } from './domUtils.js'
-import { isNodeEnv } from '../isNodeEnv.js'
-import { error } from '../utils.js'
-import sweetAlert from '../../sweetalert2.js'
+import {swalClasses, iconTypes} from '../classes.js';
+import {getContainer, getPopup, getContent} from './getters.js';
+import {addClass, removeClass, getChildByClass} from './domUtils.js';
+import {isNodeEnv} from '../isNodeEnv.js';
+import {error} from '../utils.js';
+import sweetAlert from '../../sweetalert2.js';
 
 const sweetHTML = `
  <div aria-labelledby="${swalClasses.title}" aria-describedby="${swalClasses.content}" class="${swalClasses.popup}" tabindex="-1">
@@ -49,100 +49,96 @@ const sweetHTML = `
    <div class="${swalClasses.footer}">
    </div>
  </div>
-`.replace(/(^|\n)\s*/g, '')
+`.replace(/(^|\n)\s*/g, '');
 
 const resetOldContainer = () => {
-  const oldContainer = getContainer()
+  const oldContainer = getContainer();
   if (!oldContainer) {
-    return
+    return;
   }
 
-  oldContainer.parentNode.removeChild(oldContainer)
+  oldContainer.parentNode.removeChild(oldContainer);
   removeClass(
     [document.documentElement, document.body],
-    [
-      swalClasses['no-backdrop'],
-      swalClasses['toast-shown'],
-      swalClasses['has-column']
-    ]
-  )
-}
+    [swalClasses['no-backdrop'], swalClasses['toast-shown'], swalClasses['has-column']]
+  );
+};
 
-let oldInputVal // IE11 workaround, see #1109 for details
+let oldInputVal; // IE11 workaround, see #1109 for details
 const resetValidationMessage = (e) => {
   if (sweetAlert.isVisible() && oldInputVal !== e.target.value) {
-    sweetAlert.resetValidationMessage()
+    sweetAlert.resetValidationMessage();
   }
-  oldInputVal = e.target.value
-}
+  oldInputVal = e.target.value;
+};
 
 const addInputChangeListeners = () => {
-  const content = getContent()
+  const content = getContent();
 
-  const input = getChildByClass(content, swalClasses.input)
-  const file = getChildByClass(content, swalClasses.file)
-  const range = content.querySelector(`.${swalClasses.range} input`)
-  const rangeOutput = content.querySelector(`.${swalClasses.range} output`)
-  const select = getChildByClass(content, swalClasses.select)
-  const checkbox = content.querySelector(`.${swalClasses.checkbox} input`)
-  const textarea = getChildByClass(content, swalClasses.textarea)
+  const input = getChildByClass(content, swalClasses.input);
+  const file = getChildByClass(content, swalClasses.file);
+  const range = content.querySelector(`.${swalClasses.range} input`);
+  const rangeOutput = content.querySelector(`.${swalClasses.range} output`);
+  const select = getChildByClass(content, swalClasses.select);
+  const checkbox = content.querySelector(`.${swalClasses.checkbox} input`);
+  const textarea = getChildByClass(content, swalClasses.textarea);
 
-  input.oninput = resetValidationMessage
-  file.onchange = resetValidationMessage
-  select.onchange = resetValidationMessage
-  checkbox.onchange = resetValidationMessage
-  textarea.oninput = resetValidationMessage
+  input.oninput = resetValidationMessage;
+  file.onchange = resetValidationMessage;
+  select.onchange = resetValidationMessage;
+  checkbox.onchange = resetValidationMessage;
+  textarea.oninput = resetValidationMessage;
 
   range.oninput = (e) => {
-    resetValidationMessage(e)
-    rangeOutput.value = range.value
-  }
+    resetValidationMessage(e);
+    rangeOutput.value = range.value;
+  };
 
   range.onchange = (e) => {
-    resetValidationMessage(e)
-    range.nextSibling.value = range.value
-  }
-}
+    resetValidationMessage(e);
+    range.nextSibling.value = range.value;
+  };
+};
 
-const getTarget = (target) => typeof target === 'string' ? document.querySelector(target) : target
+const getTarget = (target) => (typeof target === 'string' ? document.querySelector(target) : target);
 
 const setupAccessibility = (params) => {
-  const popup = getPopup()
+  const popup = getPopup();
 
-  popup.setAttribute('role', params.toast ? 'alert' : 'dialog')
-  popup.setAttribute('aria-live', params.toast ? 'polite' : 'assertive')
+  popup.setAttribute('role', params.toast ? 'alert' : 'dialog');
+  popup.setAttribute('aria-live', params.toast ? 'polite' : 'assertive');
   if (!params.toast) {
-    popup.setAttribute('aria-modal', 'true')
+    popup.setAttribute('aria-modal', 'true');
   }
-}
+};
 
 const setupRTL = (targetElement) => {
   if (window.getComputedStyle(targetElement).direction === 'rtl') {
-    addClass(getContainer(), swalClasses.rtl)
+    addClass(getContainer(), swalClasses.rtl);
   }
-}
+};
 
 /*
  * Add modal + backdrop to DOM
  */
 export const init = (params) => {
   // Clean up the old popup container if it exists
-  resetOldContainer()
+  resetOldContainer();
 
   /* istanbul ignore if */
   if (isNodeEnv()) {
-    error('SweetAlert2 requires document to initialize')
-    return
+    error('SweetAlert2 requires document to initialize');
+    return;
   }
 
-  const container = document.createElement('div')
-  container.className = swalClasses.container
-  container.innerHTML = sweetHTML
+  const container = document.createElement('div');
+  container.className = swalClasses.container;
+  container.innerHTML = sweetHTML;
 
-  const targetElement = getTarget(params.target)
-  targetElement.appendChild(container)
+  const targetElement = getTarget(params.target);
+  targetElement.appendChild(container);
 
-  setupAccessibility(params)
-  setupRTL(targetElement)
-  addInputChangeListeners()
-}
+  setupAccessibility(params);
+  setupRTL(targetElement);
+  addInputChangeListeners();
+};

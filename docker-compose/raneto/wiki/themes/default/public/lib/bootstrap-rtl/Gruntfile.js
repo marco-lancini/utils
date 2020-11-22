@@ -1,17 +1,18 @@
-module.exports = function(grunt) {
-  "use strict";
+module.exports = function (grunt) {
+  'use strict';
 
   // Project configuration
   grunt.initConfig({
     // Read package.json Metadata.
     pkg: grunt.file.readJSON('package.json'),
-    banner: '/*******************************************************************************\n' +
-            ' *              <%= pkg.name %> (version <%= pkg.version %>)\n' +
-            ' *      Author: <%= pkg.author %>\n' +
-            ' *  Created on: <%= grunt.template.today("mmmm dd,yyyy") %>\n' +
-            ' *     Project: <%= pkg.name %>\n' +
-            ' *   Copyright: Unlicensed Public Domain\n' +
-            ' *******************************************************************************/\n',
+    banner:
+      '/*******************************************************************************\n' +
+      ' *              <%= pkg.name %> (version <%= pkg.version %>)\n' +
+      ' *      Author: <%= pkg.author %>\n' +
+      ' *  Created on: <%= grunt.template.today("mmmm dd,yyyy") %>\n' +
+      ' *     Project: <%= pkg.name %>\n' +
+      ' *   Copyright: Unlicensed Public Domain\n' +
+      ' *******************************************************************************/\n',
     less: {
       rtl: {
         options: {
@@ -20,11 +21,11 @@ module.exports = function(grunt) {
           sourceMap: true,
           outputSourceFiles: true,
           sourceMapURL: '<%= pkg.name %>.css.map',
-          sourceMapFilename: 'dist/css/<%= pkg.name %>.css.map' 
+          sourceMapFilename: 'dist/css/<%= pkg.name %>.css.map',
         },
         files: {
-          'dist/css/<%= pkg.name %>.css': 'less/bootstrap-rtl.less'
-        }
+          'dist/css/<%= pkg.name %>.css': 'less/bootstrap-rtl.less',
+        },
       },
       flipped: {
         options: {
@@ -33,44 +34,44 @@ module.exports = function(grunt) {
           sourceMap: true,
           outputSourceFiles: true,
           sourceMapURL: '<%= pkg.name %>-flipped.css.map',
-          sourceMapFilename: 'dist/css/bootstrap-flipped.css.map' 
+          sourceMapFilename: 'dist/css/bootstrap-flipped.css.map',
         },
         files: {
-          'dist/css/bootstrap-flipped.css': 'less/bootstrap-flipped.less'
-        }
+          'dist/css/bootstrap-flipped.css': 'less/bootstrap-flipped.less',
+        },
       },
       minify: {
         options: {
-          cleancss: true
+          cleancss: true,
         },
         files: {
           'dist/css/<%= pkg.name %>.min.css': 'dist/css/<%= pkg.name %>.css',
           'dist/css/bootstrap-flipped.min.css': 'dist/css/bootstrap-flipped.css',
-        }
-      }
+        },
+      },
     },
 
     usebanner: {
-        options: {
-          position: 'top',
-          banner: '<%= banner %>',
-          linebreak: true
-
-        },
-        files: {
-          src: ['dist/css/<%= pkg.name %>.css', 
-                'dist/css/bootstrap-flipped.css', 
-                'dist/css/<%= pkg.name %>.min.css',
-                'dist/css/bootstrap-flipped.min.css']
-        }        
-    }
+      options: {
+        position: 'top',
+        banner: '<%= banner %>',
+        linebreak: true,
+      },
+      files: {
+        src: [
+          'dist/css/<%= pkg.name %>.css',
+          'dist/css/bootstrap-flipped.css',
+          'dist/css/<%= pkg.name %>.min.css',
+          'dist/css/bootstrap-flipped.min.css',
+        ],
+      },
+    },
   });
 
+  // Load uglify plugin
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-banner');
 
-// Load uglify plugin
-grunt.loadNpmTasks('grunt-contrib-less');
-grunt.loadNpmTasks('grunt-banner');
-
-// Default Task
-grunt.registerTask('default', ['less', 'usebanner']);
+  // Default Task
+  grunt.registerTask('default', ['less', 'usebanner']);
 };

@@ -13,7 +13,8 @@
 declare namespace Popper {
   export type Position = 'top' | 'right' | 'bottom' | 'left';
 
-  export type Placement = 'auto-start'
+  export type Placement =
+    | 'auto-start'
     | 'auto'
     | 'auto-end'
     | 'top-start'
@@ -41,10 +42,10 @@ declare namespace Popper {
   }
 
   export interface Padding {
-    top?: number,
-    bottom?: number,
-    left?: number,
-    right?: number,
+    top?: number;
+    bottom?: number;
+    left?: number;
+    right?: number;
   }
 
   export interface BaseModifier {
@@ -56,35 +57,35 @@ declare namespace Popper {
   export interface Modifiers {
     shift?: BaseModifier;
     offset?: BaseModifier & {
-      offset?: number | string,
+      offset?: number | string;
     };
     preventOverflow?: BaseModifier & {
-      priority?: Position[],
-      padding?: number | Padding,
-      boundariesElement?: Boundary | Element,
-      escapeWithReference?: boolean
+      priority?: Position[];
+      padding?: number | Padding;
+      boundariesElement?: Boundary | Element;
+      escapeWithReference?: boolean;
     };
     keepTogether?: BaseModifier;
     arrow?: BaseModifier & {
-      element?: string | Element,
+      element?: string | Element;
     };
     flip?: BaseModifier & {
-      behavior?: Behavior | Position[],
-      padding?: number | Padding,
-      boundariesElement?: Boundary | Element,
-      flipVariations?: boolean,
-      flipVariationsByContent?: boolean,
+      behavior?: Behavior | Position[];
+      padding?: number | Padding;
+      boundariesElement?: Boundary | Element;
+      flipVariations?: boolean;
+      flipVariationsByContent?: boolean;
     };
     inner?: BaseModifier;
     hide?: BaseModifier;
     applyStyle?: BaseModifier & {
-      onLoad?: Function,
-      gpuAcceleration?: boolean,
+      onLoad?: Function;
+      gpuAcceleration?: boolean;
     };
     computeStyle?: BaseModifier & {
       gpuAcceleration?: boolean;
-      x?: 'bottom' | 'top',
-      y?: 'left' | 'right'
+      x?: 'bottom' | 'top';
+      y?: 'left' | 'right';
     };
 
     [name: string]: (BaseModifier & Record<string, any>) | undefined;
@@ -109,12 +110,12 @@ declare namespace Popper {
     attributes: Attributes;
     boundaries: Object;
     offsets: {
-      popper: Offset,
-      reference: Offset,
+      popper: Offset;
+      reference: Offset;
       arrow: {
-        top: number,
-        left: number,
-      },
+        top: number;
+        left: number;
+      };
     };
   }
 
@@ -153,7 +154,7 @@ export type PopperOptions = Popper.PopperOptions;
 export type ReferenceObject = Popper.ReferenceObject;
 
 declare class Popper {
-  static modifiers: (BaseModifier & { name: string })[];
+  static modifiers: (BaseModifier & {name: string})[];
   static placements: Placement[];
   static Defaults: PopperOptions;
 

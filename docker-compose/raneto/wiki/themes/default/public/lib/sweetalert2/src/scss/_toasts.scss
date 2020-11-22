@@ -49,7 +49,7 @@
         font-weight: bold;
 
         @include ie {
-          font-size: .25em;
+          font-size: 0.25em;
         }
       }
 
@@ -62,15 +62,15 @@
 
       &.swal2-error {
         [class^='swal2-x-mark-line'] {
-          top: .875em;
+          top: 0.875em;
           width: 1.375em;
 
           &[class$='left'] {
-            left: .3125em;
+            left: 0.3125em;
           }
 
           &[class$='right'] {
-            right: .3125em;
+            right: 0.3125em;
           }
         }
       }
@@ -80,23 +80,24 @@
       flex-basis: auto !important;
       width: auto;
       height: auto;
-      margin: 0 .3125em;
+      margin: 0 0.3125em;
     }
 
     .swal2-styled {
-      margin: 0 .3125em;
-      padding: .3125em .625em;
+      margin: 0 0.3125em;
+      padding: 0.3125em 0.625em;
       font-size: $swal2-toast-buttons-font-size;
 
       &:focus {
-        box-shadow: 0 0 0 .0625em $swal2-white, 0 0 0 .125em $swal2-button-focus-outline;
+        box-shadow: 0 0 0 0.0625em $swal2-white, 0 0 0 0.125em $swal2-button-focus-outline;
       }
     }
 
     .swal2-success {
       border-color: $swal2-success;
 
-      [class^='swal2-success-circular-line'] { // Emulate moving circular line
+      [class^='swal2-success-circular-line'] {
+        // Emulate moving circular line
         position: absolute;
         width: 1.6em;
         height: 3em;
@@ -104,16 +105,16 @@
         border-radius: 50%;
 
         &[class$='left'] {
-          top: -.8em;
-          left: -.5em;
+          top: -0.8em;
+          left: -0.5em;
           transform: rotate(-45deg);
           transform-origin: 2em 2em;
           border-radius: 4em 0 0 4em;
         }
 
         &[class$='right'] {
-          top: -.25em;
-          left: .9375em;
+          top: -0.25em;
+          left: 0.9375em;
           transform-origin: 0 1.5em;
           border-radius: 0 4em 4em 0;
         }
@@ -126,23 +127,23 @@
 
       .swal2-success-fix {
         top: 0;
-        left: .4375em;
-        width: .4375em;
+        left: 0.4375em;
+        width: 0.4375em;
         height: 2.6875em;
       }
 
       [class^='swal2-success-line'] {
-        height: .3125em;
+        height: 0.3125em;
 
         &[class$='tip'] {
           top: 1.125em;
-          left: .1875em;
-          width: .75em;
+          left: 0.1875em;
+          width: 0.75em;
         }
 
         &[class$='long'] {
-          top: .9375em;
-          right: .1875em;
+          top: 0.9375em;
+          right: 0.1875em;
           width: 1.375em;
         }
       }

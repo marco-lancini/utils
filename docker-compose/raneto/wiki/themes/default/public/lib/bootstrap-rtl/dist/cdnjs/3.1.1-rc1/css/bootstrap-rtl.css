@@ -104,7 +104,7 @@ blockquote.pull-left .small {
 }
 body {
   direction: rtl;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 h1,
 h2,
@@ -118,7 +118,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .nav-tabs {
   border-bottom: 1px solid #dddddd;
@@ -175,13 +175,13 @@ h6,
   float: right;
 }
 .alert-dismissable .close {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   top: -2px;
   left: 21px;
   right: 0px;
 }
 .close {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   float: left;
 }
 .caret {
@@ -241,7 +241,7 @@ h6,
 }
 .nav-tabs.nav-justified > li,
 .nav-pills.nav-justified > li {
-  float: none!important;
+  float: none !important;
 }
 .nav-tabs.nav-justified > li > a,
 .nav-pills.nav-justified > li > a {
@@ -315,10 +315,10 @@ h6,
 .checkbox {
   padding-right: 20px;
 }
-.radio input[type="radio"],
-.radio-inline input[type="radio"],
-.checkbox input[type="checkbox"],
-.checkbox-inline input[type="checkbox"] {
+.radio input[type='radio'],
+.radio-inline input[type='radio'],
+.checkbox input[type='checkbox'],
+.checkbox-inline input[type='checkbox'] {
   float: right;
   margin-right: -20px;
 }
@@ -330,8 +330,8 @@ h6,
 .form-inline .checkbox {
   padding-right: 0;
 }
-.form-inline .radio input[type="radio"],
-.form-inline .checkbox input[type="checkbox"] {
+.form-inline .radio input[type='radio'],
+.form-inline .checkbox input[type='checkbox'] {
   margin-right: 0;
 }
 @media (min-width: 768px) {

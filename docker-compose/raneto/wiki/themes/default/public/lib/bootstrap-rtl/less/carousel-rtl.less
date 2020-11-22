@@ -2,7 +2,6 @@
 // RTL Carousel
 // --------------------------------------------------
 
-
 // Left/right controls for nav
 // ---------------------------
 
@@ -14,12 +13,12 @@
   &.left {
     right: auto;
     left: 0;
-    #gradient > .horizontal(@start-color: rgba(0,0,0,.5); @end-color: rgba(0,0,0,.0001));
+    #gradient > .horizontal(@start-color: rgba(0,0,0,.5); @end-color: rgba(0,0,0,.0001));;
   }
   &.right {
     left: auto;
     right: 0;
-    #gradient > .horizontal(@start-color: rgba(0,0,0,.0001); @end-color: rgba(0,0,0,.5));
+    #gradient > .horizontal(@start-color: rgba(0,0,0,.0001); @end-color: rgba(0,0,0,.5));;
   }
 
   .icon-prev,
@@ -47,12 +46,10 @@
   margin-right: -30%;
   margin-left: 0;
   padding-left: 0;
-
 }
 
 // Scale up controls for tablets and up
 @media screen and (min-width: @screen-sm-min) {
-
   // Scale up the controls a smidge
   .carousel-control {
     .glyphicon-chevron-left,

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   // Get any jquery=___ param from the query string.
   var jqversion = location.search.match(/[?&]jquery=(.*?)(?=&|$)/);
   var path;
@@ -11,4 +11,4 @@
   }
   // This is the only time I'll ever use document.write, I promise!
   document.write('<script src="' + path + '"></script>');
-}());
+})();

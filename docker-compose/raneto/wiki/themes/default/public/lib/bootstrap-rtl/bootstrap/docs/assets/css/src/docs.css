@@ -5,12 +5,10 @@
  * details, see http://creativecommons.org/licenses/by/3.0/.
  */
 
-
 /*
  * Bootstrap Documentation
  * Special styles for presenting Bootstrap's documentation and code examples.
  */
-
 
 /*
  * Scaffolding
@@ -88,7 +86,6 @@ body {
   border: 1px solid #cdbfe3;
 }
 
-
 /*
  * Fancy skip link
  *
@@ -105,14 +102,13 @@ body {
 }
 
 #skippy .skiplink-text {
-  padding: .5em;
+  padding: 0.5em;
   outline: 1px dotted;
 }
 
 #content:focus {
   outline: none;
 }
-
 
 /*
  * Main navigation
@@ -151,7 +147,6 @@ body {
   border-color: #f9f9f9;
 }
 
-
 /*
  * Footer
  *
@@ -183,7 +178,6 @@ body {
     margin-bottom: 0;
   }
 }
-
 
 /*
  * Social buttons
@@ -218,7 +212,6 @@ body {
   border: 0;
 }
 
-
 /*
  * Homepage
  *
@@ -232,12 +225,12 @@ body {
   padding: 30px 15px;
   color: #cdbfe3;
   text-align: center;
-  text-shadow: 0 1px 0 rgba(0,0,0,.1);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   background-color: #6f5499;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#563d7c), to(#6f5499));
   background-image: -webkit-linear-gradient(top, #563d7c 0%, #6f5499 100%);
-  background-image:      -o-linear-gradient(top, #563d7c 0%, #6f5499 100%);
-  background-image:         linear-gradient(to bottom, #563d7c 0%, #6f5499 100%);
+  background-image: -o-linear-gradient(top, #563d7c 0%, #6f5499 100%);
+  background-image: linear-gradient(to bottom, #563d7c 0%, #6f5499 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#563d7c', endColorstr='#6F5499', GradientType=0);
   background-repeat: repeat-x;
 }
@@ -292,7 +285,6 @@ body {
   }
 }
 
-
 /*
  * Page headers
  *
@@ -337,7 +329,6 @@ body {
   }
 }
 
-
 /*
  * Carbon ads
  *
@@ -368,7 +359,7 @@ body {
   width: auto !important;
   height: auto !important;
   margin-left: 145px !important;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 .carbonad-text {
   padding-top: 0 !important;
@@ -417,7 +408,6 @@ body {
     position: static;
   }
 }
-
 
 /*
  * Homepage featurettes
@@ -492,7 +482,6 @@ body {
   }
 }
 
-
 /*
  * Featured sites
  *
@@ -521,7 +510,6 @@ body {
   }
 }
 
-
 /*
  * Examples
  *
@@ -543,12 +531,11 @@ body {
     margin-right: -10px;
     margin-left: -10px;
   }
-  .bs-examples > [class^="col-"] {
+  .bs-examples > [class^='col-'] {
     padding-right: 10px;
     padding-left: 10px;
   }
 }
-
 
 /*
  * Side navigation
@@ -680,7 +667,6 @@ body {
   }
 }
 
-
 /*
  * Docs sections
  *
@@ -699,7 +685,6 @@ h1[id] {
   padding-top: 20px;
   margin-top: 0;
 }
-
 
 /*
  * Callouts
@@ -751,7 +736,6 @@ h1[id] {
 .bs-callout-info h4 {
   color: #1b809e;
 }
-
 
 /*
  * Color swatches
@@ -824,7 +808,6 @@ h1[id] {
   background-color: #f9f9f9;
 }
 
-
 /*
  * Team members
  *
@@ -852,7 +835,6 @@ h1[id] {
   border-radius: 4px;
 }
 
-
 /*
  * Wall of Browser Bugs
  *
@@ -867,7 +849,6 @@ h1[id] {
   width: 18%;
 }
 
-
 /*
  * Grid examples
  *
@@ -878,15 +859,14 @@ h1[id] {
 .show-grid {
   margin-bottom: 15px;
 }
-.show-grid [class^="col-"] {
+.show-grid [class^='col-'] {
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: #eee;
-  background-color: rgba(86,61,124,.15);
+  background-color: rgba(86, 61, 124, 0.15);
   border: 1px solid #ddd;
-  border: 1px solid rgba(86,61,124,.2);
+  border: 1px solid rgba(86, 61, 124, 0.2);
 }
-
 
 /*
  * Examples
@@ -902,8 +882,8 @@ h1[id] {
   border-color: #e5e5e5 #eee #eee;
   border-style: solid;
   border-width: 1px 0;
-  -webkit-box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
-          box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+  -webkit-box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.05);
 }
 /* Echo out a label for the example */
 .bs-example:after {
@@ -915,7 +895,7 @@ h1[id] {
   color: #959595;
   text-transform: uppercase;
   letter-spacing: 1px;
-  content: "Example";
+  content: 'Example';
 }
 
 .bs-example-padded-bottom {
@@ -940,7 +920,7 @@ h1[id] {
     border-width: 1px;
     border-radius: 4px 4px 0 0;
     -webkit-box-shadow: none;
-            box-shadow: none;
+    box-shadow: none;
   }
   .bs-example + .highlight,
   .bs-example + .zero-clipboard + .highlight {
@@ -1032,7 +1012,7 @@ h1[id] {
 
 /* Forms */
 .bs-example-control-sizing select,
-.bs-example-control-sizing input[type="text"] + input[type="text"] {
+.bs-example-control-sizing input[type='text'] + input[type='text'] {
   margin-top: 10px;
 }
 .bs-example-form .input-group {
@@ -1234,7 +1214,6 @@ h1[id] {
   padding-right: 45px;
 }
 
-
 /*
  * Responsive tests
  *
@@ -1308,7 +1287,6 @@ h1[id] {
   border: 1px solid #d6e9c6;
 }
 
-
 /*
  * Glyphicons
  *
@@ -1360,7 +1338,6 @@ h1[id] {
   }
 }
 
-
 /*
  * Customizer
  *
@@ -1396,8 +1373,8 @@ h1[id] {
   margin-top: 0; /* lame, but due to specificity we have to duplicate */
   margin-bottom: 5px;
 }
-.bs-customizer input[type="text"] {
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+.bs-customizer input[type='text'] {
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
   background-color: #fafafa;
 }
 .bs-customizer .help-block {
@@ -1426,8 +1403,8 @@ h1[id] {
   color: #fff;
   background-color: #d9534f;
   border-bottom: 1px solid #b94441;
-  -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
-          box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 .bs-customizer-alert .close {
   margin-top: -4px;
@@ -1444,8 +1421,8 @@ h1[id] {
   color: #fff;
   background-color: #a83c3a;
   border-color: #973634;
-  -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,.05), 0 1px 0 rgba(255,255,255,.1);
-          box-shadow: inset 0 2px 4px rgba(0,0,0,.05), 0 1px 0 rgba(255,255,255,.1);
+  -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .bs-dropzone {
@@ -1471,7 +1448,8 @@ h1[id] {
   font-weight: normal;
   color: #333;
 }
-/*.bs-dropzone*/ #import-manual-trigger {
+/*.bs-dropzone*/
+#import-manual-trigger {
   cursor: pointer;
 }
 .bs-dropzone p:last-child {
@@ -1549,7 +1527,6 @@ h1[id] {
   }
 }
 
-
 /*
  * ZeroClipboard styles
  */
@@ -1588,7 +1565,6 @@ h1[id] {
   }
 }
 
-
 /*
  * Miscellaneous
  *
@@ -1597,10 +1573,10 @@ h1[id] {
 
 /* Pseudo :focus state for showing how it looks in the docs */
 #focusedInput {
-  border-color: rgb(204,204,204); /* Restate unfocused value to make CSSLint happy that there's a pre-CSS3 fallback*/
-  border-color: rgba(82,168,236,.8);
+  border-color: rgb(204, 204, 204); /* Restate unfocused value to make CSSLint happy that there's a pre-CSS3 fallback*/
+  border-color: rgba(82, 168, 236, 0.8);
   outline: 0;
   outline: thin dotted \9; /* IE6-9 */
-  -webkit-box-shadow: 0 0 8px rgba(82,168,236,.6);
-          box-shadow: 0 0 8px rgba(82,168,236,.6);
+  -webkit-box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
 }
