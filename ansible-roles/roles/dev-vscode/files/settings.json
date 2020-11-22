@@ -5,8 +5,8 @@
   "cSpell.language": "en-GB",
   "editor.formatOnSave": true,
   "breadcrumbs.enabled": true,
-  "telemetry.enableTelemetry": false, // Disables vscode reporting
-  "telemetry.enableCrashReporter": false, // Disables vscode reporting
+  "telemetry.enableTelemetry": false,
+  "telemetry.enableCrashReporter": false,
   "typescript.updateImportsOnFileMove.enabled": "never",
   "explorer.compactFolders": false,
   "editor.minimap.enabled": false,
