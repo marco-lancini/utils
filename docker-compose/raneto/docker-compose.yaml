@@ -1,0 +1,10 @@
+version: '2'
+services:
+  web:
+    container_name: raneto
+    restart: always
+    build: .
+    volumes:
+      - ./wiki/content:/wiki/content
+    ports:
+      - 3000:3000
