@@ -2,4 +2,4 @@
 github_folder: /opt/mobile/
 
 kali_make_dirs:
-  - "/opt/mobile/"
+  - '/opt/mobile/'

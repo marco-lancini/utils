@@ -1,2 +1,2 @@
 ---
-go_download_location: "https://dl.google.com/go/{{ go_tarball }}"
+go_download_location: 'https://dl.google.com/go/{{ go_tarball }}'

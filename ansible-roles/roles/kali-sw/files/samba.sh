@@ -42,4 +42,3 @@ grep -q '^## smb' "${file}" 2>/dev/null \
   || echo '## smb\nalias smb="cd /var/samba/"\n#alias smbroot="cd /var/samba/"\n' >> "${file}"
 #--- Apply new alias
 source "${file}" || source ~/.zshrc
-

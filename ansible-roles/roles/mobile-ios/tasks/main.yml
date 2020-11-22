@@ -6,8 +6,7 @@
   register: dir_done
   file: path="{{ item }}" state=directory
   with_items:
-    - "{{ kali_make_dirs|default([]) }}"
-
+    - '{{ kali_make_dirs|default([]) }}'
 
 # ----------------------------------------------------------------------------------------
 # INSTALL
@@ -35,49 +34,47 @@
   apt: deb="/tmp/hopper.deb"
   sudo: true
 
-
 # ---------- IPAPATCH
 - name: Clone IPAPatch
   git:
     repo: https://github.com/Naituw/IPAPatch.git
-    dest: "{{ github_folder }}IPAPatch/"
+    dest: '{{ github_folder }}IPAPatch/'
   register: ipapatch_clone
-
 
 # ---------- NEEDLE
 - name: Install Needle Debian Dependencies
   apt: name={{item}} state=installed
   sudo: true
   with_items:
-       - python2.7 
-       - python2.7-dev 
-       - sshpass 
-       - sqlite3 
-       - lib32ncurses5-dev
+    - python2.7
+    - python2.7-dev
+    - sshpass
+    - sqlite3
+    - lib32ncurses5-dev
   register: needle_dependencies_debian
 
 - name: Install Needle Python Dependencies
   pip: name={{item}}
   sudo: true
   with_items:
-       - readline 
-       - paramiko 
-       - sshtunnel 
-       - frida 
-       - mitmproxy 
-       - biplist
+    - readline
+    - paramiko
+    - sshtunnel
+    - frida
+    - mitmproxy
+    - biplist
   register: needle_dependencies_python
 
 - name: Clone Needle
   when: needle_dependencies_debian|success and needle_dependencies_python|success
   git:
     repo: https://github.com/mwrlabs/needle.git
-    dest: "{{ github_folder }}needle/"
+    dest: '{{ github_folder }}needle/'
   register: needle_clone
 
 - name: Install Needle
   when: needle_clone|success
   copy:
-    src: "{{ role_path }}/files/needle"
+    src: '{{ role_path }}/files/needle'
     dest: /usr/local/bin/needle
     mode: a+x

@@ -6,7 +6,7 @@
   register: dir_done
   file: path="{{ item }}" state=directory
   with_items:
-    - "{{ kali_make_dirs|default([]) }}"
+    - '{{ kali_make_dirs|default([]) }}'
 
 # ----------------------------------------------------------------------------------------
 # INSTALL
@@ -17,7 +17,7 @@
   sudo: true
   with_items:
     - meld
-    - python-protobuf 
+    - python-protobuf
 
 - name: Install Tools via easy_install
   easy_install: name={{item}}
@@ -28,18 +28,17 @@
 
 - name: Install GIT repositories
   register: git_done
-  git:
-    repo={{ item.repo }}
+  git: repo={{ item.repo }}
     dest={{tools_dir}}/{{ item.dest }}
     accept_hostkey=yes
     version={{ item.version|default(\"master\") }}
     force={{ item.force|default("no") }}
   with_items:
-    - "{{ kali_git_repositories|default([]) }}"
+    - '{{ kali_git_repositories|default([]) }}'
 
 - name: Install shortcuts
   copy:
-    src: "{{ role_path }}/files/{{ item }}"
+    src: '{{ role_path }}/files/{{ item }}'
     dest: /usr/local/bin/{{ item }}
     mode: a+x
   with_items:
@@ -58,23 +57,20 @@
 - name: Download binaries
   when: dir_done is success
   register: bin_done
-  get_url:
-    url={{ item.url }}
+  get_url: url={{ item.url }}
     dest={{ item.dest }}
     mode=a+x
   with_items:
-    - "{{ kali_binary|default([]) }}"
+    - '{{ kali_binary|default([]) }}'
 
 - name: Download and extract zipped installs
   when: dir_done is success
   register: tars_done
-  unarchive:
-    src={{ item.src }}
+  unarchive: src={{ item.src }}
     dest={{ item.dest}}
     remote_src=yes
   with_items:
-    - "{{ kali_tars|default([]) }}"
-
+    - '{{ kali_tars|default([]) }}'
 
 # ----------------------------------------------------------------------------------------
 # CUSTOM
@@ -102,12 +98,11 @@
 
 - name: Add SignAPK to PATH
   copy:
-    src: "{{ item }}"
-    dest: "/usr/local/bin/"
+    src: '{{ item }}'
+    dest: '/usr/local/bin/'
     mode: a+x
   with_fileglob:
-    - "{{ github_folder }}signapk/bin/signapk*"
-
+    - '{{ github_folder }}signapk/bin/signapk*'
 
 # ----------------------------------------------------------------------------------------
 # CLEANUP

@@ -33,7 +33,6 @@
     path: /etc/default/keyboard
     regexp: 's/XKBLAYOUT=".*"/XKBLAYOUT="gb"/'
 
-
 # ---------- UPDATE OS
 - name: Update OS
   register: osupdated
@@ -59,23 +58,18 @@
   tags:
     - hostname
 
-
 # ---------- USERS
 - name: Add users
-  user:
-    name={{ item.name }}
+  user: name={{ item.name }}
     comment="{{ item.comment }}"
     shell={{ item.shell }}
     state=present
-  with_items: "{{ kali_users|default([]) }}"
+  with_items: '{{ kali_users|default([]) }}'
 
 - name: Add public SSH keys per user
-  authorized_key:
-    user={{ item.name }}
+  authorized_key: user={{ item.name }}
     key="{{ item.ssh_key }}"
-  with_items: "{{ kali_user_keys|default([]) }}"
-
-
+  with_items: '{{ kali_user_keys|default([]) }}'
 
 # ----------------------------------------------------------------------------------------
 # PREPARE
@@ -85,9 +79,7 @@
   register: dir_done
   file: path="{{ item }}" state=directory
   with_items:
-    - "{{ kali_make_dirs|default([]) }}"
-
-
+    - '{{ kali_make_dirs|default([]) }}'
 
 # ----------------------------------------------------------------------------------------
 # INSTALL
@@ -98,8 +90,7 @@
   sudo: true
   apt: name={{ item }} state=present
   with_items:
-   - "{{ kali_apt|default([]) }}"
-
+    - '{{ kali_apt|default([]) }}'
 
 - name: Install Tools via pip
   when: dir_done is success
@@ -107,8 +98,7 @@
   sudo: true
   pip: name={{ item }}
   with_items:
-    - "{{ kali_pip|default([]) }}"
-
+    - '{{ kali_pip|default([]) }}'
 
 - name: Install Tools via easy_install
   when: pip_done is success
@@ -116,19 +106,16 @@
   sudo: true
   easy_install: name={{ item }}
   with_items:
-    - "{{ kali_easy_install|default([]) }}"
-
+    - '{{ kali_easy_install|default([]) }}'
 
 - name: Install Tools via gem
   when: easy_install_done is success
   register: gem_done
   sudo: true
-  gem: 
-    name={{ item.package }}
+  gem: name={{ item.package }}
     state={{ item.state|default("latest") }}
   with_items:
-    - "{{ kali_gem|default([]) }}"
-
+    - '{{ kali_gem|default([]) }}'
 
 - name: Install Tools via go
   when: gem_done is success
@@ -136,21 +123,18 @@
   sudo: true
   shell: go get {{ item }}
   with_items:
-    - "{{ kali_go|default([]) }}"
-
+    - '{{ kali_go|default([]) }}'
 
 - name: Install GIT repositories
   when: go_done is success
   register: git_done
-  git:
-    repo={{ item.repo }}
+  git: repo={{ item.repo }}
     dest={{tools_dir}}/{{ item.dest }}
     accept_hostkey=yes
     version={{ item.version|default(\"master\") }}
     force={{ item.force|default("no") }}
   with_items:
-    - "{{ kali_git_repositories|default([]) }}"
-
+    - '{{ kali_git_repositories|default([]) }}'
 
 - name: Manually build go packages
   when: git_done is success
@@ -160,46 +144,39 @@
     chdir={{ item.go_folder }} go build
     chdir={{ item.go_folder }} go install
   with_items:
-    - "{{ kali_go_build|default([]) }}"
-
+    - '{{ kali_go_build|default([]) }}'
 
 - name: Install shortcuts
   copy:
-    src: "{{ role_path }}/files/{{ item }}"
+    src: '{{ role_path }}/files/{{ item }}'
     dest: /usr/local/bin/{{ item }}
     mode: a+x
   with_items:
-    - "{{ kali_shortcuts|default([]) }}"
-   
+    - '{{ kali_shortcuts|default([]) }}'
 
 - name: Download binaries
   when: git_done is success
   register: bin_done
-  get_url:
-    url={{ item.url }}
+  get_url: url={{ item.url }}
     dest={{ item.dest }}
     mode=a+x
   with_items:
-    - "{{ kali_binary|default([]) }}"
-
+    - '{{ kali_binary|default([]) }}'
 
 - name: Download and extract zipped installs
   when: git_done is success
   register: tars_done
-  unarchive:
-    src={{ item.src }}
+  unarchive: src={{ item.src }}
     dest={{ item.dest}}
     remote_src=yes
   with_items:
-    - "{{ kali_tars|default([]) }}"
+    - '{{ kali_tars|default([]) }}'
 
 - name: Run bash scripts
   when: git_done is success
   script: ../files/{{ item }}
   with_items:
-    - "{{ kali_bash|default([]) }}"
-
-
+    - '{{ kali_bash|default([]) }}'
 
 # ----------------------------------------------------------------------------------------
 # CUSTOM
@@ -214,7 +191,7 @@
   ufw: rule=allow proto=tcp port={{ item }}
   notify:
     - reload ufw
-  with_items: "{{ kali_ufw_tcp_allow|default([22]) }}"
+  with_items: '{{ kali_ufw_tcp_allow|default([22]) }}'
 
 - name: Make sure firewall is up and running, and denying
   ufw: state=enabled policy=deny
@@ -229,16 +206,16 @@
 
 - name: Hide desktop icon
   dconf:
-    key: "/org/gnome/nautilus/desktop/computer-icon-visible"
-    value: "false"
+    key: '/org/gnome/nautilus/desktop/computer-icon-visible'
+    value: 'false'
     state: present
 
 - name: Show hidden files
   dconf:
-    key: "/org/gnome/nautilus/preferences/show-hidden-files"
-    value: "true"
+    key: '/org/gnome/nautilus/preferences/show-hidden-files'
+    value: 'true'
     state: present
-  
+
 # ---------- ZSH
 - name: Execute the zsh-installer.sh
   when: tars_done is success
@@ -253,18 +230,17 @@
 - name: Copy configuration files
   when: zsh_done is success
   copy:
-    src: "{{ role_path }}/files/{{ item.src }}"
-    dest: "{{ item.dest }}"
+    src: '{{ role_path }}/files/{{ item.src }}'
+    dest: '{{ item.dest }}'
   with_items:
-    - "{{ kali_config|default([]) }}"
+    - '{{ kali_config|default([]) }}'
 
 - name: Apply / deploy common templates
-  template:
-    src={{ item.src }}
+  template: src={{ item.src }}
     dest={{ item.dest }}
     mode={{ item.mode }}
   with_items:
-    - "{{ kali_templates|default([]) }}"
+    - '{{ kali_templates|default([]) }}'
   tags:
     - templates
 
@@ -276,4 +252,4 @@
 
 - debug: msg="{{ item }}"
   with_items:
-    - "Install iTerm2 color scheme (Bluloco Dark) from /tmp/iTerm2-Color-Schemes/"
+    - 'Install iTerm2 color scheme (Bluloco Dark) from /tmp/iTerm2-Color-Schemes/'

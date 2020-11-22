@@ -1,18 +1,16 @@
 ---
 tools_dir: /opt/pentest
 
-
 kali_make_dirs:
-  - "/opt/pentest"
-  - "~/.wine/drive_c/MinGW/bin/"
-  - "/root/.config/terminator/"
-  - "/usr/share/windows-binaries/pstools"
-  - "/usr/share/nmap/scripts/vulscan/"
-  - "{{ tools_dir }}/rdp-sec-check/"
-  - "{{ tools_dir }}/snmpv3enum"
-  - "{{ tools_dir }}/cisco-decrypt/"
-  - "{{ tools_dir }}/nfsshell/"
-
+  - '/opt/pentest'
+  - '~/.wine/drive_c/MinGW/bin/'
+  - '/root/.config/terminator/'
+  - '/usr/share/windows-binaries/pstools'
+  - '/usr/share/nmap/scripts/vulscan/'
+  - '{{ tools_dir }}/rdp-sec-check/'
+  - '{{ tools_dir }}/snmpv3enum'
+  - '{{ tools_dir }}/cisco-decrypt/'
+  - '{{ tools_dir }}/nfsshell/'
 
 kali_apt:
   # ---------- BASIC TOOLS
@@ -24,9 +22,9 @@ kali_apt:
   # ---------- SYSTEM MAINTENANCE TOOLS
   - htop
   - mtr
-  - psmisc                              # Suite to help with running processes
-  - pv                                  # CLI progress bar
-  - gparted                             # GUI partition manager
+  - psmisc # Suite to help with running processes
+  - pv # CLI progress bar
+  - gparted # GUI partition manager
   - bc
   - qalc
   - ipcalc
@@ -44,7 +42,7 @@ kali_apt:
   - unrar
   - rar
   - asciinema
-  - openvpn 
+  - openvpn
   - xtightvncviewer
   - tree
   # ---------- DEV TOOLS
@@ -62,8 +60,8 @@ kali_apt:
   - ruby
   - nodejs
   - openjdk-8-jdk
-  - silversearcher-ag             # Code searching
-  - pwgen                         # Password generator
+  - silversearcher-ag # Code searching
+  - pwgen # Password generator
   - libreadline-dev
   - lib32ncurses5-dev
   - ctor
@@ -81,9 +79,9 @@ kali_apt:
   - atftpd
   - pure-ftpd
   - samba
-  - cifs-utils              # for samba
-  - libpcap-dev             # for bettercap
-  - libnetfilter-queue-dev  # for bettercap
+  - cifs-utils # for samba
+  - libpcap-dev # for bettercap
+  - libnetfilter-queue-dev # for bettercap
   - firefox-esr
   - meld
   - xsltproc
@@ -105,42 +103,42 @@ kali_apt:
   - dpkg-dev
   - libssl-dev
   # ---------- CROSS COMPILATION
-  - mingw-w64 
-  - binutils-mingw-w64 
-  - gcc-mingw-w64 
+  - mingw-w64
+  - binutils-mingw-w64
+  - gcc-mingw-w64
   - cmake
-  #- mingw-w64-dev 
+  #- mingw-w64-dev
   #- mingw-w64-tools
-  - gcc-mingw-w64-i686 
-  - gcc-mingw-w64-x86-64   
+  - gcc-mingw-w64-i686
+  - gcc-mingw-w64-x86-64
   #- mingw32
-  - wine 
+  - wine
   #- wine32
   - winetricks
   # ---------- PENTEST TOOLS
   - nmap
   - nis
-  - exe2hexbat              # Inline file transfer
-  - msfpc                   # Msfvenom Payload Creator
-  - wdiff                   # Compares two files word by word
-  - vbindiff                # Visually compare binary files
+  - exe2hexbat # Inline file transfer
+  - msfpc # Msfvenom Payload Creator
+  - wdiff # Compares two files word by word
+  - vbindiff # Visually compare binary files
   - ca-certificates
   - testssl.sh
-  - ncftp                   # CLI FTP client
-  - hashid                  # Identify hash types
-  - unicornscan             # Fast port scanner
-  - bless                   # GUI hex editor
-  - dhex                    # CLI hex compare
-  - lnav                    # CLI log viewer
-  - smbmap                  # SMB enumeration tool
-  - xprobe                  # OS fingerprinting
-  - p0f                     # OS fingerprinting
-  - rsh-client              # Remote shell connections
-  - shellter                # Dynamic shellcode injector
-  - backdoor-factory        # Bypassing anti-virus
-  - vfeed                   # Vulnerability database
-  - sparta                  # GUI automatic wrapper
-  - veil-evasion            # Bypassing anti-virus
+  - ncftp # CLI FTP client
+  - hashid # Identify hash types
+  - unicornscan # Fast port scanner
+  - bless # GUI hex editor
+  - dhex # CLI hex compare
+  - lnav # CLI log viewer
+  - smbmap # SMB enumeration tool
+  - xprobe # OS fingerprinting
+  - p0f # OS fingerprinting
+  - rsh-client # Remote shell connections
+  - shellter # Dynamic shellcode injector
+  - backdoor-factory # Bypassing anti-virus
+  - vfeed # Vulnerability database
+  - sparta # GUI automatic wrapper
+  - veil-evasion # Bypassing anti-virus
   - seclists
   - wordlists
   - crackmapexec
@@ -148,7 +146,7 @@ kali_apt:
   - netdiscover
   - onesixtyone
   - responder
-  - libgcrypt20-dev         # Needed by Cisco Decrypt
+  - libgcrypt20-dev # Needed by Cisco Decrypt
   - snmp-mibs-downloader
   - windows-binaries
   - nbtscan
@@ -164,27 +162,26 @@ kali_apt:
   - nfs-common
   # ---------- TUNNELING TOOLS
   # - http-tunnel             # Tunnels data streams in HTTP requests
-  - sshuttle                # VPN over SSH
-  - iodine                  # DNS tunnelling (IP over DNS)
-  - ptunnel                 # ICMP tunnelling
-  - stunnel                 # SSL wrapper
-  - sshpass                 # Automating SSH connections
+  - sshuttle # VPN over SSH
+  - iodine # DNS tunnelling (IP over DNS)
+  - ptunnel # ICMP tunnelling
+  - stunnel # SSL wrapper
+  - sshpass # Automating SSH connections
   - proxychains
   # ---------- WEB TOOLS
-  - lbd                     # Load balancing detector
-  - wafw00f                 # WAF detector
-  - clusterd                # Clustered attack toolkit (JBoss, ColdFusion, WebLogic, Tomcat)
-  - webacoo                 # Web backdoor cookie
-  - htshells                # htdocs/apache web shells
-  - commix                  # Automatic command injection
-  - fimap                   # Automatic LFI/RFI tool
-  - httprint                # GUI web server fingerprint
-  - webhandler              # Shell TTY handler
+  - lbd # Load balancing detector
+  - wafw00f # WAF detector
+  - clusterd # Clustered attack toolkit (JBoss, ColdFusion, WebLogic, Tomcat)
+  - webacoo # Web backdoor cookie
+  - htshells # htdocs/apache web shells
+  - commix # Automatic command injection
+  - fimap # Automatic LFI/RFI tool
+  - httprint # GUI web server fingerprint
+  - webhandler # Shell TTY handler
   - dirb
   - beef-xss
   - webshells
   - sslscan
-
 
 kali_pip:
   - httpie
@@ -197,72 +194,66 @@ kali_pip:
   - scapy
   - sslyze
   - whatportis
-  
 
 #kali_easy_install:
 #  # - example
 
-
 kali_gem:
   - package: aquatone
     state: latest
-
 
 kali_go:
   - github.com/bettercap/bettercap
   - github.com/yudai/gotty
   #- github.com/marco-lancini/goscan
 
-
 kali_go_build:
   - git_name: gobuster
     go_folder: /root/go/src/github.com/OJ/gobuster/
-
 
 kali_git_repositories:
   - repo: https://github.com/sqlmapproject/sqlmap.git
     dest: sqlmap
   - repo: https://github.com/commonexploits/dtpscan.git
-    dest: "dtpscan"
+    dest: 'dtpscan'
   - repo: https://github.com/T-S-A/smbspider.git
-    dest: "smbspider"
+    dest: 'smbspider'
   - repo: https://github.com/CoreSecurity/impacket.git
-    dest: "impacket"
+    dest: 'impacket'
   - repo: https://github.com/sensepost/autoDANE.git
-    dest: "autodane"
+    dest: 'autodane'
   - repo: https://github.com/galkan/crowbar.git
-    dest: "crowbar"
+    dest: 'crowbar'
   - repo: https://github.com/lanjelot/patator.git
-    dest: "patator"
+    dest: 'patator'
   - repo: https://github.com/SpiderLabs/ikeforce.git
-    dest: "ikeforce"
+    dest: 'ikeforce'
   - repo: https://github.com/b374k/b374k.git
-    dest: "b374k"
+    dest: 'b374k'
   - repo: https://github.com/vrana/adminer.git
-    dest: "adminer"
+    dest: 'adminer'
   - repo: https://github.com/NetSPI/cmdsql.git
-    dest: "cmdsql"
+    dest: 'cmdsql'
   - repo: https://github.com/OJ/gobuster.git
-    dest: "gobuster"
+    dest: 'gobuster'
   - repo: https://github.com/SpiderLabs/Responder.git
-    dest: "responder"
+    dest: 'responder'
   - repo: https://github.com/robertdavidgraham/masscan.git
-    dest: "masscan"
+    dest: 'masscan'
   - repo: https://github.com/arthepsy/ssh-audit.git
-    dest: "ssh-audit"
+    dest: 'ssh-audit'
   - repo: https://github.com/BloodHoundAD/BloodHound.git
-    dest: "bloodhound"
+    dest: 'bloodhound'
   - repo: https://github.com/FortyNorthSecurity/EyeWitness.git
-    dest: "eyewitness"
+    dest: 'eyewitness'
   - repo: https://github.com/ernw/nmap-parse-output.git
-    dest: "nmap-parse-output"
+    dest: 'nmap-parse-output'
   - repo: https://github.com/leostat/rtfm.git
-    dest: "rtfm"
+    dest: 'rtfm'
   - repo: https://github.com/CISOfy/lynis.git
-    dest: "lynis"
+    dest: 'lynis'
   - repo: https://github.com/arthepsy/ssh-audit.git
-    dest: "ssh-audit"
-
+    dest: 'ssh-audit'
 
 kali_shortcuts:
   - sqlmap
@@ -281,16 +272,15 @@ kali_shortcuts:
   - nmap-parse-output
   - rtfm
 
-
 kali_binary:
   - url: https://raw.githubusercontent.com/raesene/TestingScripts/master/snmpv3enum.rb
-    dest: "{{ tools_dir }}/snmpv3enum/snmpv3enum.rb"
+    dest: '{{ tools_dir }}/snmpv3enum/snmpv3enum.rb'
   - url: https://raw.githubusercontent.com/raesene/TestingScripts/master/usernames
-    dest: "{{ tools_dir }}/snmpv3enum/usernames"
+    dest: '{{ tools_dir }}/snmpv3enum/usernames'
   - url: https://web.archive.org/web/20080530012252/http://live.sysinternals.com/accesschk.exe
     dest: /usr/share/windows-binaries/accesschk_v5.02.exe
   - url: https://www.unix-ag.uni-kl.de/~massar/soft/cisco-decrypt.c
-    dest: "{{ tools_dir }}/cisco-decrypt/cisco-decrypt.c"
+    dest: '{{ tools_dir }}/cisco-decrypt/cisco-decrypt.c'
   - url: https://github.com/sharkdp/bat/releases/download/v0.6.1/bat-musl_0.6.1_amd64.deb
     dest: /tmp/bat.deb
   # ---------- Powershell
@@ -301,37 +291,33 @@ kali_binary:
   # - url: https://github.com/PowerShell/PowerShell/releases/download/v6.0.2/powershell_6.0.2-1.ubuntu.16.04_amd64.deb
   #   dest: /tmp/powershell_6.0.2-1.ubuntu.16.04_amd64.deb
 
-
 kali_deb:
-    - /tmp/bat.deb
+  - /tmp/bat.deb
 #   - /tmp/libssl1.0.0_1.0.1t-1+deb7u4_amd64.deb
 #   - /tmp/libicu55_55.1-7ubuntu0.4_amd64.deb
 #   - /tmp/powershell_6.0.2-1.ubuntu.16.04_amd64.deb
 
-
 kali_tars:
   - src: https://labs.portcullis.co.uk/download/rdp-sec-check-0.9.tgz
-    dest: "{{ tools_dir }}/rdp-sec-check/"
+    dest: '{{ tools_dir }}/rdp-sec-check/'
   - src: https://download.sysinternals.com/files/PSTools.zip
     dest: /usr/share/windows-binaries/pstools
   - src: https://download.sysinternals.com/files/AccessChk.zip
     dest: /usr/share/windows-binaries/
   - src: https://github.com/NetDirect/nfsshell/archive/master.zip
-    dest: "{{ tools_dir }}/nfsshell/"
+    dest: '{{ tools_dir }}/nfsshell/'
   - src: http://www.computec.ch/projekte/vulscan/download/nmap_nse_vulscan-2.0.tar.gz
-    dest: "/usr/share/nmap/scripts/"
+    dest: '/usr/share/nmap/scripts/'
   - src: http://sourceforge.net/projects/mingw/files/Installer/mingw-get/mingw-get-0.6.2-beta-20131004-1/mingw-get-0.6.2-mingw32-beta-20131004-1-bin.zip/download
     dest: ~/.wine/drive_c/MinGW/
-   
 
 kali_config:
-  - src: "terminator"
-    dest: "/root/.config/terminator/config"
-  - src: "emacs"
-    dest: "/root/.emacs"
-  - src: "pythonstartup"
-    dest: "/root/.pythonstartup"
-
+  - src: 'terminator'
+    dest: '/root/.config/terminator/config'
+  - src: 'emacs'
+    dest: '/root/.emacs'
+  - src: 'pythonstartup'
+    dest: '/root/.pythonstartup'
 
 kali_bash:
   - firefox.sh

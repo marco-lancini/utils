@@ -1,6 +1,5 @@
 - name: Install packages for apt over HTTPS
-  apt:
-    name={{item}}
+  apt: name={{item}}
     state=installed
     update_cache=yes
   with_items:
@@ -21,19 +20,15 @@
     state: present
 
 - name: Update packages
-  apt:
-    update_cache=yes
+  apt: update_cache=yes
 
 - name: Install Docker via apt
-  apt:
-    name=docker-ce
+  apt: name=docker-ce
     install-recommends=no
     state=present
 
 - name: Add docker_users to docker group
-  user:
-    name={{ item }}
+  user: name={{ item }}
     groups=docker
     append=yes
-  with_items:
-    docker_users
+  with_items: docker_users

@@ -1,5 +1,5 @@
 ---
-go_tarball: "go1.13.5.linux-amd64.tar.gz"
-go_tarball_checksum: "sha256:2871270d8ff0c8c69f161aaae42f9f28739855ff5c5204752a8d92a1c9f63993"
-go_version_target: "go version go1.11.1 linux/amd64"
+go_tarball: 'go1.13.5.linux-amd64.tar.gz'
+go_tarball_checksum: 'sha256:2871270d8ff0c8c69f161aaae42f9f28739855ff5c5204752a8d92a1c9f63993'
+go_version_target: 'go version go1.11.1 linux/amd64'
 set_go_path: true

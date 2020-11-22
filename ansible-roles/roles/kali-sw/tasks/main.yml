@@ -6,8 +6,7 @@
   register: dir_done
   file: path="{{ item }}" state=directory
   with_items:
-    - "{{ kali_make_dirs|default([]) }}"
-
+    - '{{ kali_make_dirs|default([]) }}'
 
 # ----------------------------------------------------------------------------------------
 # INSTALL
@@ -18,7 +17,7 @@
   sudo: true
   apt: name={{ item }} state=present
   with_items:
-   - "{{ kali_apt|default([]) }}"
+    - '{{ kali_apt|default([]) }}'
 
 - name: Install Tools via pip
   when: dir_done is success
@@ -26,7 +25,7 @@
   sudo: true
   pip: name={{ item }}
   with_items:
-    - "{{ kali_pip|default([]) }}"
+    - '{{ kali_pip|default([]) }}'
 
 - name: Install Tools via easy_install
   when: pip_done is success
@@ -34,17 +33,16 @@
   sudo: true
   easy_install: name={{ item }}
   with_items:
-    - "{{ kali_easy_install|default([]) }}"
+    - '{{ kali_easy_install|default([]) }}'
 
 - name: Install Tools via gem
   when: easy_install_done is success
   register: gem_done
   sudo: true
-  gem: 
-    name={{ item.package }}
+  gem: name={{ item.package }}
     state={{ item.state|default("latest") }}
   with_items:
-    - "{{ kali_gem|default([]) }}"
+    - '{{ kali_gem|default([]) }}'
 
 - name: Install Tools via go
   when: gem_done is success
@@ -52,19 +50,18 @@
   sudo: true
   shell: go get {{ item }}
   with_items:
-    - "{{ kali_go|default([]) }}"
+    - '{{ kali_go|default([]) }}'
 
 - name: Clone GIT repositories
   when: go_done is success
   register: git_done
-  git:
-    repo={{ item.repo }}
+  git: repo={{ item.repo }}
     dest={{tools_dir}}/{{ item.dest }}
     accept_hostkey=yes
     version={{ item.version|default(\"master\") }}
     force={{ item.force|default("no") }}
   with_items:
-    - "{{ kali_git_repositories|default([]) }}"
+    - '{{ kali_git_repositories|default([]) }}'
 
 - name: Manually build go packages
   when: git_done is success
@@ -75,57 +72,53 @@
     chdir={{ item.go_folder }} go build
     chdir={{ item.go_folder }} go install
   with_items:
-    - "{{ kali_go_build|default([]) }}"
+    - '{{ kali_go_build|default([]) }}'
 
 - name: Install shortcuts
   copy:
-    src: "{{ role_path }}/files/{{ item }}"
+    src: '{{ role_path }}/files/{{ item }}'
     dest: /usr/local/bin/{{ item }}
     mode: a+x
   with_items:
-    - "{{ kali_shortcuts|default([]) }}"
-   
+    - '{{ kali_shortcuts|default([]) }}'
+
 - name: Download binaries
   when: git_done is success
   register: bin_done
-  get_url:
-    url={{ item.url }}
+  get_url: url={{ item.url }}
     dest={{ item.dest }}
     mode=a+x
   with_items:
-    - "{{ kali_binary|default([]) }}"
+    - '{{ kali_binary|default([]) }}'
 
 - name: Install DEB binaries
   when: bin_done is success
   apt: deb="{{item}}"
   sudo: true
   with_items:
-    - "{{ kali_deb|default([]) }}"
+    - '{{ kali_deb|default([]) }}'
 
 - name: Download and extract zipped installs
   when: git_done is success
   register: tars_done
-  unarchive:
-    src={{ item.src }}
+  unarchive: src={{ item.src }}
     dest={{ item.dest}}
     remote_src=yes
   with_items:
-    - "{{ kali_tars|default([]) }}"
+    - '{{ kali_tars|default([]) }}'
 
 - name: Copy configuration files
   copy:
-    src: "{{ role_path }}/files/{{ item.src }}"
-    dest: "{{ item.dest }}"
+    src: '{{ role_path }}/files/{{ item.src }}'
+    dest: '{{ item.dest }}'
   with_items:
-    - "{{ kali_config|default([]) }}"
+    - '{{ kali_config|default([]) }}'
 
 - name: Run bash scripts
   when: git_done is success
   script: ../files/{{ item }}
   with_items:
-    - "{{ kali_bash|default([]) }}"
-
-
+    - '{{ kali_bash|default([]) }}'
 
 # ----------------------------------------------------------------------------------------
 # CUSTOM
@@ -133,23 +126,23 @@
 # ---------- SSH
 - name: Change SSH settings
   when: apt_done is success
-  command: "{{item}}"
+  command: '{{item}}'
   with_items:
-    - sed -i 's/^PermitRootLogin .*/PermitRootLogin yes/g' "/etc/ssh/sshd_config"      # Accept password login
-    - sed -i 's/^#AuthorizedKeysFile /AuthorizedKeysFile /g' "/etc/ssh/sshd_config"    # Allow for key based login
+    - sed -i 's/^PermitRootLogin .*/PermitRootLogin yes/g' "/etc/ssh/sshd_config" # Accept password login
+    - sed -i 's/^#AuthorizedKeysFile /AuthorizedKeysFile /g' "/etc/ssh/sshd_config" # Allow for key based login
 
 # ---------- GIT
 - name: Setup git
   when: apt_done is success
-  command: "{{item}}"
+  command: '{{item}}'
   with_items:
     #- git config --global user.name "Marco Lancini"
     #- git config --global user.email "info@marcolancini.it"
-    - git config --global core.editor "vim"       #--- Set as default editor
-    - git config --global merge.tool vimdiff      #--- Set as default mergetool
+    - git config --global core.editor "vim" #--- Set as default editor
+    - git config --global merge.tool vimdiff #--- Set as default mergetool
     - git config --global merge.conflictstyle diff3
     - git config --global mergetool.prompt false
-    - git config --global push.default simple     #--- Set as default push
+    - git config --global push.default simple #--- Set as default push
 
 # ---------- VULNSCAN
 - name: Vulnscan Permissions
@@ -184,7 +177,7 @@
 # ---------- MASSCAN
 - name: Install masscan
   when: git_done is success
-  command: "{{item}}"
+  command: '{{item}}'
   with_items:
     - chdir="{{ tools_dir }}/masscan/" make -j
     - chdir="{{ tools_dir }}/masscan/" cp bin/masscan /usr/local/bin/masscan
@@ -192,7 +185,7 @@
 # ---------- cmdsql
 - name: Install cmdsql
   when: git_done is success
-  command: "{{item}}"
+  command: '{{item}}'
   with_items:
     - ln -sf /opt/cmdsql/ /usr/share/webshells/aspx/cmdsql
 
@@ -206,15 +199,15 @@
 # ---------- BEEF
 - name: Configure BEEF
   when: git_done is success
-  command: "{{item}}"
+  command: '{{item}}'
   with_items:
-    - sed -i 's/user:.*".*"/user:root/' "/usr/share/beef-xss/config.yaml" 
+    - sed -i 's/user:.*".*"/user:root/' "/usr/share/beef-xss/config.yaml"
     - sed -i 's/passwd:.*".*"/passwd:toor/'  "/usr/share/beef-xss/config.yaml"
 
 # ---------- b374k
 - name: Install b374k
   when: git_done is success
-  command: "{{item}}"
+  command: '{{item}}'
   with_items:
     - chdir="{{ tools_dir }}/b374k/" php index.php -o b374k.php -s
     - ln -sf /opt/b374k /usr/share/webshells/php/b374k
@@ -222,7 +215,7 @@
 # ---------- adminer
 - name: Install adminer
   when: git_done is success
-  command: "{{item}}"
+  command: '{{item}}'
   with_items:
     - chdir="{{ tools_dir }}/adminer/" php compile.php 2>/dev/null
     - ln -sf $(find /opt/adminer/ -name adminer-*.php -type f -print -quit) /usr/share/webshells/php/adminer.php
@@ -231,7 +224,7 @@
 - name: git_done Make
   when: git_done is success
   register: nfsshell_make
-  command: "{{item}}"
+  command: '{{item}}'
   with_items:
     - mv "{{ tools_dir }}/nfsshell/nfsshell-master/*" "{{ tools_dir }}/nfsshell/"
     - chdir="{{ tools_dir }}/nfsshell/" make
@@ -239,7 +232,7 @@
 - name: NFSShell Install
   when: nfsshell_make is success
   copy:
-    src: "{{ tools_dir }}/nfsshell/nfsshell"
+    src: '{{ tools_dir }}/nfsshell/nfsshell'
     dest: /usr/local/bin/nfsshell
     mode: 777
 
@@ -258,13 +251,11 @@
   when: tars_done is success
   shell: |
     cd ~/.wine/drive_c/MinGW/ && or FILE in mingw32-base mingw32-gcc-g++ mingw32-gcc-objc; do
-        wine ./bin/mingw-get.exe install "${FILE}" 2>&1 
+        wine ./bin/mingw-get.exe install "${FILE}" 2>&1
     done
 
 - name: Add MinGW to Windows Path
   command: sed -i '/^"PATH"=/ s_"$_;C:\\\\MinGW\\\\bin"_' ~/.wine/system.reg
-  
-  
 
 # ----------------------------------------------------------------------------------------
 # CLEANUP
@@ -274,7 +265,7 @@
 
 - debug: msg="{{ item }}"
   with_items:
-    - "Update Pure-FTPd credentials: anonymous/anonymous"
-    - "Update Samba credentials: guest/<blank>"
-    - "Update BeEF credentials: root/toor  [/usr/share/beef-xss/config.yaml]"
-    - "Install PT repo"
+    - 'Update Pure-FTPd credentials: anonymous/anonymous'
+    - 'Update Samba credentials: guest/<blank>'
+    - 'Update BeEF credentials: root/toor  [/usr/share/beef-xss/config.yaml]'
+    - 'Install PT repo'

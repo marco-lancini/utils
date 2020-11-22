@@ -24,7 +24,6 @@
   notify:
     - Reload PostgreSQL
 
-
 # ----------------------------------------------------------------------------------------
 # SETUP DB
 # ----------------------------------------------------------------------------------------
@@ -35,7 +34,7 @@
 - name: MSFDB Reinit
   when: postgresql is success
   register: reinit
-  shell:  |
+  shell: |
     msfdb reinit
     sleep 5s
 
@@ -47,27 +46,26 @@
     msfdb start
     msfconsole -q -x 'version;db_status;sleep 310;exit'
 
-
 # ----------------------------------------------------------------------------------------
 # CONFIG
 # ----------------------------------------------------------------------------------------
 - name: Autorun Metasploit commands each startup (msf_autorunscript.rc)
   when: firstrun is success
   copy:
-    src: "{{ role_path }}/files/msf_autorunscript.rc"
+    src: '{{ role_path }}/files/msf_autorunscript.rc'
     dest: ~/.msf4/msf_autorunscript.rc
     mode: a+x
 
 - name: Autorun Metasploit commands each startup (msfconsole.rc)
   when: firstrun is success
   copy:
-    src: "{{ role_path }}/files/msfconsole.rc"
+    src: '{{ role_path }}/files/msfconsole.rc'
     dest: ~/.msf4/msfconsole.rc
     mode: a+x
 
 - name: Generate payload list
   when: firstrun is success
-  command: "{{item}}"
+  command: '{{item}}'
   with_items:
     - mkdir -p ~/.msf4/msfvenom/
     - msfvenom --list nops > ~/.msf4/msfvenom/nops

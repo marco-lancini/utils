@@ -14,7 +14,7 @@ APT				| `Apt 0.7 Strict`	| Package Manager			|
 Name           	| Package      										 | Repo        								     | Description           	| URL
 ------------- 	| -------------										 | ------------- 							     | -------------         	| -------------
 BigBoss 		| `bigbosshackertools` 								 | `http://apt.thebigboss.org/repofiles/cydia/`  | Common unix tools 	    |
-Class-dump 		| `pcre`, `net.limneos.classdump-dyld`, `class-dump` | 												 | Dump class interfaces	| 
+Class-dump 		| `pcre`, `net.limneos.classdump-dyld`, `class-dump` | 												 | Dump class interfaces	|
 Clutch2 		| `com.iphonecake.clutch2`						     | `http://cydia.iphonecake.com` 				 | Decrypt app binary		|
 coreutils 		| `coreutils`, `coreutils-bin`						 |												 | Core UNIX utilities 		|
 Cycript			| `cycript`											 | 												 | Hooking					| http://www.cycript.com
@@ -23,14 +23,14 @@ FileDP 			|													 |												 | Data Protection Class 	| http://www.sec
 Frida 			| `re.frida.server`									 | `https://build.frida.re`						 | Hooking					| http://www.frida.re
 Fsmon 			|													 |												 | Monitor filesystem changes| https://github.com/nowsecure/fsmon
 GDB 			| `gdb`												 | `http://cydia.radare.org/`					 | Debugger 				|
-Ipainstaller 	| `com.autopear.installipa` 						 | 												 | Install an IPA from the filesystem | 
+Ipainstaller 	| `com.autopear.installipa` 						 | 												 | Install an IPA from the filesystem |
 Keychain_Dump   |													 | 												 | Dump keychain			|
 Ldid 			| `ldid`											 | 												 | Sign binaries			|
 Ondeviceconsole | `com.eswick.ondeviceconsole`						 |												 | Access syslog			|
 Open			| `com.conradkramer.open`							  												 | Launch applications		|
 PBWatcher 		|													 |												 | Dump the OS Pasteboard	| https://github.com/dmayer/pbwatcher/
 Plutil 			| `com.ericasadun.utilities` 						 | 												 | Manipulate Plists  		|
-SSL Kill Switch |                                                    |                                               | Disable Pinning | 
+SSL Kill Switch |                                                    |                                               | Disable Pinning |
 Theos 			| 						 | 												 | Development Environment for Tweaks  		| https://github.com/theos/theos/wiki/Installation
 
 * Update Cydia repositories: `apt-get update`
@@ -41,7 +41,7 @@ Theos 			| 						 | 												 | Development Environment for Tweaks  		| https
 * List all installed apps/packages: `dpkg -l`
 
 
-- - - 
+- - -
 
 ## MANUAL
 

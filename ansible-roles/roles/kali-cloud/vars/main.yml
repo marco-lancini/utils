@@ -1,27 +1,27 @@
 ---
 tools_dir: /opt/cloud
 
-version_gcloud: "231.0.0"
-version_krew: "0.2.1"
+version_gcloud: '231.0.0'
+version_krew: '0.2.1'
 
 kali_make_dirs:
-  - "/opt/cloud"
+  - '/opt/cloud'
 
 kali_apt:
   # ---------- Prerequisites for Cloudsploit
   - nodejs
   - npm
   # ---------- Prerequisites for CloudMapper
-  - autoconf 
-  - automake 
-  - libtool 
-  - jq 
-  - python3-dev 
-  - python3-tk 
+  - autoconf
+  - automake
+  - libtool
+  - jq
+  - python3-dev
+  - python3-tk
   # ---------- Prerequisites for PMapper
   - graphviz
-  - python-pydot 
-  - python-pydot-ng 
+  - python-pydot
+  - python-pydot-ng
 
 kali_pip:
   - pipenv
@@ -30,7 +30,7 @@ kali_pip:
   - awsscout2
   - ansi2html
   # - python-tk
-  
+
 #kali_easy_install:
 #   - example
 
@@ -53,7 +53,7 @@ kali_go_build:
 kali_git_repositories:
   - repo: https://github.com/cloudsploit/scans.git
     dest: cloudsploit
-  - repo: https://github.com/duo-labs/cloudmapper.git 
+  - repo: https://github.com/duo-labs/cloudmapper.git
     dest: cloudmapper
   - repo: https://github.com/RhinoSecurityLabs/pacu.git
     dest: pacu
@@ -131,10 +131,9 @@ kali_binary:
 
 kali_tars:
   - src: https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-{{ version_gcloud }}-linux-x86_64.tar.gz
-    dest: "{{ tools_dir }}/"
+    dest: '{{ tools_dir }}/'
   - src: https://storage.googleapis.com/krew/v0.2.1/krew.tar.gz
     dest: /tmp/krew/
-
 # kali_config:
 #   - src: "terminator"
 #     dest: "/root/.config/terminator/config"

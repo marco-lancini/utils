@@ -2,29 +2,29 @@
 tools_dir: /opt/mobile
 
 kali_make_dirs:
-  - "/opt/mobile"
-  - "/opt/mobile/classyshark"
-  - "/opt/mobile/bytecode-viewer"
-  - "/opt/mobile/signapk"
-  - "/opt/mobile/android-sdk"
+  - '/opt/mobile'
+  - '/opt/mobile/classyshark'
+  - '/opt/mobile/bytecode-viewer'
+  - '/opt/mobile/signapk'
+  - '/opt/mobile/android-sdk'
 
 kali_git_repositories:
   - repo: https://github.com/marco-lancini/mobile-code-checks.git
     dest: mobile-code-checks
   - repo: https://github.com/linkedin/qark.git
-    dest: "qark"
+    dest: 'qark'
   - repo: https://github.com/AndroBugs/AndroBugs_Framework.git
-    dest: "androbugs"
+    dest: 'androbugs'
   - repo: https://github.com/google/enjarify.git
-    dest: "enjarify"
+    dest: 'enjarify'
   - repo: https://github.com/jakev/oat2dex-python.git
-    dest: "oat2dex"
+    dest: 'oat2dex'
   - repo: https://github.com/skylot/jadx.git
-    dest: "jadx"
+    dest: 'jadx'
   - repo: https://github.com/androguard/androguard.git
-    dest: "androguard"
+    dest: 'androguard'
   - repo: https://github.com/pxb1988/dex2jar.git
-    dest: "dex2jar"
+    dest: 'dex2jar'
 
 kali_binary:
   - url: https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool
@@ -32,7 +32,7 @@ kali_binary:
   - url: https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.3.1.jar
     dest: /usr/local/bin/apktool.jar
   - url: https://github.com/google/android-classyshark/releases/download/8.1/ClassyShark.jar
-    dest: "{{ tools_dir }}/classyshark/classyshark.jar"
+    dest: '{{ tools_dir }}/classyshark/classyshark.jar'
   - url: https://github.com/java-decompiler/jd-gui/releases/download/v1.4.0/jd-gui_1.4.0-0_all.deb
     dest: /tmp/jd-gui.deb
   - url: https://github.com/mwrlabs/drozer/releases/download/2.4.4/drozer_2.4.4.deb
@@ -40,8 +40,8 @@ kali_binary:
 
 kali_tars:
   - src: https://github.com/Konloch/bytecode-viewer/releases/download/v2.9.8/BytecodeViewer.2.9.8.zip
-    dest: "{{ tools_dir }}/bytecode-viewer/"
+    dest: '{{ tools_dir }}/bytecode-viewer/'
   - src: https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/signapk/signapk-0.3.1.tar.bz2
-    dest: "{{ tools_dir }}/signapk/"
+    dest: '{{ tools_dir }}/signapk/'
   - src: https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
-    dest: "{{ tools_dir }}/android-sdk/"
+    dest: '{{ tools_dir }}/android-sdk/'

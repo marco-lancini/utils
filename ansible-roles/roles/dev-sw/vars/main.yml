@@ -5,7 +5,7 @@ git_user: Marco Lancini
 git_email: info@marcolancini.it
 
 dev_make_dirs:
-  - "/opt/"
+  - '/opt/'
 
 dev_apt:
   # ---------- SYSTEM MAINTENANCE TOOLS
@@ -83,9 +83,9 @@ dev_go:
 #     dest: "{{ tools_dir }}/rdp-sec-check/"
 
 dev_config:
-  - src: "emacs"
-    dest: "~/.emacs"
-  - src: "gitconfig"
-    dest: "~/.gitconfig"
+  - src: 'emacs'
+    dest: '~/.emacs'
+  - src: 'gitconfig'
+    dest: '~/.gitconfig'
 # dev_bash:
 #   - example
