@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   wikidb:
     image: postgres:11-alpine
@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: changeme
       POSTGRES_USER: wikijs
     logging:
-      driver: "none"
+      driver: 'none'
     volumes:
       - /docker/data/postgres_data:/var/lib/postgresql/data
     expose:
@@ -28,11 +28,10 @@ services:
       DB_USER: wikijs
       DB_PASS: changeme
       DB_NAME: wiki
-      DB_TYPE: sqlite
     networks:
       - wikinet
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
       - /docker/data/:/etc/wiki/db/
 
