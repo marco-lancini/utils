@@ -11,4 +11,5 @@ All these images are pushed to [Github Container Registry](https://github.com/ma
 | Image                                       | Description                                            | Pull                                          |
 | ------------------------------------------- | ------------------------------------------------------ | --------------------------------------------- |
 | [ansible-worker](ansible-worker/Dockerfile) | Alpine with Ansible, OpenSSH, and sshpass preinstalled | `ghcr.io/marco-lancini/ansible-worker:latest` |
+| [latex](latex/Dockerfile)                   | Alpine with texlive preinstalled                       | `ghcr.io/marco-lancini/latex:latest`          |
 | [nomad](nomad/Dockerfile)                   | Image for HashiCorp Nomad                              | `ghcr.io/marco-lancini/nomad:latest`          |
