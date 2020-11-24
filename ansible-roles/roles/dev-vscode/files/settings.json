@@ -1,27 +1,52 @@
 {
-  "files.autoSave": "afterDelay",
-  "editor.rulers": [80],
+  "breadcrumbs.enabled": true,
   "cSpell.enabledLanguageIds": ["markdown"],
   "cSpell.language": "en-GB",
+  "cSpell.userWords": ["Kubernetes", "Minikube", "terraform"],
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.fontFamily": "'Fira Code'",
+  "editor.fontLigatures": true,
   "editor.formatOnSave": true,
-  "breadcrumbs.enabled": true,
-  "telemetry.enableTelemetry": false,
-  "telemetry.enableCrashReporter": false,
-  "typescript.updateImportsOnFileMove.enabled": "never",
-  "explorer.compactFolders": false,
   "editor.minimap.enabled": false,
-  "window.openFoldersInNewWindow": "off",
+  "editor.rulers": [80],
+  "editor.tabSize": 2,
   "editor.wordWrap": "wordWrapColumn",
-  "workbench.tree.renderIndentGuides": "always",
-  "workbench.tree.indent": 24,
   "explorer.autoReveal": false,
+  "explorer.compactFolders": false,
   "explorer.confirmDragAndDrop": false,
-  "workbench.colorTheme": "Monokai Dimmed",
-  "prettier.disableLanguages": ["vue", "md", "markdown"],
+  "extensions.ignoreRecommendations": true,
+  "files.autoSave": "afterDelay",
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-  "editor.fontLigatures": true,
-  "cSpell.userWords": ["Kubernetes", "Minikube", "terraform"],
-  "extensions.ignoreRecommendations": true,
-  "terminal.integrated.rendererType": "canvas"
+  "html.format.enable": false,
+  "markdown.extension.list.indentationSize": "inherit",
+  "prettier.disableLanguages": ["vue", "json", "html", "md", "markdown"],
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  "terminal.integrated.rendererType": "canvas",
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "window.openFoldersInNewWindow": "off",
+  "workbench.colorTheme": "Monokai Dimmed",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.tree.indent": 12,
+  "workbench.tree.renderIndentGuides": "always",
+  "terraform.indexing": {
+    "enabled": false,
+    "liveIndexing": false,
+    "delay": 500,
+    "exclude": [".terraform/**/*", "**/.terraform/**/*"]
+  },
+  "terraform.languageServer": {
+    "external": true,
+    "args": ["serve"]
+  },
+  "[yaml]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 1,
+    "editor.autoIndent": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  }
 }
