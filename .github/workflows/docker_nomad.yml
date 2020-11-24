@@ -65,6 +65,7 @@ jobs:
           echo "::set-output name=build-output::$output"
 
       - name: 🛡 Run Trivy vulnerability scanner
+        continue-on-error: true
         uses: aquasecurity/trivy-action@0.0.8
         id: trivy
         with:
@@ -75,12 +76,13 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
       - name: 📄 Show Build Output
-        uses: actions/github-script@0.9.0
+        uses: actions/github-script@v3
         if: github.event_name == 'pull_request'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const output = `
+            const output = `#### Image: 📋 \`${process.env.IMAGE_NAME}\`
+
             |     | Step        | Result                                       |
             | --- | ----------  | -------------------------------------------- |
             | 🎫  | **Login**   | \`${{ steps.login.outcome }}\`               |
@@ -107,7 +109,7 @@ jobs:
             })
 
       - name: ❓ Build Status
-        if: steps.build.outcome == 'failure'
+        if: steps.build.outcome == 'failure' || steps.trivy.outcome == 'failure'
         run: exit 1
 
       - name: 🚀 Push image to GitHub Container Registry
