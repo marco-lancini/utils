@@ -44,4 +44,4 @@ MATCH (p:Person {name: "Jennifer"})-[rel:LIKES]->(g:Technology {type: "Graphs"})
 
 # Other Resources
 * Filter query results: [https://neo4j.com/developer/filtering-query-results/](https://neo4j.com/developer/filtering-query-results/)
-* Additional resources: [https://neo4j.com/docs/cypher-refcard/current/](https://neo4j.com/docs/cypher-refcard/current/)  
+* Additional resources: [https://neo4j.com/docs/cypher-refcard/current/](https://neo4j.com/docs/cypher-refcard/current/)
