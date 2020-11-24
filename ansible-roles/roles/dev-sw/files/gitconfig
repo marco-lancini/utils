@@ -3,12 +3,25 @@
 	email = info@marcolancini.it
 
 [core]
+  ui = auto
   pager = delta
+  editor = micro
+
+[push]
+  default = current
+
+[merge]
+  tool = vimdiff
+  conflictstyle = diff3
+
+[mergetool]
+  prompt = false
 
 [delta]
   plus-color = "#012800"
   minus-color = "#340001"
   syntax-theme = Monokai Extended
+  line-numbers = true
 
 [interactive]
   diffFilter = delta --color-only

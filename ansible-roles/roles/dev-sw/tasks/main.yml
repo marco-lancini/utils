@@ -1,16 +1,16 @@
 ---
-# ----------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # PREPARE
-# ----------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 - name: Create directories
   register: dir_done
   file: path="{{ item }}" state=directory
   with_items:
     - '{{ dev_make_dirs|default([]) }}'
 
-# ----------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # INSTALL
-# ----------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 - name: Install Tools via APT
   when: dir_done is success
   register: apt_done
@@ -120,25 +120,18 @@
   with_items:
     - '{{ dev_bash|default([]) }}'
 
-# ----------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # CUSTOM
-# ----------------------------------------------------------------------------------------
-# ---------- GIT
-- name: Setup git
-  when: apt_done is success
-  command: '{{item}}'
-  with_items:
-    - git config --global user.name "{{ git_user }}"
-    - git config --global user.email "{{ git_email }}"
-    - git config --global core.editor "vim" #--- Set as default editor
-    - git config --global merge.tool vimdiff #--- Set as default mergetool
-    - git config --global merge.conflictstyle diff3
-    - git config --global mergetool.prompt false
-    - git config --global push.default simple #--- Set as default push
+# ------------------------------------------------------------------------------
+- name: Install AWS cli v2
+  when: tars_done is success
+  command: |
+    chdir=/opt/awscliv2/ sudo ./aws/install
+    chdir=/opt/awscliv2/ aws configure set cli_auto_prompt on-partial
 
-# ----------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # CLEANUP
-# ----------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 - name: Clean the system
   script: ../files/cleanup.sh
 
