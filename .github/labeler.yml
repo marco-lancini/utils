@@ -1,6 +1,9 @@
 ansible-roles:
   - ansible-roles/**/*
 
+cheatsheets:
+  - cheatsheets/**/*
+
 docker-compose:
   - docker-compose/**/*
 
