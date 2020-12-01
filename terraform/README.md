@@ -5,6 +5,6 @@ This folder contains the relevant sources needed by a few custom Terraform modul
 
 ## Modules
 
-| Role                                                   | Description                                     |
+| Module                                                 | Description                                     |
 | ------------------------------------------------------ | ----------------------------------------------- |
 | [digitalocean-algovpn](digitalocean-algovpn/README.md) | DigitalOcean droplet hosting an Algo VPN server |
