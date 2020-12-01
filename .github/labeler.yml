@@ -13,6 +13,9 @@ docker-images:
 scripts:
   - scripts/**/*
 
+terraform:
+  - terraform/**/*
+
 documentation:
   - '*.md'
   - '*.markdown'
