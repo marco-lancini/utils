@@ -7,7 +7,8 @@ Docker image for compiling Latex documents.
 ```bash
 $ docker run --rm -v $(pwd):/src                \
             ghcr.io/marco-lancini/latex:latest  \
+            <pdflatex|xelatex>
             --halt-on-error                     \
-            -output-directory=out               \
+            -output-directory=build             \
             file.tex
 ```
