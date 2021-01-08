@@ -10,21 +10,21 @@ on:
     branches:
       - main
     paths:
-      - 'docker-images/nomad/Dockerfile'
-      - 'docker-images/nomad/VERSION'
+      - 'docker/nomad/Dockerfile'
+      - 'docker/nomad/VERSION'
   pull_request:
     branches:
       - main
     paths:
-      - 'docker-images/nomad/Dockerfile'
-      - 'docker-images/nomad/VERSION'
+      - 'docker/nomad/Dockerfile'
+      - 'docker/nomad/VERSION'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     env:
-      FOLDER: ${{ github.workspace }}/docker-images/nomad
+      FOLDER: ${{ github.workspace }}/docker/nomad
       REGISTRY: ghcr.io
       VERSION_FILE: VERSION
       IMAGE_NAME: nomad
