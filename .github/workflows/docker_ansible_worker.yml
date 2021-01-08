@@ -10,21 +10,21 @@ on:
     branches:
       - main
     paths:
-      - 'docker-images/ansible-worker/Dockerfile'
-      - 'docker-images/ansible-worker/VERSION'
+      - 'docker/ansible-worker/Dockerfile'
+      - 'docker/ansible-worker/VERSION'
   pull_request:
     branches:
       - main
     paths:
-      - 'docker-images/ansible-worker/Dockerfile'
-      - 'docker-images/ansible-worker/VERSION'
+      - 'docker/ansible-worker/Dockerfile'
+      - 'docker/ansible-worker/VERSION'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     env:
-      FOLDER: ${{ github.workspace }}/docker-images/ansible-worker
+      FOLDER: ${{ github.workspace }}/docker/ansible-worker
       REGISTRY: ghcr.io
       VERSION_FILE: VERSION
       IMAGE_NAME: ansible-worker

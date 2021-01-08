@@ -10,21 +10,21 @@ on:
     branches:
       - main
     paths:
-      - 'docker-images/latex/Dockerfile'
-      - 'docker-images/latex/VERSION'
+      - 'docker/latex/Dockerfile'
+      - 'docker/latex/VERSION'
   pull_request:
     branches:
       - main
     paths:
-      - 'docker-images/latex/Dockerfile'
-      - 'docker-images/latex/VERSION'
+      - 'docker/latex/Dockerfile'
+      - 'docker/latex/VERSION'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     env:
-      FOLDER: ${{ github.workspace }}/docker-images/latex
+      FOLDER: ${{ github.workspace }}/docker/latex
       REGISTRY: ghcr.io
       VERSION_FILE: VERSION
       IMAGE_NAME: latex
