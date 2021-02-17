@@ -1,0 +1,127 @@
+name: '[DOCKER IMAGE] Markserv'
+
+on:
+  workflow_dispatch:
+    inputs:
+      git-ref:
+        description: Git Ref (Optional)
+        required: false
+  push:
+    branches:
+      - main
+    paths:
+      - 'docker/markserv/Dockerfile'
+      - 'docker/markserv/VERSION'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'docker/markserv/Dockerfile'
+      - 'docker/markserv/VERSION'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      FOLDER: ${{ github.workspace }}/docker/markserv
+      REGISTRY: ghcr.io
+      VERSION_FILE: VERSION
+      IMAGE_NAME: markserv
+
+    steps:
+      - name: 📂 Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 📊 Obtain version
+        id: obtain_version
+        run: |
+          version=$(cat ${FOLDER}/${VERSION_FILE})
+          echo "🎉 Found version: ${version}"
+          echo "::set-output name=tag::$version"
+
+      - name: 🎫 Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        id: login
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          # Create a PAT with `read:packages` and `write:packages` scopes and save it as an Actions secret `GHCR_TOKEN`
+          password: ${{ secrets.GHCR_TOKEN }}
+
+      - name: 🔨 Building the image
+        id: build
+        continue-on-error: true
+        run: |
+          output="$(docker build . -f ${FOLDER}/Dockerfile -t ${IMAGE_NAME}:build --cache-from ${REGISTRY}/${{ github.repository_owner }}/$IMAGE_NAME:latest)"
+
+          # Needed to avoid truncating multilines (https://github.com/actions/toolkit/issues/403)
+          output="${output//'%'/'%25'}"
+          output="${output//$'\n'/'%0A'}"
+          output="${output//$'\r'/'%0D'}"
+
+          # Set output for following steps
+          echo $output
+          echo "::set-output name=build-output::$output"
+
+      - name: 🛡 Run Trivy vulnerability scanner
+        continue-on-error: true
+        uses: aquasecurity/trivy-action@0.0.8
+        id: trivy
+        with:
+          image-ref: ${{ env.IMAGE_NAME }}:build
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+
+      - name: 📄 Show Build Output
+        uses: actions/github-script@v3
+        if: github.event_name == 'pull_request'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### Image: 📋 \`${process.env.IMAGE_NAME}\`
+
+            |     | Step        | Result                                       |
+            | --- | ----------  | -------------------------------------------- |
+            | 🎫  | **Login**   | \`${{ steps.login.outcome }}\`               |
+            | 📊  | **Version** | \`${{ steps.obtain_version.outputs.tag }}\`  |
+            | 📖  | **Build**   | \`${{ steps.build.outcome }}\`               |
+            | 🛡  | **Trivy**   | \`${{ steps.trivy.outcome }}\`               |
+
+            <details>
+              <summary>Show Build Output</summary>
+
+              \`\`\`
+              ${{ steps.build.outputs.build-output }}
+              \`\`\`
+
+            </details>
+
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+
+      - name: ❓ Build Status
+        if: steps.build.outcome == 'failure' || steps.trivy.outcome == 'failure'
+        run: exit 1
+
+      - name: 🚀 Push image to GitHub Container Registry
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          IMAGE_VERSION=${{ steps.obtain_version.outputs.tag }}
+          REMOTE_IMAGE=${REGISTRY}/${{ github.repository_owner }}/$IMAGE_NAME
+
+          echo "⚙️ Pushing ${REMOTE_IMAGE}:${IMAGE_VERSION}"
+          docker tag ${IMAGE_NAME}:build ${REMOTE_IMAGE}:${IMAGE_VERSION}
+          docker push ${REMOTE_IMAGE}:${IMAGE_VERSION}
+
+          echo "⚙️ Pushing ${REMOTE_IMAGE}:latest"
+          docker tag ${IMAGE_NAME}:build ${REMOTE_IMAGE}:latest
+          docker push ${REMOTE_IMAGE}:latest
