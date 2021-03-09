@@ -25,3 +25,7 @@
 
 [interactive]
   diffFilter = delta --color-only
+
+# Use VSCode for interactice rebase
+[sequence]
+	editor = code --wait
