@@ -97,6 +97,8 @@ alias glog="git log --graph --decorate --oneline"
 alias glog_full="git log --graph --decorate --abbrev-commit"
 alias ungit='find . -type d -name ".git" | while read dir ; do sh -c "cd $dir/../ && echo \"\nGIT STATUS IN ${dir//\.\
 git/}\" && git status -s && git cherry -v" ; done'
+alias openports="sudo lsof -PiTCP -sTCP:LISTEN"
+alias branches="git ls-remote --heads origin"
 
 # Python
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -119,6 +121,8 @@ source /usr/local/bin/aws_zsh_completer.sh
 # Kubernetes
 source <(kubectl completion zsh)
 source ~/.oh-my-zsh/custom/kube-ps1.sh
+# https://github.com/ahmetb/kubectl-aliases
+[ -f ~/.kube/kubectl_aliases ] && source ~/.kube/kubectl_aliases
 [ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
 function kubectl() { echo "+ kubectl $@">&2; command kubectl $@; }
 alias k="kubectl"
@@ -135,8 +139,4 @@ for file in ~/.kube/configs/*.yaml; do
     export KUBECONFIG=$KUBECONFIG:$file
 done
 
-# Docker compose
-alias wekan_up="docker-compose -f /opt/admin_wekan/docker-compose.yml up -d"
-alias wekan_down="docker-compose -f /opt/admin_wekan/docker-compose.yml down"
-alias wiki_up="docker-compose -f /opt/admin_raneto/docker-compose.yaml up -d"
-alias wiki_down="docker-compose -f /opt/admin_raneto/docker-compose.yaml down"
+eval "$(starship init zsh)"
