@@ -1,0 +1,91 @@
+format = """
+$username\
+$hostname\
+$directory\
+$kubernetes\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$docker_context\
+$terraform\
+$aws\
+$gcloud\
+$cmd_duration\
+$line_break\
+$jobs\
+$status\
+$character"""
+
+add_newline = true
+
+[character]
+success_symbol = "[➜](bold green)"
+
+[username]
+style_user = "dimmed blue bold"
+style_root = "red bold"
+format = "[$user]($style)"
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format =  "[@$hostname](dimmed blue bold) "
+trim_at = ".companyname.com"
+disabled = false
+
+[directory]
+format = '🗂  [$path]($style)[$read_only]($read_only_style) '
+truncation_length = 8
+truncate_to_repo	= true
+read_only =	"🔒"
+read_only_style	= "red"
+truncation_symbol	= ""
+style	= "bold yellow"
+
+[kubernetes]
+format = '[⛵ $context \($namespace\)](dimmed green) '
+disabled = false
+
+[git_branch]
+symbol = "🌱 "
+truncation_symbol = ""
+
+[git_commit]
+commit_hash_length = 4
+tag_symbol = "🔖 "
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = "[🍒 PICKING](bold red)"
+
+[git_status]
+conflicted = "🏳"
+untracked = "🤷‍"
+stashed = "📦"
+modified = "📝"
+staged = '[++\($count\)](green)'
+renamed = "👅"
+deleted = "🗑"
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+
+[terraform]
+format = "[🏎💨 $version$workspace]($style) "
+
+[aws]
+format = '[$symbol$profile(\($region\))]($style) '
+style = "bold cyan dimmed"
+symbol = "☁️  "
+[aws.region_aliases]
+ap-southeast-2 = "au"
+us-east-1 = "va"
+
+[gcloud]
+format = '[$symbol$account(\($project\))]($style) '
+
+[jobs]
+symbol = "+ "
+threshold = 4
