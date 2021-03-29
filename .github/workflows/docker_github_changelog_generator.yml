@@ -92,15 +92,6 @@ jobs:
             | 📖  | **Build**   | \`${{ steps.build.outcome }}\`               |
             | 🛡  | **Trivy**   | \`${{ steps.trivy.outcome }}\`               |
 
-            <details>
-              <summary>Show Build Output</summary>
-
-              \`\`\`
-              ${{ steps.build.outputs.build-output }}
-              \`\`\`
-
-            </details>
-
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
 
             github.issues.createComment({
