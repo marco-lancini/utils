@@ -2,7 +2,7 @@ FROM ruby:2.6.4-alpine3.9
 
 RUN apk add --no-cache git
 
-COPY Gemfile Gemfile
+COPY docker/github-changelog-generator/Gemfile Gemfile
 RUN gem install bundler --version $(cat Gemfile | grep bundler | awk -F "'" '{print $4}') \
   && bundle install --system \
   && gem uninstall bundler
