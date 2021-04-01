@@ -95,10 +95,11 @@ alias bat='bat --theme TwoDark'
 alias lock="gnome-screensaver-command -l"
 alias glog="git log --graph --decorate --oneline"
 alias glog_full="git log --graph --decorate --abbrev-commit"
-alias ungit='find . -type d -name ".git" | while read dir ; do sh -c "cd $dir/../ && echo \"\nGIT STATUS IN ${dir//\.\
+alias ungit='find . -type d -name ".git" | while read dir ; do sh -c "cd $dir/../ && echo \"\n🗂  GIT STATUS IN ${dir//\.\
 git/}\" && git status -s && git cherry -v" ; done'
 alias openports="sudo lsof -PiTCP -sTCP:LISTEN"
 alias branches="git ls-remote --heads origin"
+alias master="gco master && gl"
 
 # Python
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
