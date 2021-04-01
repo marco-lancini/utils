@@ -45,6 +45,32 @@ dev_apt:
   - dpkg-dev
   - libssl-dev
 
+dev_brew:
+  - aws-vault
+  - bat
+  - dive
+  - dog
+  - font-fira-code
+  - gh
+  - git-delta
+  - go
+  - helm
+  - htop
+  - jq
+  - lens
+  - kube-ps1
+  - kubectx
+  - micro
+  - minikube
+  - multipass
+  - please
+  - readline
+  - starship
+  - terraform
+  - tfsec
+  - tmux
+  - topgrade
+
 dev_pip:
   - yq
 
