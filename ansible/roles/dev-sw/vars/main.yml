@@ -111,6 +111,5 @@ dev_config:
     dest: '~/.emacs'
   - src: 'gitconfig'
     dest: '~/.gitconfig'
-
 # dev_bash:
 #   - example
