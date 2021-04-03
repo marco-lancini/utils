@@ -46,6 +46,8 @@ dev_tars:
 dev_config:
   - src: custom.zsh-theme
     dest: '{{ home_dir }}/.oh-my-zsh/themes/custom.zsh-theme'
+  - src: iterm-material.json
+    dest: '/tmp/iterm-material.json'
   - src: starship.toml
     dest: '{{ home_dir}}/.config/starship.toml'
 

@@ -218,4 +218,5 @@
 - debug: msg="{{ item }}"
   with_items:
     - 'Install iTerm2 color scheme (Bluloco Dark) from /tmp/iTerm2-Color-Schemes/'
+    - 'Import iTerm2 Material from /tmp/iterm-material.json'
     - 'Install Starship (starship.rs)'
