@@ -71,22 +71,27 @@ fi
 # ------------------------------------------------------------------------------
 #  CUSTOM
 # ------------------------------------------------------------------------------
+eval "$(starship init zsh)"
+
 # Setting history length
 HISTSIZE=1000000
-HISTFILESIZE=5000
+HISTFILESIZE=2000000
 HISTTIMEFORMAT="%d/%m/%y %T "
 
 # Individual history per terminal
 unsetopt inc_append_history
 unsetopt share_history
 
+# Fuzzy bash completion
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # Aliases
 source ~/.bash_aliases
 function cd {
-    builtin cd "$@" && clear && ls -lh --color=auto
+    builtin cd "$@" && clear && ls -lh
 }
 alias la='ls -A'
-alias ls='clear && ls -lhG --color=auto'
+alias ls='clear && ls -lhG'
 alias ..="cd .."
 alias ee="exit"
 alias renew='/etc/init.d/networking restart'

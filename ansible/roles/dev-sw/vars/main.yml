@@ -47,31 +47,40 @@ dev_apt:
 
 dev_brew:
   - aws-vault
+  - azure-cli
+  - bash-completion
   - bat
   - dive
+  - doctl
   - dog
   - font-fira-code
+  - fzf
   - gh
   - git-delta
   - go
   - helm
   - htop
   - jq
-  - lens
   - kube-ps1
   - kubectx
+  - lens
   - micro
   - minikube
   - multipass
   - please
+  - pre-commit
   - readline
   - starship
   - terraform
   - tfsec
+  - tmate
+  - tmux
   - tmux
   - topgrade
+  - watch
 
 dev_pip:
+  - awscli
   - yq
 
 #dev_easy_install:
