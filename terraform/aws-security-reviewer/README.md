@@ -1,6 +1,6 @@
 # AWS Security Reviewer
 
-This module automate the setup of roles and users to be used for implementing an Hub and Spoke model, as described in [Cross Account Auditing in AWS and GCP](https://www.marcolancini.it/2019/blog-cross-account-auditing/).
+This module automates the setup of roles and users needed to perform a security audit of AWS accounts in an Hub and Spoke model, as described in [Cross Account Auditing in AWS and GCP](https://www.marcolancini.it/2019/blog-cross-account-auditing/).
 
 In short, this module can be used to create:
 
