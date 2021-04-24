@@ -66,7 +66,7 @@ resource "aws_iam_policy" "policy_assume_audit" {
       {
         Action   = ["sts:AssumeRole"]
         Effect   = "Allow"
-        Resource = "arn:aws:iam::*:role/role-security-audit"
+        Resource = "arn:aws:iam::*:role/${var.role_audit_name}"
       },
     ]
   })
