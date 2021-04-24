@@ -101,6 +101,29 @@ resource "aws_iam_role_policy_attachment" "policy_describe_regions" {
   policy_arn = aws_iam_policy.policy_describe_regions[count.index].arn
 }
 
+# Grant the permission to list the accounts within the AWS Organization
+resource "aws_iam_policy" "policy_list_accounts" {
+  count = var.is_hub ? 1 : 0
+  name  = "policy_list_accounts"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action   = ["organizations:ListAccounts"]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "policy_list_accounts" {
+  count      = var.is_hub ? 1 : 0
+  role       = aws_iam_role.role_security_assume[count.index].name
+  policy_arn = aws_iam_policy.policy_list_accounts[count.index].arn
+}
+
 # ==============================================================================
 # security_user_name: in the Hub, able to assume role_security_assume in Hub
 # ==============================================================================
