@@ -144,5 +144,8 @@ export KUBECONFIG=~/.kube/config
 for file in ~/.kube/configs/*.yaml; do
     export KUBECONFIG=$KUBECONFIG:$file
 done
+complete -F __start_kubectl k
 
-eval "$(starship init zsh)"
+# Yubikey SSH GPG
+# export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+# gpg-connect-agent updatestartuptty /bye > /dev/null

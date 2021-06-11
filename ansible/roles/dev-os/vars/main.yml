@@ -50,6 +50,8 @@ dev_config:
     dest: '/tmp/iterm-material.json'
   - src: starship.toml
     dest: '{{ home_dir}}/.config/starship.toml'
+  - src: gpg-agent.conf
+    dest: '{{ home_dir}}/.gnupg/gpg-agent.conf'
 
 dev_templates:
   - src: ssh_config.j2
