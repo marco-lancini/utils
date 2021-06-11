@@ -16,3 +16,8 @@ repos:
     rev: v2.2.0
     hooks:
       - id: prettier
+  - repo: git://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.45.0
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_validate
