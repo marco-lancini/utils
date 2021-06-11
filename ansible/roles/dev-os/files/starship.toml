@@ -2,11 +2,12 @@ format = """
 $username\
 $hostname\
 $directory\
-$kubernetes\
 $git_branch\
 $git_commit\
 $git_state\
 $git_status\
+$line_break\
+$kubernetes\
 $docker_context\
 $terraform\
 $aws\
@@ -45,11 +46,11 @@ truncation_symbol	= ""
 style	= "bold yellow"
 
 [kubernetes]
-format = '[⛵ $context \($namespace\)](dimmed green) '
+format = '[✳️  $context \($namespace\)](green) '
 disabled = false
 
 [git_branch]
-symbol = "🌱 "
+symbol = "⎇  "
 truncation_symbol = ""
 
 [git_commit]
@@ -73,18 +74,18 @@ diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 behind = "⇣${count}"
 
 [terraform]
-format = "[🏎💨 $version$workspace]($style) "
+format = "[🏎💨  $version$workspace]($style) "
 
 [aws]
 format = '[$symbol$profile(\($region\))]($style) '
 style = "bold cyan dimmed"
-symbol = "☁️  "
+symbol = "☁️   "
 [aws.region_aliases]
 ap-southeast-2 = "au"
 us-east-1 = "va"
 
 [gcloud]
-format = '[$symbol$account(\($project\))]($style) '
+format = '[$symbol $account(\($project\))]($style) '
 
 [jobs]
 symbol = "+ "
