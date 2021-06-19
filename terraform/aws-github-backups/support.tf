@@ -24,7 +24,7 @@ resource "aws_s3_bucket" "backups_github" {
 }
 
 resource "aws_s3_bucket_public_access_block" "backups_github_block" {
-  bucket   = aws_s3_bucket.backups_github.id
+  bucket = aws_s3_bucket.backups_github.id
 
   block_public_acls       = true
   block_public_policy     = true
@@ -34,9 +34,9 @@ resource "aws_s3_bucket_public_access_block" "backups_github_block" {
 
 # Grant access to the task
 resource "aws_iam_role_policy" "backup_github_access_s3" {
-  name     = "${var.ecs_task_github}-access-s3"
-  role     = module.backup_github.task_role_id
-  policy   = data.aws_iam_policy_document.backup_github_access_s3.json
+  name   = "${var.ecs_task_github}-access-s3"
+  role   = module.backup_github.task_role_id
+  policy = data.aws_iam_policy_document.backup_github_access_s3.json
 }
 
 data "aws_iam_policy_document" "backup_github_access_s3" {
@@ -58,7 +58,7 @@ data "aws_iam_policy_document" "backup_github_access_s3" {
 
 # Notifications
 resource "aws_s3_bucket_notification" "backup_github_notification" {
-  bucket   = aws_s3_bucket.backups_github.id
+  bucket = aws_s3_bucket.backups_github.id
 
   topic {
     topic_arn = aws_sns_topic.backups_github.arn
@@ -103,7 +103,7 @@ EOF
 # ==============================================================================
 # Secret is created manually
 data "aws_ssm_parameter" "backup_github_pat" {
-  name     = "GITHUB_PAT_BACKUP"
+  name = "GITHUB_PAT_BACKUP"
 }
 
 # Grant access to the task
@@ -131,7 +131,7 @@ data "aws_iam_policy_document" "backup_github_access_ssm" {
 # ==============================================================================
 # SNS
 resource "aws_sns_topic" "backups_github" {
-  name     = var.sns_backups_github
+  name = var.sns_backups_github
 }
 
 # Event Rule
@@ -165,8 +165,8 @@ resource "aws_cloudwatch_event_target" "backups_github" {
 
 # Policy
 resource "aws_sns_topic_policy" "backups_github" {
-  arn      = aws_sns_topic.backups_github.arn
-  policy   = data.aws_iam_policy_document.sns_backups_github_policy.json
+  arn    = aws_sns_topic.backups_github.arn
+  policy = data.aws_iam_policy_document.sns_backups_github_policy.json
 }
 
 data "aws_iam_policy_document" "sns_backups_github_policy" {
