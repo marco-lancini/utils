@@ -1,7 +1,7 @@
 # AWS Github Backups
 
 This module automates the setup of an ECS Task needed to backup a Github account,
-as described in [Github Backups with ECS and S3](https://www.marcolancini.it/2021/blog-github-backups-with-ecs/).
+as described in [Automated Github Backups with ECS and S3](https://www.marcolancini.it/2021/blog-github-backups-with-ecs/).
 
 In short, this module can be used to create:
 * A dedicated VPC/subnet with an Internet Gateway attached
