@@ -139,7 +139,7 @@ data "aws_ssm_parameter" "gdrive_rclone_config" {
 
 # Grant access to the task
 resource "aws_iam_role_policy" "backup_gdrive_access_ssm" {
-  name   = "${local.ecs_task_gdrive}-access-ssm"
+  name   = "${var.ecs_task_gdrive}-access-ssm"
   role   = module.backup_gdrive.execution_role_id
   policy = data.aws_iam_policy_document.backup_gdrive_access_ssm.json
 }
@@ -171,7 +171,7 @@ resource "aws_sns_topic" "backups_notifications" {
 # Event Rule - Notify on ECS Task Events
 #
 resource "aws_cloudwatch_event_rule" "backups_ecs_tasks" {
-  name        = "${local.ecs_task_github}-status"
+  name        = "${var.ecs_task_github}-status"
   description = "Notify on ECS Task Events"
 
   event_pattern = <<EOF
@@ -207,7 +207,6 @@ resource "aws_sns_topic_policy" "backups_notifications" {
 }
 
 data "aws_iam_policy_document" "sns_backups_notifications_policy" {
-  provider = aws.ireland
   statement {
     sid     = "1"
     effect  = "Allow"

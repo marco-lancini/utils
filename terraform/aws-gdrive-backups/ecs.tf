@@ -43,7 +43,7 @@ module "backup_gdrive" {
 
   # Image
   ecr_repository         = aws_ecr_repository.rclone-gdrive-backup.arn
-  task_container_image   = "${aws_ecr_repository.rclone-gdrive-backup.repository_url}:${local.ecr_image_version_gdrive}"
+  task_container_image   = "${aws_ecr_repository.rclone-gdrive-backup.repository_url}:${var.ecr_image_version_gdrive}"
   task_definition_cpu    = 512
   task_definition_memory = 2048
 
@@ -90,7 +90,7 @@ module "backup_gdrive" {
 module "ecs-fargate-scheduled-task-gdrive" {
   source = "umotif-public/ecs-fargate-scheduled-task/aws"
 
-  name_prefix = "${local.ecs_task_gdrive}-scheduled-task"
+  name_prefix = "${var.ecs_task_gdrive}-scheduled-task"
 
   ecs_cluster_arn    = aws_ecs_cluster.backups_cluster.arn
   task_role_arn      = module.backup_gdrive.task_role_arn

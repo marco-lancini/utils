@@ -23,7 +23,6 @@ resource "aws_subnet" "backups_subnet" {
 # Security Group
 #
 resource "aws_default_security_group" "backups_vpc_default" {
-  provider = aws.ireland
   vpc_id   = aws_vpc.backups_vpc.id
 
   ingress {
