@@ -34,10 +34,10 @@ variable "sns_backups_gdrive" {
 
 variable "efs_backups_gdrive" {
   description = "Name of the EFS file system"
-  type = string
+  type        = string
 }
 
 variable "availability_zone_name" {
   description = "Name of the AZ for the EFS file system"
-  type = string
+  type        = string
 }

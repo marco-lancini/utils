@@ -2,7 +2,7 @@
 # VPC
 #
 resource "aws_vpc" "backups_vpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
 
   tags = {
@@ -23,7 +23,7 @@ resource "aws_subnet" "backups_subnet" {
 # Security Group
 #
 resource "aws_default_security_group" "backups_vpc_default" {
-  vpc_id   = aws_vpc.backups_vpc.id
+  vpc_id = aws_vpc.backups_vpc.id
 
   ingress {
     protocol  = -1
