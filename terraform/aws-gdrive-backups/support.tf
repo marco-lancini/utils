@@ -105,6 +105,31 @@ EOF
 }
 
 # ==============================================================================
+# EFS
+# ==============================================================================
+resource "aws_efs_file_system" "backup_gdrive" {
+  creation_token         = var.efs_backups_gdrive
+  availability_zone_name = var.availability_zone_name
+
+  lifecycle_policy {
+    transition_to_ia = "AFTER_7_DAYS"
+  }
+
+  tags = {
+    Name = var.efs_backups_gdrive
+  }
+}
+
+resource "aws_efs_mount_target" "backup_gdrive" {
+  file_system_id = aws_efs_file_system.backup_gdrive.id
+  subnet_id      = aws_subnet.backups_subnet.id
+  security_groups = [
+    aws_default_security_group.backups_vpc_default.id,
+    module.backup_gdrive.service_sg_id
+  ]
+}
+
+# ==============================================================================
 # SECRETS
 # ==============================================================================
 # Secrets are created manually
