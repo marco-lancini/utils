@@ -68,7 +68,7 @@ module "backup_gdrive" {
   # EFS
   task_mount_points = [
     {
-      "sourceVolume"  = local.efs_backups_gdrive,
+      "sourceVolume"  = var.efs_backups_gdrive,
       "containerPath" = "/tmp/efs",
       "readOnly"      = false
     }
@@ -76,7 +76,7 @@ module "backup_gdrive" {
 
   volume = [
     {
-      name = local.efs_backups_gdrive,
+      name = var.efs_backups_gdrive,
       efs_volume_configuration = [
         {
           "file_system_id" : aws_efs_file_system.backup_gdrive.id,
