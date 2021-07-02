@@ -104,3 +104,31 @@ resource "aws_ecr_lifecycle_policy" "rclone-gdrive-backup" {
 EOF
 }
 
+# ==============================================================================
+# SECRETS
+# ==============================================================================
+# Secrets are created manually
+data "aws_ssm_parameter" "gdrive_rclone_config" {
+  name     = "GDRIVE_RCLONE_CONFIG"
+}
+
+# Grant access to the task
+resource "aws_iam_role_policy" "backup_gdrive_access_ssm" {
+  name   = "${local.ecs_task_gdrive}-access-ssm"
+  role   = module.backup_gdrive.execution_role_id
+  policy = data.aws_iam_policy_document.backup_gdrive_access_ssm.json
+}
+
+data "aws_iam_policy_document" "backup_gdrive_access_ssm" {
+  statement {
+    sid    = "AllowECSRunTask"
+    effect = "Allow"
+
+    actions = ["ssm:GetParameters"]
+
+    resources = [
+      "${data.aws_ssm_parameter.gdrive_rclone_config.arn}",
+    ]
+  }
+}
+
