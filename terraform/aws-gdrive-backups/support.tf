@@ -24,7 +24,7 @@ resource "aws_s3_bucket" "backups_gdrive" {
 }
 
 resource "aws_s3_bucket_public_access_block" "backups_gdrive_block" {
-  bucket   = aws_s3_bucket.backups_gdrive.id
+  bucket = aws_s3_bucket.backups_gdrive.id
 
   block_public_acls       = true
   block_public_policy     = true
@@ -34,9 +34,9 @@ resource "aws_s3_bucket_public_access_block" "backups_gdrive_block" {
 
 # Grant access to the task
 resource "aws_iam_role_policy" "backup_gdrive_access_s3" {
-  name     = "${var.ecs_task_gdrive}-access-s3"
-  role     = module.backup_gdrive.task_role_id
-  policy   = data.aws_iam_policy_document.backup_gdrive_access_s3.json
+  name   = "${var.ecs_task_gdrive}-access-s3"
+  role   = module.backup_gdrive.task_role_id
+  policy = data.aws_iam_policy_document.backup_gdrive_access_s3.json
 }
 
 data "aws_iam_policy_document" "backup_gdrive_access_s3" {
@@ -64,7 +64,7 @@ data "aws_iam_policy_document" "backup_gdrive_access_s3" {
 
 # Notifications
 resource "aws_s3_bucket_notification" "backup_gdrive_notification" {
-  bucket   = aws_s3_bucket.backups_gdrive.id
+  bucket = aws_s3_bucket.backups_gdrive.id
 
   topic {
     topic_arn = aws_sns_topic.backups_notifications.arn
@@ -109,7 +109,7 @@ EOF
 # ==============================================================================
 # Secrets are created manually
 data "aws_ssm_parameter" "gdrive_rclone_config" {
-  name     = "GDRIVE_RCLONE_CONFIG"
+  name = "GDRIVE_RCLONE_CONFIG"
 }
 
 # Grant access to the task
@@ -132,3 +132,89 @@ data "aws_iam_policy_document" "backup_gdrive_access_ssm" {
   }
 }
 
+# ==============================================================================
+# SNS NOTIFICATIONS
+# ==============================================================================
+#
+# SNS
+#
+resource "aws_sns_topic" "backups_notifications" {
+  name = var.sns_backups_gdrive
+}
+
+#
+# Event Rule - Notify on ECS Task Events
+#
+resource "aws_cloudwatch_event_rule" "backups_ecs_tasks" {
+  name        = "${local.ecs_task_github}-status"
+  description = "Notify on ECS Task Events"
+
+  event_pattern = <<EOF
+{
+   "source":[
+      "aws.ecs"
+   ],
+   "detail-type":[
+      "ECS Task State Change"
+   ],
+   "detail":{
+      "lastStatus":[
+         "RUNNING",
+         "STOPPED"
+      ]
+   }
+}
+EOF
+}
+
+resource "aws_cloudwatch_event_target" "backups_ecs_tasks" {
+  rule      = aws_cloudwatch_event_rule.backups_ecs_tasks.name
+  target_id = "SendToSNS"
+  arn       = aws_sns_topic.backups_notifications.arn
+}
+
+#
+# Policy - Notify on S3 Object Creation
+#
+resource "aws_sns_topic_policy" "backups_notifications" {
+  arn    = aws_sns_topic.backups_notifications.arn
+  policy = data.aws_iam_policy_document.sns_backups_notifications_policy.json
+}
+
+data "aws_iam_policy_document" "sns_backups_notifications_policy" {
+  provider = aws.ireland
+  statement {
+    sid     = "1"
+    effect  = "Allow"
+    actions = ["SNS:Publish"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["events.amazonaws.com"]
+    }
+
+    resources = [aws_sns_topic.backups_notifications.arn]
+  }
+
+  statement {
+    sid     = "2"
+    effect  = "Allow"
+    actions = ["SNS:Publish"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["s3.amazonaws.com"]
+    }
+
+    resources = [aws_sns_topic.backups_notifications.arn]
+
+    condition {
+      test     = "ArnLike"
+      variable = "aws:SourceArn"
+
+      values = [
+        "${aws_s3_bucket.backups_gdrive.arn}",
+      ]
+    }
+  }
+}
