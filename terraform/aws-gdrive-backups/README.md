@@ -6,7 +6,7 @@ as described in [Automated GDrive Backups with ECS and S3](https://www.marcolanc
 In short, this module can be used to create:
 * A dedicated VPC/subnet with an Internet Gateway attached
 * An ECS (Fargate SPOT) cluster
-* An EFS file system, with a mount point in the subnet used by ECS
+* An EFS file system, with a mount target in the subnet used by ECS
 * An ECR repository where to store the Docker image for backing up GDrive via rclone (see [rclone GDrive Backup](https://github.com/marco-lancini/utils/tree/main/docker/rclone-gdrive-backup))
 * A destination S3 bucket with transition to Glacier after 1 day
 * An ECS Task Definition, with execution triggered periodically (`cron`) by a CloudWatch Event Rule, and secrets pulled by Parameter Store
