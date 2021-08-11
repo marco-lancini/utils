@@ -11,6 +11,9 @@ In short, this module can be used to create:
 ![](https://www.marcolancini.it/images/posts/blog_cross_account_auditing_AWS.png)
 
 
+> A similar implementation in CloudFormation can be found on Gitlab: <a href="https://gitlab.com/gitlab-com/gl-security/security-operations/infrastructure-security-public/aws-account-management/-/tree/main/aws-security-reviewer" target="_blank">CloudFormation: AWS Security Reviewer</a>.
+
+
 ## Usage
 
 From the Hub account:
