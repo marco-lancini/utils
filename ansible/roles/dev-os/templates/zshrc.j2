@@ -72,6 +72,7 @@ fi
 #  CUSTOM
 # ------------------------------------------------------------------------------
 eval "$(starship init zsh)"
+eval "$(mcfly init zsh)"
 
 # Setting history length
 HISTSIZE=1000000
@@ -104,6 +105,7 @@ alias ungit='find . -type d \( -path \*.terraform \) -prune -false -o -name ".gi
 alias openports="sudo lsof -PiTCP -sTCP:LISTEN"
 alias branches="git ls-remote --heads origin"
 alias master="gco master && gl"
+alias main="gco main && gl"
 
 # Python
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
