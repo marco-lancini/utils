@@ -50,6 +50,7 @@ dev_brew:
   - azure-cli
   - bash-completion
   - bat
+  - broot
   - dive
   - doctl
   - dog
@@ -64,6 +65,7 @@ dev_brew:
   - kube-ps1
   - kubectx
   - lens
+  - mcfly
   - micro
   - minikube
   - multipass
@@ -74,7 +76,6 @@ dev_brew:
   - terraform
   - tfsec
   - tmate
-  - tmux
   - tmux
   - topgrade
   - watch
