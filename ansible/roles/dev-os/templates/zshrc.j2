@@ -73,6 +73,7 @@ fi
 # ------------------------------------------------------------------------------
 eval "$(starship init zsh)"
 eval "$(mcfly init zsh)"
+source ~/.config/broot/launcher/bash/br
 
 # Setting history length
 HISTSIZE=1000000
@@ -88,29 +89,48 @@ unsetopt share_history
 
 # Aliases
 source ~/.bash_aliases
+
+# Cd
 function cd {
-    builtin cd "$@" && clear && ls -lh
+    # builtin cd "$@" && clear && ls -lh
+    builtin cd "$@" && clear && exa -l --git
 }
-alias la='ls -A'
-alias ls='clear && ls -lhG'
+# alias la='ls -A'
+alias la='ls exa -la --git'
+# alias ls='clear && ls -lhG'
+alias ls="clear && exa -l --git"
 alias ..="cd .."
 alias ee="exit"
+
+# Networking
 alias renew='/etc/init.d/networking restart'
-alias emacs="emacs -nw"
-alias bat='bat --theme TwoDark'
-alias lock="gnome-screensaver-command -l"
-alias glog="git log --graph --decorate --oneline"
-alias glog_full="git log --graph --decorate --abbrev-commit"
-alias ungit='find . -type d \( -path \*.terraform \) -prune -false -o -name ".git" | while read dir ; do sh -c "cd $dir/../ && echo \"\n🗂  GIT STATUS IN ${dir//\.\git/}\" && git status -s && (git status -u | grep behind) && git cherry -v" ; done'
 alias openports="sudo lsof -PiTCP -sTCP:LISTEN"
+
+# GIT
 alias branches="git ls-remote --heads origin"
 alias master="gco master && gl"
 alias main="gco main && gl"
+alias glog="git log --graph --decorate --oneline"
+alias glog_full="git log --graph --decorate --abbrev-commit"
+alias ungit='/usr/bin/find . -type d \( -path \*.terraform \) -prune -false -o -name ".git" | while read dir ; do sh -c "cd $dir/../ && echo \"\n🗂  GIT STATUS IN ${dir//\.\git/}\" && git status -s && (git status -u | grep behind) && git cherry -v" ; done'
+
+# Override old commands
+alias lock="gnome-screensaver-command -l"
+alias emacs="emacs -nw"
+alias bat='bat --theme TwoDark'
+alias du="duf"
+alias ping="gping"
+alias curl="curlie"
+alias find="fd"
 
 # Python
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PYTHONSTARTUP=/root/.pythonstartup
 export PIPENV_VENV_IN_PROJECT=true
+
+# Ruby
+# export PATH="$HOME/.rvm:$PATH"
+# export PATH="$PATH:$HOME/.rvm/bin"
 
 # Go
 export GOPATH=~/go/
@@ -121,13 +141,11 @@ source <(plz --completion_script)
 
 # CSPs
 export AWS_SDK_LOAD_CONFIG=1
-autoload -U compinit && compinit
-source /usr/lib/google-cloud-sdk/completion.bash.inc
 source /usr/local/bin/aws_zsh_completer.sh
+source /usr/lib/google-cloud-sdk/completion.bash.inc
 
 # Kubernetes
 source <(kubectl completion zsh)
-source ~/.oh-my-zsh/custom/kube-ps1.sh
 # https://github.com/ahmetb/kubectl-aliases
 [ -f ~/.kube/kubectl_aliases ] && source ~/.kube/kubectl_aliases
 [ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
@@ -146,6 +164,17 @@ for file in ~/.kube/configs/*.yaml; do
     export KUBECONFIG=$KUBECONFIG:$file
 done
 complete -F __start_kubectl k
+# source ~/.oh-my-zsh/custom/kube-ps1.sh
+
+#
+# Compinit
+#
+# autoload -U compinit && compinit
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 
 # Yubikey SSH GPG
 # export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
