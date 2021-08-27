@@ -51,16 +51,22 @@ dev_brew:
   - bash-completion
   - bat
   - broot
+  - clementtsang/bottom/bottom
   - dive
   - doctl
   - dog
+  - duf
+  - exa
+  - fd
   - font-fira-code
   - fzf
   - gh
+  - gping
   - git-delta
   - go
   - helm
   - htop
+  - httpie
   - jq
   - kube-ps1
   - kubectx
@@ -71,7 +77,10 @@ dev_brew:
   - multipass
   - please
   - pre-commit
+  - procs
   - readline
+  - rs/tap/curlie
+  - sshuttle
   - starship
   - terraform
   - tfsec
@@ -80,7 +89,6 @@ dev_brew:
   - topgrade
   - watch
   - ykman
-  - sshuttle
 
 dev_pip:
   - awscli
