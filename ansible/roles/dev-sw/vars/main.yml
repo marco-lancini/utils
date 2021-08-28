@@ -61,15 +61,16 @@ dev_brew:
   - font-fira-code
   - fzf
   - gh
-  - gping
   - git-delta
   - go
+  - gping
   - helm
   - htop
   - httpie
   - jq
   - kube-ps1
   - kubectx
+  - kubeval # tap instrumenta/instrumenta
   - lens
   - mcfly
   - micro
