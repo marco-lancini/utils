@@ -29,3 +29,14 @@
 # Use VSCode for interactice rebase
 [sequence]
 	editor = code --wait
+
+#
+# Conditional Includes
+#
+#   Create a new file ~/.gitconfig-work
+#   Content:
+#     [user]
+#       name = ...
+#       email = ...
+[includeIf "gitdir:~/work/"]
+  path = .gitconfig-work
