@@ -7,8 +7,7 @@ This folder contains some useful Ansible roles for setting up dev workstations.
 
 | Role              | Description                                                  |
 | ----------------- | ------------------------------------------------------------ |
-| `dev-os`          | Setup OS for Ubuntu dev                                      |
-| `dev-sw`          | Install software for Ubuntu dev                              |
+| `dev-sw`          | Install software for dev machine (MacOS)                     |
 | `dev-vscode`      | Install VSCode                                               |
 | `docker`          | Install docker on Linux                                      |
 | `golang`          | Install golang on Linux                                      |

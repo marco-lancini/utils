@@ -1,136 +1,90 @@
 ---
-tools_dir: /opt/
-
-dev_make_dirs:
-  - '/opt/'
-
-dev_apt:
-  # ---------- SYSTEM MAINTENANCE TOOLS
-  - htop
-  - bc
-  - qalc
-  - ipcalc
-  - sipcalc
-  - network-manager-openvpn
-  # ---------- ARCHIVING
-  - p7zip-full
-  - p7zip-rar
-  - zip
-  - unzip
-  - unace
-  - unrar
-  - rar
-  - openvpn
-  - tree
-  # ---------- DEV TOOLS
-  - git
-  - emacs
-  - micro
-  - rsync
-  - curl
-  - tmux
-  - pwgen
-  - libreadline-dev
-  - lib32ncurses5-dev
-  - bat
-  - git-delta
-  - dog
-  - fonts-firacode
-  # ---------- COMPILING LIBRARIES
-  - gcc
-  - g++
-  - make
-  - automake
-  - build-essential
-  - dpkg-dev
-  - libssl-dev
-
-dev_brew:
-  - aws-vault
-  - azure-cli
-  - bash-completion
-  - bat
-  - broot
-  - clementtsang/bottom/bottom
-  - dive
-  - doctl
-  - dog
-  - duf
-  - exa
-  - fd
-  - font-fira-code
-  - fzf
-  - gh
-  - git-delta
-  - go
-  - gping
-  - helm
-  - htop
-  - httpie
-  - jq
-  - kube-ps1
-  - kubectx
-  - kubeval # tap instrumenta/instrumenta
-  - lens
-  - mcfly
-  - micro
-  - minikube
-  - multipass
-  - please
-  - pre-commit
-  - procs
-  - readline
-  - rs/tap/curlie
-  - sshuttle
-  - starship
-  - terraform
-  - tfsec
-  - tmate
-  - tmux
-  - topgrade
-  - watch
-  - ykman
-
-dev_pip:
-  - awscli
-  - yq
-
-#dev_easy_install:
-#  # - example
-
-# dev_gem:
-#   - package: example
-#     state: latest
-
-dev_go:
-  - github.com/charmbracelet/glow
-
-# dev_go_build:
-# - git_name: gobuster
-# go_folder: /root/go/src/github.com/OJ/gobuster/
-
-# dev_git_repositories:
-#   - repo: https://github.com/arthepsy/ssh-audit.git
-#     dest: "ssh-audit"
-
-# dev_shortcuts:
-# - example
-
-# dev_binary:
-# - url: https://raw.githubusercontent.com/raesene/TestingScripts/master/snmpv3enum.rb
-#   dest: "{{ tools_dir }}/snmpv3enum/snmpv3enum.rb"
-
-# dev_deb:
-# - /tmp/libssl1.0.0_1.0.1t-1+deb7u4_amd64.deb
-
-dev_tars:
-  - src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-    dest: '{{ tools_dir }}/awscliv2/'
-
+# ==============================================================================
+# Config files
+# ==============================================================================
 dev_config:
-  - src: 'emacs'
-    dest: '~/.emacs'
+  - src: custom.zsh-theme
+    dest: '{{ home_dir }}/.oh-my-zsh/themes/custom.zsh-theme'
   - src: 'gitconfig'
     dest: '~/.gitconfig'
-# dev_bash:
-#   - example
+  - src: gpg-agent.conf
+    dest: '{{ home_dir}}/.gnupg/gpg-agent.conf'
+  - src: iterm-material.json
+    dest: '/tmp/iterm-material.json'
+  - src: ssh_config
+    dest: /etc/ssh/ssh_config
+  - src: starship.toml
+    dest: '{{ home_dir}}/.config/starship.toml'
+  - src: zshrc
+    dest: ~/.zshrc
+
+# ==============================================================================
+# Installation sources
+# ==============================================================================
+# dev_pip:
+# dev_easy_install:
+# dev_gem:
+# dev_go:
+# dev_git_repositories:
+
+dev_binary:
+  - url: https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    dest: /tmp/zsh-installer.sh
+  - url: https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases
+    dest: '~/.kube/kubectl_aliases'
+
+dev_tars:
+  - src: https://github.com/mbadolato/iTerm2-Color-Schemes/archive/master.zip
+    dest: '/tmp/iTerm2-Color-Schemes/'
+
+dev_brew:
+  - aws-vault # Store AWS credentials locally
+  - azure-cli # Azure CLI
+  - bash-completion # Autocomplation
+  - bat # cat v2.0
+  - broot # Navigate directory trees
+  - clementtsang/bottom/bottom # htop v2.0
+  - dive # Inspect docker images
+  - doctl # DO CLI
+  - dog # dig v2.0  (DNS)
+  - duf # du v2.0   (Storage space)
+  - exa # ls v2.0
+  - fd # find v2.0
+  - font-fira-code # Nerd fonts
+  - fzf # CLI fuzzy-finder
+  - gh # Github CLI
+  - git # GIT
+  - git-delta # Git diff
+  - glow # Render Markdown in CLI
+  - go # Golang
+  - gping # Graphical ping
+  - helm # Helm
+  - htop # Htop
+  - httpie # CLI HTTP client
+  - instrumenta/instrumenta/kubeval # K8s linter
+  - jq # Json manipulation
+  - kube-ps1 # K8s context
+  - kubectx # K8s context
+  - kubernetes-cli # K8s CLI
+  - kustomize # K8s templating
+  - lens # K8s IDE
+  - lima # Linux VMs (for nerdctl)
+  - mcfly # Ctrl-r v2.0
+  - micro # Editor
+  - minikube # K8s
+  - please # Please.build
+  - pre-commit # Pre-commit hooks
+  - procs # ps v2.0
+  - readline # Readline
+  - rs/tap/curlie # curl v2.0
+  - sshuttle # Transparent proxy
+  - starship # Cross shell prompt (starship.rs)
+  - terraform # Terraform
+  - tfenv # Terraform versioning
+  - tfsec # Terraform linter
+  - tmux # Terminal multiplexer
+  - topgrade # Upgrade everything
+  - tree # Print directories
+  - trivy # Container scanner
+  - ykman # YubiKey CLI
+  - yq # Yaml manipulation

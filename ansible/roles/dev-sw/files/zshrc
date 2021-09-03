@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH={{ home_dir }}/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -87,9 +87,6 @@ unsetopt share_history
 # Fuzzy bash completion
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# Aliases
-source ~/.bash_aliases
-
 # Cd
 function cd {
     # builtin cd "$@" && clear && ls -lh
@@ -122,6 +119,8 @@ alias du="duf"
 alias ping="gping"
 alias curl="curlie"
 alias find="fd"
+alias ps="procs"
+alias d="lima nerdctl"
 
 # Python
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -131,6 +130,7 @@ export PIPENV_VENV_IN_PROJECT=true
 # Ruby
 # export PATH="$HOME/.rvm:$PATH"
 # export PATH="$PATH:$HOME/.rvm/bin"
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # Go
 export GOPATH=~/go/
@@ -152,7 +152,7 @@ source <(kubectl completion zsh)
 function kubectl() { echo "+ kubectl $@">&2; command kubectl $@; }
 alias k="kubectl"
 alias krew="kubectl-krew"
-alias debug-shell="kubectl run -it --rm --restart=Never kube-shell --image alpine -- sh"
+alias k_debug_shell="kubectl run -it --rm --restart=Never debug-shell --image alpine -- sh"
 export KUBE_PS1_PREFIX="["
 export KUBE_PS1_SUFFIX="]"
 export KUBE_PS1_SEPARATOR="|"
