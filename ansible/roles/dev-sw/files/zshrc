@@ -119,6 +119,7 @@ alias du="duf"
 alias ping="gping"
 alias curl="curlie"
 alias find="fd"
+alias ps="procs"
 alias d="lima nerdctl"
 
 # Python
