@@ -2,13 +2,7 @@
   "breadcrumbs.enabled": true,
   "cSpell.enabledLanguageIds": ["markdown"],
   "cSpell.language": "en-GB",
-  "cSpell.userWords": [
-    "Kubernetes",
-    "Minikube",
-    "corp",
-    "hashi",
-    "terraform"
-  ],
+  "cSpell.userWords": ["Kubernetes", "Minikube", "corp", "hashi", "terraform"],
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.fontFamily": "'Fira Code'",
   "editor.fontLigatures": true,
@@ -58,7 +52,7 @@
     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   },
   "workbench.editorAssociations": {
-    "*.png": "luna.editor",
+    "*.png": "luna.editor"
   },
   "explorer.confirmDelete": false,
   "workbench.iconTheme": "material-icon-theme",
