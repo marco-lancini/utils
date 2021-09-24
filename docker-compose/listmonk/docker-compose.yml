@@ -1,17 +1,17 @@
-version: "3.7"
+version: '3.7'
 
 x-app-defaults: &app-defaults
   restart: unless-stopped
   image: listmonk/listmonk:latest
   ports:
-    - "9000:9000"
+    - '9000:9000'
   networks:
     - listmonk
 
 x-db-defaults: &db-defaults
   image: postgres:11
   ports:
-    - "9433:5432"
+    - '9433:5432'
   networks:
     - listmonk
   environment:
@@ -20,7 +20,7 @@ x-db-defaults: &db-defaults
     - POSTGRES_DB=listmonk
   restart: unless-stopped
   healthcheck:
-    test: ["CMD-SHELL", "pg_isready -U listmonk"]
+    test: ['CMD-SHELL', 'pg_isready -U listmonk']
     interval: 10s
     timeout: 5s
     retries: 6

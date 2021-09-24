@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   redis:
     image: redis
@@ -24,12 +24,12 @@ services:
       SERVER_ENDPOINT: http://api:5000/graphql
       PORT: 5000
     ports:
-      - "8080:5000"
+      - '8080:5000'
 
   api:
     image: ohmyform/api
     environment:
-      CREATE_ADMIN: "true"
+      CREATE_ADMIN: 'true'
       ADMIN_EMAIL: admin@local.host
       ADMIN_USERNAME: admin
       ADMIN_PASSWORD: admin
@@ -42,7 +42,7 @@ services:
       - db
       - redis
     ports:
-      - "8090:5000"
+      - '8090:5000'
     depends_on:
       - db
       - redis

@@ -1,14 +1,11 @@
 ansible:
   - ansible/**/*
 
-cheatsheets:
-  - cheatsheets/**/*
+docker:
+  - docker/**/*
 
 docker-compose:
   - docker-compose/**/*
-
-docker:
-  - docker/**/*
 
 scripts:
   - scripts/**/*
