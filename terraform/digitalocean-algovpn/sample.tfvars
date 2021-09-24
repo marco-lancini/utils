@@ -1,3 +1,3 @@
 do_token   = ""
-pvt_key    = "/Users/test/.ssh/do"
-public_key = "/Users/test/.ssh/do.pub"
+pvt_key    = "~/.ssh/do"
+public_key = "~/.ssh/do.pub"

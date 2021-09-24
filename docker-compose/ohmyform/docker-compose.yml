@@ -1,0 +1,48 @@
+version: '3'
+services:
+  redis:
+    image: redis
+
+  # mail:
+  #   image: mailhog/mailhog
+  #   ports:
+  #     - "5051:8025"
+
+  db:
+    image: postgres:10-alpine
+    volumes:
+      - ./data/pg_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ohmyform
+
+  ui:
+    image: ohmyform/ui
+    environment:
+      ENDPOINT: http://localhost:8090/graphql
+      SERVER_ENDPOINT: http://api:5000/graphql
+      PORT: 5000
+    ports:
+      - '8080:5000'
+
+  api:
+    image: ohmyform/api
+    environment:
+      CREATE_ADMIN: 'true'
+      ADMIN_EMAIL: admin@local.host
+      ADMIN_USERNAME: admin
+      ADMIN_PASSWORD: admin
+      DATABASE_DRIVER: postgres
+      DATABASE_URL: postgresql://root:root@db:5432/ohmyform
+      MAILER_URI: smtp://local.host
+      REDIS_URL: redis://redis
+      PORT: 5000
+    links:
+      - db
+      - redis
+    ports:
+      - '8090:5000'
+    depends_on:
+      - db
+      - redis

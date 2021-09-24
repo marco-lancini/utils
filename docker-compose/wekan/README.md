@@ -6,7 +6,7 @@ Wekan is an open-source alternative to Trello.
 ## Usage
 
 * Edit `docker-compose.yml`:
-    * Replace the `volume` locations, from `/docker/data/wekan/...` to the folder on your filesystem where you want to persist data
+    * Replace the `volume` locations, from `./data/wekan/...` to the folder on your filesystem where you want to persist data
     * Change the default password
 * Start the service: `docker-compose up`
 * Access Wekan: `127.0.0.1:9001`
