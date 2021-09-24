@@ -16,8 +16,8 @@ services:
     expose:
       - 27017
     volumes:
-      - /docker/data/wekan_bookstack/wekan-db:/data/db
-      - /docker/data/wekan_bookstack/wekan-db-dump:/dump
+      - ./data/wekan/wekan-db:/data/db
+      - ./data/wekan/wekan-db-dump:/dump
 
   wekan:
     image: quay.io/wekan/wekan

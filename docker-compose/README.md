@@ -10,8 +10,10 @@ build a few docker-compose based apps/
 | ---------------------------------------------------- | ------------------------------------------------------------------------ |
 | docker_vault                                         | [Docker + Consul + Vault](https://github.com/marco-lancini/docker_vault) |
 | [draw-pad-whiteboard](draw-pad-whiteboard/README.md) | Draw.io + Pad + Whiteboard                                               |
-| [nginx-proxy](nginx-proxy/docker-compose.yml)        | Sample setup for `nginx-proxy`                                           |
-| [raneto](raneto/docker-compose.yaml)                 | OSS Wiki                                                                 |
-| [statping](statping/docker-compose.yml)              | Status page for monitoring websites/apps                                 |
-| [wekan](wekan/README.md)                             | OSS alternative to Trello                                                |
-| [wikijs](wikijs/README.md)                           | OSS Wiki                                                                 |
+| [listmonk](listmonk/)                                | Self-hosted newsletter & mailing list manager                            |
+| [nginx-proxy](nginx-proxy/)                          | Sample setup for `nginx-proxy`                                           |
+| [ohmyform](ohmyform)                                 | Self-hosted forms                                                        |
+| [raneto](raneto/)                                    | OSS Wiki                                                                 |
+| [statping](statping/)                                | Status page for monitoring websites/apps                                 |
+| [wekan](wekan/)                                      | OSS alternative to Trello                                                |
+| [wikijs](wikijs/)                                    | OSS Wiki                                                                 |

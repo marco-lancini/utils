@@ -9,7 +9,7 @@ services:
     logging:
       driver: 'none'
     volumes:
-      - /docker/data/postgres_data:/var/lib/postgresql/data
+      - ./data/postgres_data:/var/lib/postgresql/data
     expose:
       - 5432
     networks:
@@ -33,7 +33,7 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - /docker/data/:/etc/wiki/db/
+      - ./data/wikijs:/etc/wiki/db/
 
 networks:
   wikinet:
