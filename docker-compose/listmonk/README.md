@@ -12,7 +12,7 @@
 * Visit: http://localhost:9000
 
 
-### First time setup
+### First time setup
 
 * `docker-compose up db`
 * `docker-compose run --rm app ./listmonk --install`
