@@ -1,0 +1,36 @@
+name: 'Docker Build'
+description: 'Docker Build'
+
+inputs:
+  folder:
+    description: 'Folder of the Docker image'
+    required: true
+  image_build:
+    description: 'Name of the build image'
+    required: true
+  image_latest:
+    description: 'Name of the latest image in the repository'
+    required: true
+
+outputs:
+  build_output:
+    description: 'Output of the build step'
+    value: ${{ steps.build.outputs.build_output }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 🔨 Building the image
+      id: build
+      shell: bash
+      run: |
+        output="$(docker build . -f ${{ inputs.folder }}/Dockerfile -t ${{ inputs.image_build }} --cache-from ${{ inputs.image_latest }})"
+
+        # Needed to avoid truncating multilines (https://github.com/actions/toolkit/issues/403)
+        output="${output//'%'/'%25'}"
+        output="${output//$'\n'/'%0A'}"
+        output="${output//$'\r'/'%0D'}"
+
+        # Set output
+        echo $output
+        echo "::set-output name=build_output::$output"
