@@ -45,14 +45,9 @@ data "aws_iam_policy_document" "backup_gdrive_access_s3" {
     effect = "Allow"
 
     actions = [
-      "s3:DeleteObject",
       "s3:GetObject",
-      "s3:GetObjectAcl",
       "s3:ListBucket",
-      "s3:ListMultipartUploadParts",
-      "s3:ListMultipartUploads",
-      "s3:PutObject",
-      "s3:PutObjectAcl",
+      "s3:PutObject"
     ]
 
     resources = [
@@ -94,6 +89,19 @@ resource "aws_ecr_lifecycle_policy" "rclone-gdrive-backup" {
                 "countType": "sinceImagePushed",
                 "countUnit": "days",
                 "countNumber": 1
+            },
+            "action": {
+                "type": "expire"
+            }
+        },
+        {
+            "rulePriority": 2,
+            "description": "Keep last 2 images",
+            "selection": {
+                "tagStatus": "tagged",
+                "tagPrefixList": ["v"],
+                "countType": "imageCountMoreThan",
+                "countNumber": 2
             },
             "action": {
                 "type": "expire"
