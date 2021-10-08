@@ -95,7 +95,7 @@ module "ecs-fargate-scheduled-task" {
 
   event_target_assign_public_ip = true
 
-  event_target_subnets         = [aws_subnet.backups_subnet.id]
+  event_target_subnets = [aws_subnet.backups_subnet.id]
   event_target_security_groups = [
     aws_default_security_group.backups_vpc_default.id,
     module.backup_github.service_sg_id,
