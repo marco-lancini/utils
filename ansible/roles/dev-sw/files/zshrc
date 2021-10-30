@@ -144,6 +144,7 @@ source <(plz --completion_script)
 export AWS_SDK_LOAD_CONFIG=1
 source /usr/local/bin/aws_zsh_completer.sh
 source /usr/lib/google-cloud-sdk/completion.bash.inc
+alias awslocal="aws --endpoint-url=http://localhost:4566 --profile localstack --region us-east-1"
 
 # Kubernetes
 source <(kubectl completion zsh)
