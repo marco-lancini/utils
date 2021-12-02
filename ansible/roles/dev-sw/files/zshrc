@@ -104,12 +104,12 @@ alias renew='/etc/init.d/networking restart'
 alias openports="sudo lsof -PiTCP -sTCP:LISTEN"
 
 # GIT
-alias branches="git ls-remote --heads origin"
+alias branches="git ls-remote --heads github"
 alias master="gco master && gl"
 alias main="gco main && gl"
 alias glog="git log --graph --decorate --oneline"
 alias glog_full="git log --graph --decorate --abbrev-commit"
-alias git_changelog="git log origin..HEAD --format='* %s%n%w(,4,4)%+b'"
+alias git_changelog="git log github/main..HEAD --format='* %s%n%w(,4,4)%+b'"
 alias ungit='/usr/bin/find . -type d \( -path \*.terraform \) -prune -false -o -name ".git" | while read dir ; do sh -c "cd $dir/../ && echo \"\n🗂  GIT STATUS IN ${dir//\.\git/}\" && git status -s && (git status -u | grep behind) && git cherry -v" ; done'
 
 # Override old commands
