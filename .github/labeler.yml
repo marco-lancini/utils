@@ -7,6 +7,9 @@ docker:
 docker-compose:
   - docker-compose/**/*
 
+kubernetes:
+  - k8s/**/*
+
 scripts:
   - scripts/**/*
 
