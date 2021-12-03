@@ -1,0 +1,70 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (6.1.4.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+      zeitwerk (~> 2.3)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
+    concurrent-ruby (1.1.9)
+    faraday (1.8.0)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
+      faraday-excon (~> 1.1)
+      faraday-httpclient (~> 1.0.1)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.1)
+      faraday-patron (~> 1.0)
+      faraday-rack (~> 1.0)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords (>= 0.0.4)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
+    faraday-excon (1.1.0)
+    faraday-http-cache (2.2.0)
+      faraday (>= 0.8)
+    faraday-httpclient (1.0.1)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.2.0)
+    faraday-patron (1.0.0)
+    faraday-rack (1.0.0)
+    github_changelog_generator (1.15.2)
+      activesupport
+      faraday-http-cache
+      multi_json
+      octokit (~> 4.6)
+      rainbow (>= 2.2.1)
+      rake (>= 10.0)
+      retriable (~> 3.0)
+    i18n (1.8.11)
+      concurrent-ruby (~> 1.0)
+    minitest (5.14.4)
+    multi_json (1.15.0)
+    multipart-post (2.1.1)
+    octokit (4.21.0)
+      faraday (>= 0.9)
+      sawyer (~> 0.8.0, >= 0.5.3)
+    public_suffix (4.0.6)
+    rainbow (3.0.0)
+    rake (13.0.6)
+    retriable (3.1.2)
+    ruby2_keywords (0.0.5)
+    sawyer (0.8.2)
+      addressable (>= 2.3.5)
+      faraday (> 0.8, < 2.0)
+    tzinfo (2.0.4)
+      concurrent-ruby (~> 1.0)
+    zeitwerk (2.5.1)
+
+PLATFORMS
+  x86_64-linux-musl
+
+DEPENDENCIES
+  bundler (= 2.2.3)!
+  github_changelog_generator (= 1.15.2)!
+
+BUNDLED WITH
+   2.2.3

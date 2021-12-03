@@ -1,21 +1,22 @@
 FROM ruby:3.0.0-alpine3.13
 
-RUN apk add --no-cache git
-
-COPY docker/github-changelog-generator/Gemfile Gemfile
-RUN gem install bundler --version $(cat Gemfile | grep bundler | awk -F "'" '{print $4}') \
-  && bundle install --system \
-  && gem uninstall bundler
-
-ENV SRC_PATH /src
-RUN mkdir -p $SRC_PATH
-VOLUME [ "$SRC_PATH" ]
-WORKDIR $SRC_PATH
-
+# Create user
 RUN addgroup --gid 11111 -S app
 RUN adduser -s /bin/false -u 11111 -G app -S app
-RUN chown -R app:app /src
-USER app
 
+# Setup workdir
+RUN mkdir -p /src
+WORKDIR /src
+RUN chown -R app:app /src
+
+# Install dependencies
+RUN apk add --no-cache git
+
+# Install Gems
+COPY docker/github-changelog-generator/Gemfile Gemfile
+RUN bundle install
+
+# Run app
+USER app
 CMD ["--help"]
 ENTRYPOINT ["github_changelog_generator"]
