@@ -5,6 +5,8 @@ Docker image for [github-changelog-generator](https://github.com/github-changelo
 
 ## Usage
 ```bash
-$ docker run --rm -it -v $(pwd):/src   \
-             ghcr.io/marco-lancini/github-changelog-generator:latest -t $CHANGELOG_GITHUB_TOKEN
+$ docker run --rm -it -v $(pwd):/src                                 \
+             ghcr.io/marco-lancini/github-changelog-generator:latest \
+             --user <user> --project <project>                       \
+             -t $CHANGELOG_GITHUB_TOKEN                              \
 ```
