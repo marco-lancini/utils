@@ -70,7 +70,7 @@ jobs:
       #
       - name: 📄 Show Build Output
         if: github.event_name == 'pull_request'
-        uses: actions/github-script@v4.0.2
+        uses: actions/github-script@v5
         env:
           BUILD: ${{ steps.docker_build.outputs.build_output }}
         with:
