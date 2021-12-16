@@ -2,12 +2,17 @@
   "breadcrumbs.enabled": true,
   "cSpell.enabledLanguageIds": ["markdown"],
   "cSpell.language": "en-GB",
-  "cSpell.userWords": ["Kubernetes", "Minikube", "corp", "hashi", "terraform"],
+  "cSpell.userWords": [
+    "Kubernetes",
+    "Minikube",
+    "corp",
+    "hashi",
+    "terraform"
+  ],
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.fontFamily": "'Fira Code'",
   "editor.fontLigatures": true,
   "editor.formatOnSave": true,
-  "editor.minimap.enabled": false,
   "editor.rulers": [80],
   "editor.tabSize": 2,
   "editor.wordWrap": "wordWrapColumn",
@@ -52,11 +57,17 @@
     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   },
   "workbench.editorAssociations": {
-    "*.png": "luna.editor"
+    "*.png": "luna.editor",
+    "*.ipynb": "jupyter-notebook"
   },
   "explorer.confirmDelete": false,
   "workbench.iconTheme": "material-icon-theme",
   "workbench.editor.untitled.hint": "hidden",
   "redhat.telemetry.enabled": false,
-  "go.toolsManagement.autoUpdate": true
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "editor.minimap.enabled": false
 }
