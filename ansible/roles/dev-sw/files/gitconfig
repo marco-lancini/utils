@@ -7,6 +7,12 @@
   pager = delta
   editor = micro
 
+[init]
+	defaultBranch = main
+
+[color]
+	ui = auto
+
 [push]
   default = current
 
@@ -18,8 +24,8 @@
   prompt = false
 
 [delta]
-  plus-color = "#012800"
-  minus-color = "#340001"
+  plus-style = "#012800"
+  minus-style = "#340001"
   syntax-theme = Monokai Extended
   line-numbers = true
 
