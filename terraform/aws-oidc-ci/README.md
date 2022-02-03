@@ -5,10 +5,11 @@ This module automates the setup of OIDC federation between AWS and:
 * Github Actions
 * Gitlab CI
 
-
 <p align="center">
   <img src="./aws-oidc-ci.drawio.png">
 </p>
+
+For more info/references around how it works, you can check out CloudSecDocs: [CI/CD Providers](https://cloudsecdocs.com/devops/pipelines/securing/cicd/).
 
 
 ## Examples
