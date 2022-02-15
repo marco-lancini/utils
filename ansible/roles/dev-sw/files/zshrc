@@ -45,7 +45,7 @@ ZSH_THEME="custom"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras tmux last-working-dir dirhistory python pip z docker)
+plugins=(git git-extras tmux last-working-dir dirhistory python pip z docker zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -121,7 +121,6 @@ alias ping="gping"
 alias curl="curlie"
 alias find="fd"
 alias ps="procs"
-alias d="lima nerdctl"
 
 # Python
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -167,6 +166,12 @@ for file in ~/.kube/configs/*.yaml; do
 done
 complete -F __start_kubectl k
 # source ~/.oh-my-zsh/custom/kube-ps1.sh
+
+#
+# Docker
+#
+eval $(minikube docker-env)
+alias minikubeup="minikube start --no-kubernetes --memory 4000 --cpus 4 --driver=virtualbox --container-runtime=docker"
 
 #
 # Compinit
