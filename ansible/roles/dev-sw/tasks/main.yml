@@ -93,6 +93,13 @@
     - '{{ dev_config|default([]) }}'
 
 # ==============================================================================
+# Custom setup
+# ==============================================================================
+- name: Install zsh-autosuggestions
+  when: zsh_done is success
+  command: git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# ==============================================================================
 # CLEANUP
 # ==============================================================================
 - debug: msg="{{ item }}"

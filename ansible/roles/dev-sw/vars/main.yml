@@ -45,6 +45,9 @@ dev_brew:
   - broot # Navigate directory trees
   - clementtsang/bottom/bottom # htop v2.0
   - dive # Inspect docker images
+  - docker
+  - docker-compose
+  - docker-credential-helper
   - doctl # DO CLI
   - dog # dig v2.0  (DNS)
   - duf # du v2.0   (Storage space)
@@ -71,6 +74,7 @@ dev_brew:
   - lima # Linux VMs (for nerdctl)
   - mcfly # Ctrl-r v2.0
   - micro # Editor
+  - minikube
   - minikube # K8s
   - please # Please.build
   - pre-commit # Pre-commit hooks
