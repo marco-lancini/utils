@@ -1,3 +1,0 @@
-#!/bin/bash
-
-cd /opt/bytecode-viewer/ && java -jar bytecode-viewer.jar

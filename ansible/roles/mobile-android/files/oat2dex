@@ -1,3 +1,0 @@
-#!/bin/bash
-
-cd /opt/oat2dex/ && python oat2dex.py "$@"
