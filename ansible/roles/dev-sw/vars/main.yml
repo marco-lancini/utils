@@ -83,6 +83,7 @@ dev_brew:
   - rs/tap/curlie # curl v2.0
   - sshuttle # Transparent proxy
   - starship # Cross shell prompt (starship.rs)
+  - stern # Multi pod and container log tailing for Kubernetes
   - terraform # Terraform
   - tfenv # Terraform versioning
   - tfsec # Terraform linter
