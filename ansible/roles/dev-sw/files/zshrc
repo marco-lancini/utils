@@ -92,10 +92,8 @@ function cd {
     # builtin cd "$@" && clear && ls -lh
     builtin cd "$@" && clear && exa -l --git
 }
-# alias la='ls -A'
-alias la='ls exa -la --git'
-# alias ls='clear && ls -lhG'
 alias ls="clear && exa -l --git"
+alias la='clear && exa -la --tree -L 2 --git'
 alias ..="cd .."
 alias ee="exit"
 
@@ -170,8 +168,10 @@ complete -F __start_kubectl k
 #
 # Docker
 #
-eval $(minikube docker-env)
-alias minikubeup="minikube start --no-kubernetes --memory 4000 --cpus 4 --driver=virtualbox --container-runtime=docker"
+# eval $(minikube docker-env)
+# alias minikubeup="minikube start --no-kubernetes --memory 4000 --cpus 2 --driver=virtualbox"
+export UID=$(id -u)
+export GID=$(id -g)
 
 #
 # Compinit
