@@ -1,7 +1,0 @@
-#run post/windows/escalate/getsystem
-
-#run migrate -f -k
-#run migrate -n "explorer.exe" -k    # Can trigger AV alerts by touching explorer.exe...
-
-#run post/windows/manage/smart_migrate
-#run post/windows/gather/smart_hashdump
