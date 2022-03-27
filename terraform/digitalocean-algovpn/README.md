@@ -9,10 +9,10 @@ Terraform module which spins up a DigitalOcean droplet hosting an [Algo](https:/
 2. Initialize Terraform: `$ terraform init`
 3. Deploy the Droplet with Terraform: `$ tf apply -var-file="secret.tfvars"`
 
-![](../../.github/images/tf_digitalocean-algo_setup.jpg)
+![](tf_digitalocean-algo_setup.jpg)
 
-4. Connect to the Droplet: `$ ssh root@$(terraform output droplet_ipv4)`
-5. Configure Algo: `# vim algo/config.cfg`
+1. Connect to the Droplet: `$ ssh root@$(terraform output droplet_ipv4)`
+2. Configure Algo: `# vim algo/config.cfg`
 ```yaml
 users:
 - <your_username>

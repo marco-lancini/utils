@@ -1,0 +1,33 @@
+name: '[ADMIN] Pre-commit auto-update'
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 10 15 * *' # At 10:00 on day-of-month 15
+
+jobs:
+  auto-update:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: 📂 Checkout Branch
+        uses: actions/checkout@v3
+
+      - name: ⚒ Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+
+      - name: 🗜 Install pre-commit
+        run: pip install pre-commit
+
+      - name: ♻️ Run pre-commit autoupdate
+        run: pre-commit autoupdate
+
+      - name: ↗️ Create Pull Request
+        uses: ./.github/actions/create-pull-request
+        with:
+          title: '[ADMIN] Pre-commit auto-update'
+          branch-suffix: timestamp
+          commit-message: Auto-update pre-commit hooks
+          body: |
+            Update versions of tools in pre-commit
+            configs to latest version
