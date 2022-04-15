@@ -23,7 +23,7 @@ jobs:
         run: pre-commit autoupdate
 
       - name: ↗️ Create Pull Request
-        uses: ./.github/actions/create-pull-request
+        uses: peter-evans/create-pull-request@v4.0.2
         with:
           title: '[ADMIN] Pre-commit auto-update'
           branch-suffix: timestamp
