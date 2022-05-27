@@ -1,9 +1,10 @@
-FROM alpine:3.12.0
+FROM alpine:3.16.0
 
-# OPTIONAL packages:
-#   texmf-dist-formatsextra \
-#   texmf-dist-pictures \
-#   texmf-dist-science \
+# Install packages
+#   OPTIONAL packages:
+#       texmf-dist-formatsextra \
+#       texmf-dist-pictures \
+#       texmf-dist-science \
 RUN apk update && \
     apk add --no-cache \
     texlive \
