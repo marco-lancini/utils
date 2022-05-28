@@ -10,3 +10,6 @@ RUN adduser -s /bin/false -u 11111 -G app -S app
 WORKDIR /src
 RUN chown -R app:app /src
 USER app
+
+# Command
+CMD [ "pandoc" ]
