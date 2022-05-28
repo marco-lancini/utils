@@ -1,10 +1,6 @@
 FROM pandoc/latex:2.18.0
 
-# Install packages
-RUN apk update && \
-    apk add --no-cache \
-    texlive-full \
-    && rm -rf /var/cache/apk/*
+# Install Latex packages
 RUN tlmgr install adjustbox babel-german background bidi collectbox csquotes everypage filehook footmisc footnotebackref framed fvextra letltxmacro ly1 mdframed mweights needspace pagecolor sourcecodepro sourcesanspro titling ucharcat ulem unicode-math upquote xecjk xurl zref koma-script
 
 # Create low-privileged user
