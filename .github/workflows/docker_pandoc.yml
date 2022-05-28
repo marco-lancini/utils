@@ -1,33 +1,29 @@
-name: '[DOCKER IMAGE] Markserv'
+name: '[DOCKER IMAGE] Pandoc'
 
 on:
   workflow_dispatch:
-    inputs:
-      git-ref:
-        description: Git Ref (Optional)
-        required: false
   push:
     branches:
       - main
     paths:
-      - 'docker/markserv/Dockerfile'
-      - 'docker/markserv/VERSION'
+      - 'docker/pandoc/Dockerfile'
+      - 'docker/pandoc/VERSION'
   pull_request:
     branches:
       - main
     paths:
-      - 'docker/markserv/Dockerfile'
-      - 'docker/markserv/VERSION'
+      - 'docker/pandoc/Dockerfile'
+      - 'docker/pandoc/VERSION'
 
 jobs:
   build:
     runs-on: ubuntu-20.04
 
     env:
-      FOLDER: ${{ github.workspace }}/docker/markserv
+      FOLDER: ${{ github.workspace }}/docker/pandoc
       REGISTRY: ghcr.io
       VERSION_FILE: VERSION
-      IMAGE_NAME: markserv
+      IMAGE_NAME: pandoc
 
     steps:
       - name: 📂 Checkout repository
