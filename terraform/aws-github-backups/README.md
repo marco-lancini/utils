@@ -1,7 +1,7 @@
 # AWS Github Backups
 
 This module automates the setup of an ECS Task needed to backup a Github account,
-as described in [Automated Github Backups with ECS and S3](https://www.marcolancini.it/2021/blog-github-backups-with-ecs/).
+as described in [Automated Github Backups with ECS and S3](https://blog.marcolancini.it/2021/blog-github-backups-with-ecs/).
 
 In short, this module can be used to create:
 * A dedicated VPC/subnet with an Internet Gateway attached
@@ -14,4 +14,4 @@ In short, this module can be used to create:
     * A CloudWatch Event Rule to alert on every `RUNNING` and `STOPPED` task
     * An S3 bucket notification to alert on every new object
 
-![](https://www.marcolancini.it/images/posts/blog_github_backups_architecture.png)
+![](https://blog.marcolancini.it/images/posts/blog_github_backups_architecture.png)

@@ -1,6 +1,6 @@
 # AWS Security Reviewer
 
-This module automates the setup of roles and users needed to perform a security audit of AWS accounts in an Hub and Spoke model, as described in [Cross Account Auditing in AWS and GCP](https://www.marcolancini.it/2019/blog-cross-account-auditing/).
+This module automates the setup of roles and users needed to perform a security audit of AWS accounts in an Hub and Spoke model, as described in [Cross Account Auditing in AWS and GCP](https://blog.marcolancini.it/2019/blog-cross-account-auditing/).
 
 In short, this module can be used to create:
 
@@ -8,7 +8,7 @@ In short, this module can be used to create:
 2. One role (`role_security_assume`), in the Hub account, able to assume the `role_security_audit` role on all the Spoke accounts.
 3. One IAM user (`user_security_audit`), in the Hub account, able to assume the `role_security_assume` role. Access keys for this user are not managed via this module.
 
-![](https://www.marcolancini.it/images/posts/blog_cross_account_auditing_AWS.png)
+![](https://blog.marcolancini.it/images/posts/blog_cross_account_auditing_AWS.png)
 
 
 > A similar implementation in CloudFormation can be found on Gitlab: <a href="https://gitlab.com/gitlab-com/gl-security/security-operations/infrastructure-security-public/aws-account-management/-/tree/main/aws-security-reviewer" target="_blank">CloudFormation: AWS Security Reviewer</a>.
