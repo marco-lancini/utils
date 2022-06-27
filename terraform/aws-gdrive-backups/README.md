@@ -1,7 +1,7 @@
 # AWS GDrive Backups
 
 This module automates the setup of an ECS Task needed to backup a Gdrive folder,
-as described in [Automated GDrive Backups with ECS and S3](https://www.marcolancini.it/2021/blog-gdrive-backups-with-ecs/).
+as described in [Automated GDrive Backups with ECS and S3](https://blog.marcolancini.it/2021/blog-gdrive-backups-with-ecs/).
 
 In short, this module can be used to create:
 * A dedicated VPC/subnet with an Internet Gateway attached
@@ -15,4 +15,4 @@ In short, this module can be used to create:
     * A CloudWatch Event Rule to alert on every `RUNNING` and `STOPPED` task
     * An S3 bucket notification to alert on every new object
 
-![](https://www.marcolancini.it/images/posts/blog_gdrive_backups_architecture.png)
+![](https://blog.marcolancini.it/images/posts/blog_gdrive_backups_architecture.png)
