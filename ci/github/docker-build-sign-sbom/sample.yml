@@ -1,0 +1,34 @@
+name: 'Sample Usage'
+
+on:
+  # Manual run
+  workflow_dispatch:
+  # PR
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'path/to/dockerfile/folder/**/*'
+  # Push
+  push:
+    branches:
+      - main
+    paths:
+      - 'path/to/dockerfile/folder/**/*'
+
+jobs:
+  run-docker:
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+
+    uses: marco-lancini/utils/ci/github/docker-build-sign-sbom/reusable-docker.yml@main
+    with:
+      FOLDER: 'path/to/dockerfile/folder'
+      AWS_ACCOUNT_NAME: ''
+      AWS_ACCOUNT_ID: ''
+      AWS_REGION: ''
+      AWS_ROLE: ''
+      REGISTRY: <id>.dkr.ecr.<region>.amazonaws.com
+      IMAGE_NAME: sample-app
