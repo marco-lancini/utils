@@ -47,7 +47,7 @@ A **reusable** Github Action **workflow** that:
   > You can use my [Identity Federation for CI on AWS](https://github.com/marco-lancini/utils/tree/main/terraform/aws-oidc-ci)
   > Terraform module to automate the setup of OIDC federation between AWS and Github Actions/Gitlab CI
 2. Make a copy of the reusable workflow: [`reusable-docker.yml`](reusable-docker.yml)
-3. Call the reusable workflow as shown in the [`sample`](sample.yml)
+3. Call the reusable workflow as shown in the [`sample`](sample.yml):
 
   ```yaml
   ...
