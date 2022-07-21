@@ -8,6 +8,8 @@ A **reusable** Github Action **workflow** that:
   5. Computes its SBOM with `Syft`
   6. Attaches the SBOM to it via `cosign`
 
+![](pipeline.png)
+
 ```mermaid
   graph TD;
       start --> install
@@ -37,8 +39,6 @@ A **reusable** Github Action **workflow** that:
       signx --> install2
       attach --> finish
 ```
-
-![](pipeline.png)
 
 
 ## Usage
