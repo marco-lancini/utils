@@ -20,93 +20,17 @@ on:
       - 'docker/markserv/VERSION'
 
 jobs:
-  build:
-    runs-on: ubuntu-20.04
+  run-docker:
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
 
-    env:
+    uses: marco-lancini/utils/.github/workflows/reusable-docker.yml@main
+    with:
       FOLDER: ${{ github.workspace }}/docker/markserv
-      REGISTRY: ghcr.io
-      VERSION_FILE: VERSION
+      REGISTRY: ghcr.io/${{ github.repository_owner }}
       IMAGE_NAME: markserv
-
-    steps:
-      - name: 📂 Checkout repository
-        uses: actions/checkout@v3
-
-      - name: 🎫 Login to GitHub Container Registry
-        uses: docker/login-action@v2
-        id: login
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          # Create a PAT with `read:packages` and `write:packages` scopes and save it as an Actions secret `GHCR_TOKEN`
-          password: ${{ secrets.GHCR_TOKEN }}
-
-      #
-      # Build Image
-      #
-      - name: 🔨 Build the image
-        id: docker_build
-        uses: ./.github/actions/docker-build
-        with:
-          folder: ${{ env.FOLDER }}
-          image_build: ${{ env.IMAGE_NAME }}:build
-          image_latest: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
-
-      #
-      # Run Trivy
-      #
-      - name: 🛡 Run Trivy vulnerability scanner
-        if: github.event_name == 'pull_request'
-        id: docker_trivy
-        uses: ./.github/actions/docker-trivy
-        with:
-          image_name: ${{ env.IMAGE_NAME }}:build
-
-      #
-      # PR Output
-      #
-      - name: 📄 Show Build Output
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v6
-        env:
-          BUILD: ${{ steps.docker_build.outputs.build_output }}
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const output = `#### Image: 📋 \`${process.env.IMAGE_NAME}\`
-
-            |     | Step        | Result                                       |
-            | --- | ----------  | -------------------------------------------- |
-            | 🎫  | **Login**   | \`${{ steps.login.outcome }}\`               |
-            | 📖  | **Build**   | \`${{ steps.docker_build.outcome }}\`               |
-            | 🛡  | **Trivy**   | \`${{ steps.docker_trivy.outcome }}\`               |
-
-            ### Build:
-
-            \`\`\`${process.env.BUILD}
-            \`\`\`
-
-            ---
-
-            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })
-
-      #
-      # Push image to GCR
-      #
-      - name: 🚀 Push image to GitHub Container Registry
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        id: docker_push
-        uses: ./.github/actions/docker-push-gcr
-        with:
-          image_local: ${{ env.IMAGE_NAME }}:build
-          image_remote: ${{ env.IMAGE_NAME }}
-          registry: ${{ env.REGISTRY }}/${{ github.repository_owner }}
-          version_file: ${{ env.FOLDER }}/${{ env.VERSION_FILE }}
+    secrets:
+      GHCR_USER: ${{ github.repository_owner }}
+      GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
