@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
 
+LABEL org.opencontainers.image.source = "https://github.com/marco-lancini/utils"
+
 RUN apt-get update && apt-get install -y curl unzip zip
 # I know, I know...
 RUN curl https://rclone.org/install.sh | bash
