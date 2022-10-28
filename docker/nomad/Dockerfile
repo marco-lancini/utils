@@ -1,5 +1,7 @@
 FROM alpine:3.7
 
+LABEL org.opencontainers.image.source = "https://github.com/marco-lancini/utils"
+
 # Create a consul user and group first so the IDs get set the same way, even as
 # the rest of this may change over time.
 RUN addgroup nomad && \

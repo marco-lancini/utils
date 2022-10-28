@@ -1,5 +1,7 @@
 FROM pandoc/latex:2.18.0
 
+LABEL org.opencontainers.image.source = "https://github.com/marco-lancini/utils"
+
 # Install Latex packages
 RUN tlmgr install adjustbox awesomebox babel-german background bidi collectbox csquotes everypage filehook fontawesome5 footmisc footnotebackref framed fvextra koma-script letltxmacro ly1 mdframed mweights needspace pagecolor pdfpages sourcecodepro sourcesanspro titlesec titling ucharcat ulem unicode-math upquote xecjk xurl zref
 

@@ -1,5 +1,7 @@
 FROM alpine:3.16.0
 
+LABEL org.opencontainers.image.source = "https://github.com/marco-lancini/utils"
+
 # Install packages
 #   OPTIONAL packages:
 #       texmf-dist-formatsextra \

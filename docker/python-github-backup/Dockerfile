@@ -1,5 +1,7 @@
 FROM python:3.9.5-slim-buster
 
+LABEL org.opencontainers.image.source = "https://github.com/marco-lancini/utils"
+
 RUN addgroup --gid 11111 app
 RUN adduser --shell /bin/false --no-create-home --uid 11111 --gid 11111 app
 
