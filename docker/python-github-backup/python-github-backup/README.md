@@ -98,6 +98,8 @@ optional arguments:
                         wait this amount of seconds when API request
                         throttling is active (default: 30.0, requires
                         --throttle-limit to be set)
+    --output-s3
+			S3 URI where zipped repo should be uploaded
 ```
 
 

@@ -170,6 +170,10 @@ def parse_args(args = None):
                         '--output-s3',
                         dest='output_s3',
                         help='S3 where to upload the final ZIP file')
+    parser.add_argument('-e',
+                        '--errors-sns',
+                        dest='errors_sns',
+                        help='SNS topic where error messages are published')
     parser.add_argument('-i',
                         '--incremental',
                         action='store_true',
@@ -334,10 +338,6 @@ def parse_args(args = None):
                         help='wait this amount of seconds when API request throttling is active (default: 30.0, requires --throttle-limit to be set)')
 
     args = parser.parse_args(args)
-
-    # INJECT ENVIRONMENT VARIABLES
-    args.token = os.environ.get("GITHUB_PAT_BACKUP", None)
-    args.user = os.environ.get("PY_ORG", None)
 
     return args
 
@@ -696,7 +696,7 @@ def filter_repositories(args, unfiltered_repositories):
     for r in unfiltered_repositories:
         log_info(f"\tRepo: {r['name']}")
         # gists can be anonymous, so need to safely check owner
-        if r.get('owner', {}).get('login') == args.user or r.get('is_starred'):
+        if not r.get('is_gist') or (r.get('owner', {}).get('login') == args.user or r.get('is_starred')):
             repositories.append(r)
 
     name_regex = None
@@ -709,12 +709,12 @@ def filter_repositories(args, unfiltered_repositories):
 
     if not args.fork:
         repositories = [r for r in repositories if not r.get('fork')]
-    # if not args.private:
-    #     repositories = [r for r in repositories if not r.get('private') or r.get('public')]
-    # if languages:
-    #     repositories = [r for r in repositories if r.get('language') and r.get('language').lower() in languages]  # noqa
-    # if name_regex:
-    #     repositories = [r for r in repositories if name_regex.match(r['name'])]
+    if not args.private:
+        repositories = [r for r in repositories if not r.get('private') or r.get('public')]
+    if languages:
+        repositories = [r for r in repositories if r.get('language') and r.get('language').lower() in languages]  # noqa
+    if name_regex:
+         repositories = [r for r in repositories if name_regex.match(r['name'])]
     if args.skip_archived:
         repositories = [r for r in repositories if not r.get('archived')]
 

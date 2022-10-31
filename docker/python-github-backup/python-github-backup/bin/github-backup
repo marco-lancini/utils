@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os, sys, logging
+import shutil
 from datetime import datetime
 
 from github_backup.github_backup import (
@@ -18,6 +19,7 @@ from github_backup.github_backup import (
 
 from github_backup.zip import do_zip
 from github_backup.s3upload import upload_file
+from github_backup.snspublish import publish_message
 
 logging.basicConfig(
     format='%(asctime)s.%(msecs)03d: %(message)s',
@@ -25,14 +27,11 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-def main():
-    #
-    # Parse Arguments
-    #
-    args = parse_args()
-    output_directory = os.path.realpath(args.output_directory)
-    zip_directory = os.path.realpath(args.output_zip)
-    output_s3 = args.output_s3
+def main(output_directory, zip_directory, output_s3):
+
+    # INJECT ENVIRONMENT VARIABLES
+    args.token = os.environ.get("GITHUB_PAT_BACKUP", None)
+    args.user = os.environ.get("PY_ORG", None)
 
     #
     # Setup folders
@@ -44,6 +43,10 @@ def main():
     if not os.path.isdir(zip_directory):
         log_info('Create ZIP directory {0}'.format(zip_directory))
         mkdir_p(zip_directory)
+
+    account_directory = f"{output_directory}/account"
+    if not os.path.isdir(account_directory):
+        mkdir_p(account_directory)
 
     if args.lfs_clone:
         check_git_lfs_install()
@@ -60,30 +63,55 @@ def main():
     repositories = retrieve_repositories(args, authenticated_user)
     repositories = filter_repositories(args, repositories)
     backup_repositories(args, output_directory, repositories)
-    backup_account(args, output_directory)
-    log_info("[!] Ingestion complete")
+    backup_account(args, account_directory)
 
     #
     # Zip content
     #
     today_date = datetime.today().strftime('%Y-%m-%d')
-    zip_name = f"{today_date}_github_backup.zip"
-    fname = os.path.join(zip_directory, zip_name)
-    log_info(f"[!] Zipping output folder: {fname}")
-    do_zip(output_directory, fname)
+    zip_account = f"{today_date}_github_account.zip"
+    fname_account = os.path.join(zip_directory, zip_account)
+    log_info(f"[!] Zipping account folder: {fname_account}")
+    do_zip(account_directory, fname_account)
+
+    files = dict()
+    for repo in repositories:
+        zip_name = f"{today_date}_{repo['name']}.zip"
+        fname = os.path.join(zip_directory, zip_name)
+        files[zip_name] = fname
+        repo_dir = f"{output_directory}/repositories/{repo['name']}"
+        log_info(f"Zip file: {fname}")
+        do_zip(repo_dir, fname)
+        shutil.rmtree(repo_dir)
 
     #
     # Sync to S3
     #
-    log_info(f"[!] Uploading ZIP to S3: {output_s3}/{zip_name}")
-    upload_file(fname, output_s3, object_name=zip_name)
+    if output_s3 is None:
+        log_info(f"Skipping upload to s3")
+    else:
+        upload_file(fname_account, output_s3, object_name=f"github/{zip_account}")
+        for name in files.keys():
+            print(f"upload {files[name]} to {output_s3}/github/{name}" )
+            upload_file(files[name], output_s3, object_name=f"github/{name}")
+            if os.path.isfile(files[name]):
+                os.remove(files[name])
 
     log_info("[!] Completed!")
 
 
 if __name__ == '__main__':
     try:
-        main()
+        #
+        # Parse Arguments
+        #
+        args = parse_args()
+        output_directory = os.path.realpath(args.output_directory)
+        zip_directory = os.path.realpath(args.output_zip)
+        output_s3 = args.output_s3
+        errors_sns = args.errors_sns
+        main(output_directory, zip_directory, output_s3)
     except Exception as e:
+        publish_message(str(e), errors_sns)
         log_warning(str(e))
         sys.exit(1)
