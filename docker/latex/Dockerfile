@@ -1,22 +1,30 @@
-FROM alpine:3.16.0
+FROM debian:11.5
 
 LABEL org.opencontainers.image.source = "https://github.com/marco-lancini/utils"
 
 # Install packages
-#   OPTIONAL packages:
-#       texmf-dist-formatsextra \
-#       texmf-dist-pictures \
-#       texmf-dist-science \
-RUN apk update && \
-    apk add --no-cache \
-    texlive \
-    texlive-xetex \
-    texmf-dist \
-    texmf-dist-latexextra \
-    && rm -rf /var/cache/apk/*
+RUN apt update &&                   \
+    apt install -y                  \
+    wget                            \
+    texlive                         \
+    texlive-xetex                   \
+    texlive-latex-recommended       \
+    texlive-latex-extra             \
+    texlive-fonts-extra             \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN addgroup --gid 11111 -S app
-RUN adduser -s /bin/false -u 11111 -G app -S app
+# Install roboto
+WORKDIR /root
+RUN wget http://mirror.ctan.org/install/fonts/roboto.tds.zip
+
+WORKDIR /root/texmf
+RUN unzip /root/roboto.tds.zip && \
+    texhash && \
+    updmap-sys --enable Map=roboto.map
+
+# Create low-privilege user
+RUN addgroup --gid 11111 app
+RUN adduser --shell /bin/false --uid 11111 --gid 11111 --disabled-login app
 
 WORKDIR /src
 RUN chown -R app:app /src
