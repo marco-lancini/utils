@@ -13,7 +13,7 @@ RUN apt update &&                   \
     texlive-fonts-extra             \
     && rm -rf /var/lib/apt/lists/*
 
-# Install roboto
+# Install the roboto font
 WORKDIR /root
 RUN wget http://mirror.ctan.org/install/fonts/roboto.tds.zip
 
@@ -25,7 +25,8 @@ RUN unzip /root/roboto.tds.zip && \
 # Create low-privilege user
 RUN addgroup --gid 11111 app
 RUN adduser --shell /bin/false --uid 11111 --gid 11111 --disabled-login app
-
-WORKDIR /src
 RUN chown -R app:app /src
 USER app
+
+# Define workdir
+WORKDIR /src
