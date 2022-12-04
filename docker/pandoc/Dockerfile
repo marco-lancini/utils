@@ -1,4 +1,4 @@
-FROM pandoc/latex:2.18.0
+FROM pandoc/latex:2.19.2
 
 LABEL org.opencontainers.image.source = "https://github.com/marco-lancini/utils"
 
