@@ -15,6 +15,7 @@ In short, this module creates:
 
 
 > ⚠️ This module has been exported from my personal setup, which relies on a monorepo leveraging local modules only.
+> 
 > Since this module relies on a local text file to store the domain list, it is supposed to be fetched with a local import. If you'd like to fetch it from a remote registry, modifications are required.
 
 
