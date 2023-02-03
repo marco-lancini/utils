@@ -179,7 +179,7 @@ resource "aws_sns_topic" "backups_notifications" {
 # Event Rule - Notify on ECS Task Events
 #
 resource "aws_cloudwatch_event_rule" "backups_ecs_tasks" {
-  name        = "${var.ecs_task_github}-status"
+  name        = "${var.ecs_task_gdrive}-status"
   description = "Notify on ECS Task Events"
 
   event_pattern = <<EOF
