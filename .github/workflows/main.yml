@@ -1,0 +1,61 @@
+name: 'Update Domain List'
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 10 15 * *' # At 10:00 on day-of-month 15
+
+env:
+  FOLDER: '/cloudflare/lists'
+
+jobs:
+  auto-update:
+    runs-on: ubuntu-22.04
+
+    permissions:
+      id-token: write
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: 📂 Checkout Branch
+        uses: actions/checkout@v3.3.0
+
+      #
+      # Fetch domain list
+      #
+      - name: 🔗 Fetch Domain List
+        working-directory: ${{ env.FOLDER }}
+        run: |
+          LIST_URL="https://adaway.org/hosts.txt"
+          LIST_FNAME="pihole_domain_list.txt"
+
+          echo "[*] Fetching list: ${LIST_URL} -> ${LIST_FNAME}"
+          wget --quiet $LIST_URL -O $LIST_FNAME
+
+          echo "[*] Sorting list..."
+          sort -u -o $LIST_FNAME $LIST_FNAME
+
+          echo "[*] Removing comments..."
+          grep -o '^[^#]*' $LIST_FNAME > temp.txt
+          mv temp.txt $LIST_FNAME
+
+          echo "[*] Extracting domains..."
+          cat $LIST_FNAME | awk '{ print $2 }' > temp.txt
+          mv temp.txt $LIST_FNAME
+
+          echo "[*] Removing localhost from list..."
+          sed -i '/localhost/d' $LIST_FNAME
+          sed -i '/127.0.0.1/d' $LIST_FNAME
+
+      #
+      # Commit file
+      #
+      - name: ↗️ Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.CF_TOKEN }}
+          title: 'Update Domain List'
+          branch-suffix: timestamp
+          commit-message: 'Update Domain List'
+          body: ''
