@@ -24,12 +24,12 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/pre-commit/mirrors-prettier/
-    rev: v3.0.0-alpha.4
+    rev: v3.0.0-alpha.6
     hooks:
       - id: prettier
 
   - repo: https://github.com/crate-ci/typos
-    rev: typos-dict-v0.9.16
+    rev: v1.13.23
     hooks:
       - id: typos
         args: ['--write-changes', '--config', '.typos.toml']
