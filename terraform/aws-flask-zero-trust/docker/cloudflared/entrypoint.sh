@@ -60,13 +60,13 @@ set +ex
 echo "[*] Checking connection with origin..."
 for i in {1..60}
 do
-  wget ${ORIGIN_DNS} 1>/dev/null 2>&1
+  wget ${VAR_ORIGIN_URL} 1>/dev/null 2>&1
 
   if [ $? -ne 0 ]; then
-    echo "Attempt to connect to ${ORIGIN_DNS} failed."
+    echo "Attempt to connect to origin failed: ${VAR_ORIGIN_URL}"
     sleep 1
   else
-    echo "Connected to origin ${ORIGIN_DNS} successfully."
+    echo "Successfully connected to origin: ${VAR_ORIGIN_URL}"
     break
   fi
 done
