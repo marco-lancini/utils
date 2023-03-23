@@ -10,14 +10,21 @@ locals {
   #
   cloudflare_account_id = "1234567890"
   example_domain        = "example.com"
+  allowed_emails = [
+    "marco@example.com"
+  ]
 
   #
   # Resources
   #
   # Tunnel
-  tunnel_name    = "flask"
-  tunnel_dnsname = "flask" # flask.example.com
-  tunnel_origin  = "http://127.0.0.1:5000"
+  tunnel_name     = "flask"
+  tunnel_dnsname  = "flask"
+  tunnel_hostname = "${local.tunnel_dnsname}.${local.example_domain}"
+  tunnel_origin   = "http://127.0.0.1:5000"
+
+  # Access Application
+  cf_app_name = "Flask Example"
 
   # ECR
   ecr_cloudflared_name = "cloudflared"

@@ -50,3 +50,38 @@ resource "cloudflare_record" "flask_tunnel" {
   proxied = "true"
   ttl     = 1
 }
+
+
+# ==============================================================================
+# Cloudflare Access Application
+# ==============================================================================
+#
+# Application
+#
+resource "cloudflare_access_application" "flask" {
+  account_id = local.cloudflare_account_id
+
+  name   = local.cf_app_name
+  domain = local.tunnel_hostname
+
+  type                 = "self_hosted"
+  session_duration     = "24h"
+  app_launcher_visible = true
+}
+
+#
+# Access Policy
+#
+resource "cloudflare_access_policy" "flask" {
+  account_id     = local.cloudflare_account_id
+  application_id = cloudflare_access_application.flask.id
+
+  name       = "Email Filter for ${local.cf_app_name}"
+  precedence = "1"
+  decision   = "allow"
+
+  include {
+    email = local.allowed_emails
+  }
+
+}
