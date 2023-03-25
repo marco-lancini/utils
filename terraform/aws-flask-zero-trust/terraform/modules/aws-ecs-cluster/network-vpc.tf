@@ -56,4 +56,8 @@ resource "aws_default_route_table" "rt" {
 #
 resource "aws_default_security_group" "vpc_default_sg" {
   vpc_id = aws_vpc.vpc.id
+
+  tags = {
+    Name = "${var.cluster_name} Default SG"
+  }
 }
