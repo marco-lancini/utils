@@ -27,7 +27,8 @@ locals {
   cf_app_name = "Flask Example"
 
   # ECS
-  ecs_cluster_name = "flask_cluster"
+  ecs_cluster_name           = "flask_cluster"
+  parameter_credentials_name = "FLASK_TUNNEL_CREDENTIALS"
 
   # ECR
   ecr_cloudflared_name = "cloudflared"

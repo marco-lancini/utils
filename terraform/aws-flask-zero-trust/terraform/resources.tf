@@ -1,4 +1,23 @@
 # ==============================================================================
+# SECRETS
+# ==============================================================================
+resource "aws_ssm_parameter" "flask_tunnel_credentials" {
+  name        = local.parameter_credentials_name
+  description = "${local.tunnel_name} Cloudflared Tunnel: credentials JSON"
+  type        = "SecureString"
+
+  value = <<EOF
+{
+  "AccountTag": "${local.cloudflare_account_id}",
+  "TunnelSecret": "${cloudflare_tunnel.flask.secret}",
+  "TunnelID": "${cloudflare_tunnel.flask.id}"
+}
+EOF
+
+}
+
+
+# ==============================================================================
 # ECS Cluster
 # ==============================================================================
 module "flask_cluster" {
