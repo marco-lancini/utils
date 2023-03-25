@@ -21,7 +21,8 @@ locals {
   tunnel_name     = "flask"
   tunnel_dnsname  = "flask"
   tunnel_hostname = "${local.tunnel_dnsname}.${local.example_domain}"
-  tunnel_origin   = "http://127.0.0.1:5000"
+  tunnel_port     = 5000
+  tunnel_origin   = "http://127.0.0.1:${local.tunnel_port}"
 
   # Access Application
   cf_app_name = "Flask Example"
@@ -29,6 +30,9 @@ locals {
   # ECS
   ecs_cluster_name           = "flask_cluster"
   parameter_credentials_name = "FLASK_TUNNEL_CREDENTIALS"
+  container_cloudflared_name = "cloudflared"
+  container_flask_name       = "flask"
+  task_desired_count         = 1
 
   # ECR
   ecr_cloudflared_name = "cloudflared"
