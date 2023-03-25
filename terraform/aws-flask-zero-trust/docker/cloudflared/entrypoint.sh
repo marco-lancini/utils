@@ -21,7 +21,7 @@ VAR_TUNNEL_UUID=${TUNNEL_UUID}
 #
 # SECRETS
 #
-VAR_TUNNEL_FLASK_CREDENTIALS=${TUNNEL_FLASK_CREDENTIALS}
+VAR_TUNNEL_CREDENTIALS=${TUNNEL_CREDENTIALS}
 
 
 # ==============================================================================
@@ -36,7 +36,7 @@ mkdir -p ${PATH_CLOUDFLARED}
 # Fetch secrets
 #
 echo "[*] Fetching Cloudflared Tunnel: credentials JSON..."
-echo "$VAR_TUNNEL_FLASK_CREDENTIALS" > $PATH_CREDENTIALS
+echo "$VAR_TUNNEL_CREDENTIALS" > $PATH_CREDENTIALS
 
 #
 # Create config file
