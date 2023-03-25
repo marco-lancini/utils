@@ -26,6 +26,9 @@ locals {
   # Access Application
   cf_app_name = "Flask Example"
 
+  # ECS
+  ecs_cluster_name = "flask_cluster"
+
   # ECR
   ecr_cloudflared_name = "cloudflared"
   ecr_flask_name       = "flask"
