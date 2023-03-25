@@ -5,7 +5,7 @@
 # Cloudflared
 #
 module "container_cloudflared" {
-    source = "modules/aws-ecs-container"
+  source = "modules/aws-ecs-container"
 
   container_name  = local.container_cloudflared_name
   container_image = "${aws_ecr_repository.cloudflared.repository_url}:latest"
