@@ -1,7 +1,7 @@
 # ==============================================================================
 # SECRETS
 # ==============================================================================
-resource "aws_ssm_parameter" "flask_tunnel_credentials" {
+resource "aws_ssm_parameter" "tunnel_credentials" {
   name        = local.parameter_credentials_name
   description = "${local.tunnel_name} Cloudflared Tunnel: credentials JSON"
   type        = "SecureString"
