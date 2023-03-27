@@ -96,5 +96,5 @@ variable "container_flask_name" {
 variable "parameter_credentials_name" {
   description = "The name of the SSM Parameter storing the Tunnel credentials"
   type        = string
-  default     = "TUNNEL_CREDENTIALS"
+  default     = "FLASK_TUNNEL_CREDENTIALS"
 }
