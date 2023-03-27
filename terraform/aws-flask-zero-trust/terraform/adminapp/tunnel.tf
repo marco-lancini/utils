@@ -5,9 +5,9 @@
 # Tunnel
 #
 resource "cloudflare_tunnel" "flask" {
-  account_id = local.cloudflare_account_id
+  account_id = var.cloudflare_account_id
 
-  name   = local.tunnel_name
+  name   = var.tunnel_name
   secret = random_password.flask_token.result
 }
 
@@ -21,7 +21,7 @@ resource "random_password" "flask_token" {
 # Tunnel Config
 #
 resource "cloudflare_tunnel_config" "flask" {
-  account_id = local.cloudflare_account_id
+  account_id = var.cloudflare_account_id
 
   tunnel_id = cloudflare_tunnel.flask.id
 
@@ -30,7 +30,7 @@ resource "cloudflare_tunnel_config" "flask" {
       enabled = false
     }
     ingress_rule {
-      service = local.tunnel_origin
+      service = var.tunnel_origin
     }
   }
 
@@ -41,9 +41,9 @@ resource "cloudflare_tunnel_config" "flask" {
 #   flask.example.com -> <tunnel-UUID>.cfargotunnel.com
 #
 resource "cloudflare_record" "flask_tunnel" {
-  zone_id = data.cloudflare_zone.example.zone_id
+  zone_id = var.cloudflare_zone_id
 
-  name  = local.tunnel_dnsname
+  name  = var.tunnel_dnsname
   value = cloudflare_tunnel.flask.cname
 
   type    = "CNAME"
@@ -59,29 +59,30 @@ resource "cloudflare_record" "flask_tunnel" {
 # Application
 #
 resource "cloudflare_access_application" "flask" {
-  account_id = local.cloudflare_account_id
+  account_id = var.cloudflare_account_id
 
-  name   = local.cf_app_name
-  domain = local.tunnel_hostname
+  name   = var.cloudflare_app_name
+  domain = var.tunnel_hostname
 
   type                 = "self_hosted"
   session_duration     = "24h"
   app_launcher_visible = true
+  logo_url             = var.cloudflare_app_logo
 }
 
 #
 # Access Policy
 #
 resource "cloudflare_access_policy" "flask" {
-  account_id     = local.cloudflare_account_id
+  account_id     = var.cloudflare_account_id
   application_id = cloudflare_access_application.flask.id
 
-  name       = "Email Filter for ${local.cf_app_name}"
+  name       = "Email Filter for ${var.cloudflare_app_name}"
   precedence = "1"
   decision   = "allow"
 
   include {
-    email = local.allowed_emails
+    email = var.cloudflare_app_allowed_emails
   }
 
 }

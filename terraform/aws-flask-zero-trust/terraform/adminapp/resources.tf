@@ -2,13 +2,13 @@
 # SECRETS
 # ==============================================================================
 resource "aws_ssm_parameter" "tunnel_credentials" {
-  name        = local.parameter_credentials_name
-  description = "${local.tunnel_name} Cloudflared Tunnel: credentials JSON"
+  name        = var.parameter_credentials_name
+  description = "${var.tunnel_name} Cloudflared Tunnel: credentials JSON"
   type        = "SecureString"
 
   value = <<EOF
 {
-  "AccountTag": "${local.cloudflare_account_id}",
+  "AccountTag": "${var.cloudflare_account_id}",
   "TunnelSecret": "${cloudflare_tunnel.flask.secret}",
   "TunnelID": "${cloudflare_tunnel.flask.id}"
 }
@@ -21,9 +21,9 @@ EOF
 # ECS Cluster
 # ==============================================================================
 module "flask_cluster" {
-  source = "modules/aws-ecs-cluster"
+  source = "../modules/aws-ecs-cluster"
 
-  cluster_name = local.ecs_cluster_name
+  cluster_name = var.ecs_cluster_name
 }
 
 
@@ -36,7 +36,7 @@ module "flask_cluster" {
 resource "aws_ecr_repository" "cloudflared" {
   #checkov:skip=CKV_AWS_33:Ensure ECR image scanning on push is enabled
   #checkov:skip=CKV_AWS_51:Ensure ECR Image Tags are immutable
-  name                 = local.ecr_cloudflared_name
+  name                 = var.ecr_cloudflared_name
   image_tag_mutability = "MUTABLE"
 }
 
@@ -70,7 +70,7 @@ EOF
 resource "aws_ecr_repository" "flask" {
   #checkov:skip=CKV_AWS_33:Ensure ECR image scanning on push is enabled
   #checkov:skip=CKV_AWS_51:Ensure ECR Image Tags are immutable
-  name                 = local.ecr_flask_name
+  name                 = var.ecr_flask_name
   image_tag_mutability = "MUTABLE"
 }
 

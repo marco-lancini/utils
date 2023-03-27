@@ -5,9 +5,9 @@
 # Cloudflared
 #
 module "container_cloudflared" {
-  source = "modules/aws-ecs-container"
+  source = "../modules/aws-ecs-container"
 
-  container_name  = local.container_cloudflared_name
+  container_name  = var.container_cloudflared_name
   container_image = "${aws_ecr_repository.cloudflared.repository_url}:latest"
 
   essential        = true
@@ -24,7 +24,7 @@ module "container_cloudflared" {
   environment = [
     {
       name  = "ORIGIN_URL"
-      value = local.tunnel_origin
+      value = var.tunnel_origin
     },
     {
       name  = "TUNNEL_UUID"
@@ -34,7 +34,7 @@ module "container_cloudflared" {
 
   container_depends_on = [
     {
-      containerName = local.container_flask_name
+      containerName = var.container_flask_name
       condition     = "START"
     }
   ]
@@ -44,9 +44,9 @@ module "container_cloudflared" {
 # Flask Server
 #
 module "container_flask" {
-  source = "modules/aws-ecs-container"
+  source = "../modules/aws-ecs-container"
 
-  container_name  = local.container_flask_name
+  container_name  = var.container_flask_name
   container_image = "${aws_ecr_repository.flask.repository_url}:latest"
 
   essential = true
@@ -65,10 +65,10 @@ module "container_flask" {
 # ECS Task
 # ==============================================================================
 module "task" {
-  source = "modules/aws-ecs-task"
+  source = "../modules/aws-ecs-task"
 
   # Main settings
-  name_prefix      = local.name
+  name_prefix      = var.service_name
   platform_version = "LATEST"
 
   # CloudWatch
@@ -104,7 +104,7 @@ module "task" {
   load_balanced = false
 
   # Containers
-  container_exposed_port        = local.tunnel_port
+  container_exposed_port        = var.tunnel_port
   container_exposed_to_internet = false
   task_container_protocol       = "HTTP"
 
@@ -122,7 +122,7 @@ module "task" {
 # Grant access to the SSM parameters
 #
 resource "aws_iam_role_policy" "access_ssm" {
-  name   = "flask-access-ssm"
+  name   = "${var.service_name}-access-ssm"
   role   = module.task.execution_role_name
   policy = data.aws_iam_policy_document.access_ssm.json
 }
