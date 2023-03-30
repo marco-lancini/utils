@@ -48,27 +48,6 @@ no-autoupdate: true" > $PATH_CONFIG
 
 
 # ==============================================================================
-# CHECK CONNECTION
-# ==============================================================================
-set +ex
-
-# Check connection with origin
-echo "[*] Checking connection with origin..."
-for i in {1..60}
-do
-  wget ${VAR_ORIGIN_URL} 1>/dev/null 2>&1
-
-  if [ $? -ne 0 ]; then
-    echo "Attempt to connect to origin failed: ${VAR_ORIGIN_URL}"
-    sleep 1
-  else
-    echo "Successfully connected to origin: ${VAR_ORIGIN_URL}"
-    break
-  fi
-done
-
-
-# ==============================================================================
 # RUN TUNNEL
 # ==============================================================================
 set -ex
