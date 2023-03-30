@@ -58,10 +58,6 @@ resource "aws_security_group_rule" "alb_to_exposed_port" {
 # Allow direct traffic if no Load Balancer and publicly exposed
 #
 resource "aws_security_group_rule" "task_ingress" {
-  #checkov:skip=CKV_AWS_24:Ensure no security groups allow ingress from 0.0.0.0:0 to port 22
-  #checkov:skip=CKV_AWS_25:Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389
-  #checkov:skip=CKV_AWS_260:Ensure no security groups allow ingress from 0.0.0.0:0 to port 80
-
   # Create only if:
   #   - load balancing is disabled
   #   - assign public IP is enabled

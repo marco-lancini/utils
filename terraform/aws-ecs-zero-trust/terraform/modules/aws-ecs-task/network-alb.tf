@@ -23,9 +23,6 @@ module "aws_lb" {
 # ALB Listener
 #
 resource "aws_lb_listener" "listener_target_groups" {
-  #checkov:skip=CKV_AWS_2:Ensure ALB protocol is HTTPS
-  #checkov:skip=CKV_AWS_103:Ensure that load balancer is using at least TLS 1.2
-
   for_each = var.load_balanced ? { for tg in var.target_groups : tg.target_group_name => tg } : {}
 
   load_balancer_arn = module.aws_lb[0].arn
