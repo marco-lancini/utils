@@ -24,12 +24,12 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/pre-commit/mirrors-prettier/
-    rev: v3.0.0-alpha.6
+    rev: v3.0.0-alpha.9-for-vscode
     hooks:
       - id: prettier
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.14.6
+    rev: typos-dict-v0.9.26
     hooks:
       - id: typos
         args: ['--write-changes', '--config', '.typos.toml']
@@ -43,7 +43,7 @@ repos:
   # TERRAFORM
   # ============================================================================
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.77.2
+    rev: v1.79.1
     hooks:
       - id: terraform_fmt
 
@@ -51,7 +51,7 @@ repos:
   # DOCKER
   # ============================================================================
   - repo: https://github.com/IamTheFij/docker-pre-commit
-    rev: v2.1.1
+    rev: v3.0.1
     hooks:
       - id: docker-compose-check
 
