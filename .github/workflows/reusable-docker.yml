@@ -134,7 +134,7 @@ jobs:
       - name: 📭 Extract Docker metadata
         if: github.event_name != 'pull_request'
         id: meta
-        uses: docker/metadata-action@v4.4.0
+        uses: docker/metadata-action@v4.6.0
         with:
           images: ${{ inputs.REGISTRY }}/${{ inputs.IMAGE_NAME }}
 
