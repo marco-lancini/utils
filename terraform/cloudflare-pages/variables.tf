@@ -26,6 +26,12 @@ variable "production_branch" {
   default     = "main"
 }
 
+variable "environment_variables" {
+  description = "A map of environment variables to set for the project"
+  type        = map(string)
+  default     = {}
+}
+
 # ==============================================================================
 # Custom Domain
 # ==============================================================================
