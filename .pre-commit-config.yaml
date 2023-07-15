@@ -24,18 +24,18 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/pre-commit/mirrors-prettier/
-    rev: v3.0.0-alpha.9-for-vscode
+    rev: v3.0.0
     hooks:
       - id: prettier
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.15.0
+    rev: v1.16.1
     hooks:
       - id: typos
         args: ['--write-changes', '--config', '.typos.toml']
 
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.6.24
+    rev: v1.6.25
     hooks:
       - id: actionlint
 
