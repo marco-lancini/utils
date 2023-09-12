@@ -1,0 +1,8 @@
+#
+# Python filters
+#
+# Taken from:
+#   https://github.com/pandoc/dockerfiles/blob/master/common/extra/requirements.txt
+#
+
+pandoc-latex-environment==1.1
