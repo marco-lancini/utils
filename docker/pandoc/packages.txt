@@ -1,0 +1,75 @@
+#
+# Latex packages required
+#
+# Taken from:
+#   https://github.com/pandoc/dockerfiles/blob/master/common/extra/packages.txt
+#
+
+#########################################################################
+# Required by pandoc-latex-environment filter
+etoolbox
+environ
+pgf
+tcolorbox
+trimspaces
+
+#########################################################################
+# Required by eisvogel template
+# see https://github.com/Wandmalfarbe/pandoc-latex-template/blob/master/.github/workflows/build-examples.yml
+abstract
+adjustbox
+awesomebox
+babel-german
+background
+bidi
+catchfile
+collectbox
+csquotes
+everypage
+filehook
+fontawesome5
+footmisc
+footnotebackref
+framed
+fvextra
+hardwrap
+incgraph
+koma-script
+letltxmacro
+lineno
+listingsutf8
+ly1
+mdframed
+mweights
+needspace
+pagecolor
+pdfpages
+sectsty
+sourcecodepro
+sourcesanspro
+titlesec
+titling
+transparent
+ucharcat
+ulem
+unicode-math
+upquote
+xecjk
+xurl
+zref
+
+#########################################################################
+# Completes Source family
+sourceserifpro
+
+#########################################################################
+# Required by Beamer/Metropolis
+beamertheme-metropolis
+pgfopts
+tcolorbox
+environ
+tikzfill
+
+# https://github.com/pandoc/dockerfiles/issues/135
+enumitem
+
