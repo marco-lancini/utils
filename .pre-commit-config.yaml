@@ -24,12 +24,12 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/pre-commit/mirrors-prettier/
-    rev: v3.0.1
+    rev: v3.0.3
     hooks:
       - id: prettier
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.16.5
+    rev: v1.16.11
     hooks:
       - id: typos
         args: ['--write-changes', '--config', '.typos.toml']
@@ -43,7 +43,7 @@ repos:
   # TERRAFORM
   # ============================================================================
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.81.2
+    rev: v1.83.2
     hooks:
       - id: terraform_fmt
 
