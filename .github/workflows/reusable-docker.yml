@@ -47,7 +47,7 @@ jobs:
       # ========================================================================
       # Setup docker build
       - name: 🔻 Setup Docker buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       # ========================================================================
       # Authenticate to GHCR
