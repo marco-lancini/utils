@@ -1,7 +1,7 @@
 repos:
   # pre-commit install --hook-type pre-push
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: check-added-large-files
         args: ['--maxkb=1000']
@@ -29,13 +29,13 @@ repos:
       - id: prettier
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.16.11
+    rev: v1.16.19
     hooks:
       - id: typos
         args: ['--write-changes', '--config', '.typos.toml']
 
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.6.25
+    rev: v1.6.26
     hooks:
       - id: actionlint
 
@@ -43,7 +43,7 @@ repos:
   # TERRAFORM
   # ============================================================================
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.83.2
+    rev: v1.83.5
     hooks:
       - id: terraform_fmt
 
