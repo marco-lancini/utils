@@ -78,7 +78,7 @@ jobs:
       - name: 🛡 Run Trivy vulnerability scanner
         if: github.event_name == 'pull_request'
         id: docker_trivy
-        uses: aquasecurity/trivy-action@0.14.0
+        uses: aquasecurity/trivy-action@0.16.0
         continue-on-error: true
         with:
           image-ref: ${{ inputs.IMAGE_NAME }}:${{ inputs.IMAGE_TAG }}
