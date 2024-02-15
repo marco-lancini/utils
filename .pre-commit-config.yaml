@@ -29,7 +29,7 @@ repos:
       - id: prettier
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.17.1
+    rev: typos-v0.10.21
     hooks:
       - id: typos
         args: ['--write-changes', '--config', '.typos.toml']
