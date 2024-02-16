@@ -10,14 +10,12 @@ on:
     branches:
       - main
     paths:
-      - 'docker/ansible-worker/Dockerfile'
-      - 'docker/ansible-worker/VERSION'
+      - 'docker/ansible-worker/**/*'
   pull_request:
     branches:
       - main
     paths:
-      - 'docker/ansible-worker/Dockerfile'
-      - 'docker/ansible-worker/VERSION'
+      - 'docker/ansible-worker/**/*'
 
 jobs:
   run-docker:
@@ -28,7 +26,7 @@ jobs:
 
     uses: marco-lancini/utils/.github/workflows/reusable-docker.yml@main
     with:
-      FOLDER: ${{ github.workspace }}/docker/ansible-worker
+      FOLDER: 'docker/ansible-worker'
       REGISTRY: ghcr.io/${{ github.repository_owner }}
       IMAGE_NAME: ansible-worker
     secrets:

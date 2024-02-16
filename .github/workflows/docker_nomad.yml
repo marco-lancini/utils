@@ -10,14 +10,12 @@ on:
     branches:
       - main
     paths:
-      - 'docker/nomad/Dockerfile'
-      - 'docker/nomad/VERSION'
+      - 'docker/nomad/**/*'
   pull_request:
     branches:
       - main
     paths:
-      - 'docker/nomad/Dockerfile'
-      - 'docker/nomad/VERSION'
+      - 'docker/nomad/**/*'
 
 jobs:
   run-docker:
@@ -28,7 +26,7 @@ jobs:
 
     uses: marco-lancini/utils/.github/workflows/reusable-docker.yml@main
     with:
-      FOLDER: ${{ github.workspace }}/docker/nomad
+      FOLDER: 'docker/nomad'
       REGISTRY: ghcr.io/${{ github.repository_owner }}
       IMAGE_NAME: nomad
     secrets:

@@ -6,14 +6,12 @@ on:
     branches:
       - main
     paths:
-      - 'docker/pandoc/Dockerfile'
-      - 'docker/pandoc/VERSION'
+      - 'docker/pandoc/**/*'
   pull_request:
     branches:
       - main
     paths:
-      - 'docker/pandoc/Dockerfile'
-      - 'docker/pandoc/VERSION'
+      - 'docker/pandoc/**/*'
 
 jobs:
   run-docker:
@@ -24,7 +22,7 @@ jobs:
 
     uses: marco-lancini/utils/.github/workflows/reusable-docker.yml@main
     with:
-      FOLDER: ${{ github.workspace }}/docker/pandoc
+      FOLDER: 'docker/pandoc'
       REGISTRY: ghcr.io/${{ github.repository_owner }}
       IMAGE_NAME: pandoc
     secrets:

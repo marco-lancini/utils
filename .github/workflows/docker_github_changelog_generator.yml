@@ -10,16 +10,12 @@ on:
     branches:
       - main
     paths:
-      - 'docker/github-changelog-generator/Dockerfile'
-      - 'docker/github-changelog-generator/Gemfile'
-      - 'docker/github-changelog-generator/VERSION'
+      - 'docker/github-changelog-generator/**/*'
   pull_request:
     branches:
       - main
     paths:
-      - 'docker/github-changelog-generator/Dockerfile'
-      - 'docker/github-changelog-generator/Gemfile'
-      - 'docker/github-changelog-generator/VERSION'
+      - 'docker/github-changelog-generator/**/*'
 
 jobs:
   run-docker:
@@ -30,7 +26,7 @@ jobs:
 
     uses: marco-lancini/utils/.github/workflows/reusable-docker.yml@main
     with:
-      FOLDER: ${{ github.workspace }}/docker/github-changelog-generator
+      FOLDER: 'docker/github-changelog-generator'
       REGISTRY: ghcr.io/${{ github.repository_owner }}
       IMAGE_NAME: github-changelog-generator
     secrets:

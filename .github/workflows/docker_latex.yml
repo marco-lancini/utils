@@ -10,14 +10,12 @@ on:
     branches:
       - main
     paths:
-      - 'docker/latex/Dockerfile'
-      - 'docker/latex/VERSION'
+      - 'docker/latex/**/*'
   pull_request:
     branches:
       - main
     paths:
-      - 'docker/latex/Dockerfile'
-      - 'docker/latex/VERSION'
+      - 'docker/latex/**/*'
 
 jobs:
   run-docker:
@@ -28,7 +26,7 @@ jobs:
 
     uses: marco-lancini/utils/.github/workflows/reusable-docker.yml@main
     with:
-      FOLDER: ${{ github.workspace }}/docker/latex
+      FOLDER: 'docker/latex'
       REGISTRY: ghcr.io/${{ github.repository_owner }}
       IMAGE_NAME: latex
     secrets:
