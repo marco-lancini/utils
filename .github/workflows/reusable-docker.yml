@@ -6,6 +6,10 @@ on:
       FOLDER:
         required: true
         type: string
+      DOCKERFILE_NAME:
+        required: false
+        type: string
+        default: 'Dockerfile'
       REGISTRY:
         required: true
         type: string
@@ -40,7 +44,7 @@ jobs:
 
     steps:
       - name: 📂 Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.1
 
       # ========================================================================
       # Install Tooling
@@ -70,7 +74,7 @@ jobs:
         uses: docker/build-push-action@master
         with:
           push: false
-          file: ${{ inputs.FOLDER }}/Dockerfile
+          file: ${{ inputs.FOLDER }}/${{ inputs.DOCKERFILE_NAME }}
           tags: ${{ inputs.IMAGE_NAME }}:${{ inputs.IMAGE_TAG }}
           # Needed for trivy
           outputs: type=docker
@@ -128,7 +132,7 @@ jobs:
             })
 
       # ========================================================================
-      # Build Image and push to GCR (except on PR)
+      # Build Image and push to GHCR (except on PR)
       # ========================================================================
       # Extract metadata (tags, labels) for Docker
       - name: 📭 Extract Docker metadata
@@ -145,7 +149,7 @@ jobs:
         uses: docker/build-push-action@master
         with:
           push: ${{ github.event_name != 'pull_request' }}
-          file: ${{ inputs.FOLDER }}/Dockerfile
+          file: ${{ inputs.FOLDER }}/${{ inputs.DOCKERFILE_NAME }}
           labels: ${{ steps.meta.outputs.labels }}
           # Use tags: ${{ steps.meta.outputs.tags }} if you want to tag the image with branch name
           tags: ${{ inputs.REGISTRY }}/${{ inputs.IMAGE_NAME }}:${{ inputs.IMAGE_TAG }}
