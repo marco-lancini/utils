@@ -29,7 +29,7 @@ repos:
       - id: prettier
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.22.7
+    rev: typos-v0.10.26
     hooks:
       - id: typos
         args: ['--write-changes', '--config', '.typos.toml']
@@ -43,7 +43,7 @@ repos:
   # TERRAFORM
   # ============================================================================
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.91.0
+    rev: v1.92.0
     hooks:
       - id: terraform_fmt
 
