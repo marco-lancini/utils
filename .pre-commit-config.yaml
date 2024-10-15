@@ -1,7 +1,7 @@
 repos:
   # pre-commit install --hook-type pre-push
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-added-large-files
         args: ['--maxkb=1000']
@@ -19,7 +19,7 @@ repos:
       - id: no-commit-to-branch
         args: ['--branch', 'main']
         stages:
-          - 'commit'
+          - 'pre-commit'
       - id: requirements-txt-fixer
       - id: trailing-whitespace
 
@@ -29,13 +29,13 @@ repos:
       - id: prettier
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.24.5
+    rev: v1.26.0
     hooks:
       - id: typos
         args: ['--write-changes', '--config', '.typos.toml']
 
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.1
+    rev: v1.7.3
     hooks:
       - id: actionlint
 
@@ -43,7 +43,7 @@ repos:
   # TERRAFORM
   # ============================================================================
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.95.0
+    rev: v1.96.1
     hooks:
       - id: terraform_fmt
 
@@ -56,6 +56,6 @@ repos:
       - id: docker-compose-check
 
   - repo: https://github.com/hadolint/hadolint
-    rev: v2.13.0-beta
+    rev: v2.13.1-beta
     hooks:
       - id: hadolint
