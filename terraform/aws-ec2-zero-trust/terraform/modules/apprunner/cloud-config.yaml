@@ -1,0 +1,69 @@
+#cloud-config
+# https://cloudinit.readthedocs.io
+
+#
+# General settings
+#
+timezone: Europe/London
+locale: en_GB.UTF-8
+keyboard:
+  layout: gb
+  variant: ''
+
+#
+# Hostname
+#
+hostname: apprunner
+create_hostname_file: true
+
+#
+# Group definitions
+#
+groups:
+  - ubuntu: [root,sys]
+  - docker
+
+#
+# Users definitions
+#
+users:
+  - default
+  - name: ec2-user
+    gecos: EC2 Default User
+    shell: /bin/bash
+    primary_group: ec2-user
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin, docker
+    lock_passwd: false
+    homedir: /home/ec2-user/
+
+#
+# Package definitions
+#
+package_update: true
+package_upgrade: true
+packages:
+  - ca-certificates
+  - docker
+
+#
+# Startup commands
+#
+runcmd:
+  # Start the SSM agent
+  - sudo systemctl enable amazon-ssm-agent
+  - sudo systemctl start amazon-ssm-agent
+  # Install Docker
+  - sudo systemctl enable docker
+  - sudo systemctl start docker
+  # Install Docker Compose
+  - sudo curl -L "https://github.com/docker/compose/releases/download/v2.29.7/docker-compose-linux-x86_64" -o /usr/local/bin/docker-compose
+  - sudo chmod +x /usr/local/bin/docker-compose
+  # Install micro
+  - cd /tmp/
+  - curl https://getmic.ro | bash
+  - sudo mv micro /usr/local/bin
+  # Switch to the ec2-user user
+  - sudo su ec2-user
+  # Chown user directory
+  - sudo chown -R ec2-user:ec2-user /home/ec2-user/
