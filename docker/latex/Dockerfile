@@ -1,4 +1,4 @@
-FROM debian:11.5
+FROM debian:12.8
 
 LABEL org.opencontainers.image.source = "https://github.com/marco-lancini/utils"
 
@@ -15,7 +15,7 @@ RUN apt update &&                   \
 
 # Install the roboto font
 WORKDIR /root
-RUN wget http://mirror.ctan.org/install/fonts/roboto.tds.zip
+RUN wget --no-check-certificate http://mirror.ctan.org/install/fonts/roboto.tds.zip
 
 WORKDIR /root/texmf
 RUN unzip /root/roboto.tds.zip && \
