@@ -6,7 +6,7 @@ on:
 
 jobs:
   auto-update:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: 📂 Checkout Branch
         uses: actions/checkout@v4
