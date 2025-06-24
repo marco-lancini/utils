@@ -1,4 +1,4 @@
-# GCP OIDC AWS Module
+# Identity Federation for AWS on GCP
 
 This module creates a GCP Workload Identity Federation to allow AWS workloads to authenticate to GCP via a GCP Service Account, without storing service account keys.
 
