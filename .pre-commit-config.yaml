@@ -35,7 +35,7 @@ repos:
         args: ['--write-changes', '--config', '.typos.toml']
 
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.7
+    rev: v1.7.10
     hooks:
       - id: actionlint
 
@@ -43,7 +43,7 @@ repos:
   # TERRAFORM
   # ============================================================================
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.100.0
+    rev: v1.105.0
     hooks:
       - id: terraform_fmt
 
@@ -56,6 +56,6 @@ repos:
       - id: docker-compose-check
 
   - repo: https://github.com/hadolint/hadolint
-    rev: v2.13.1
+    rev: v2.14.0
     hooks:
       - id: hadolint
